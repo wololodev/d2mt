@@ -1,0 +1,125 @@
+body {
+	width:325px;
+}
+.gif {
+	background:url("../img/ajax-loader.gif");
+	display:block;
+	width: 16px;
+	height: 11px;
+	margin: 0 auto;
+}
+
+.err {
+	text-align: center;
+}
+tbody {
+	font-size:0.85em;
+}
+#settingsList td {
+	vertical-align: middle;
+}
+#dropDownTimezone {
+	margin:0px !important;
+}
+.about{
+	margin-left:18px;
+}
+.iconTwitch {
+	background:url(../img/t.png) no-repeat 0 0 scroll transparent;
+	display:block;
+	height:16px;
+	width:16px
+}
+.iconOwned {
+	background:url(../img/o.png) no-repeat 0 0 scroll transparent;
+	display:block;
+	height:16px;
+	width:16px
+}
+.iconYT {
+	background:url(../img/yt.png) no-repeat 0 0 scroll transparent;
+	display:block;
+	height:16px;
+	width:16px
+}
+.iconJD {
+	background:url(../img/jd.ico) no-repeat 0 0 scroll transparent;
+	display:block;
+	height:16px;
+	width:16px
+}
+.iconSHEEV {
+	background:url(../img/sheev.png) no-repeat 0 0 scroll transparent;
+	display:block;
+	height:16px;
+	width:16px
+}
+.iconPURGE {
+	background:url(../img/purge.png) no-repeat 0 0 scroll transparent;
+	display:block;
+	height:16px;
+	width:16px
+}
+.iconBTS {
+	background:url(../img/bts.png) no-repeat 0 0 scroll transparent;
+	display:block;
+	height:16px;
+	width:16px
+}
+.iconLD {
+	background:url(../img/ld.png) no-repeat 0 0 scroll transparent;
+	display:block;
+	height:16px;
+	width:16px
+}
+.iconGODZ {
+	background:url(../img/godz.png) no-repeat 0 0 scroll transparent;
+	display:block;
+	height:16px;
+	width:16px
+}
+#gg_acc_matches tr, #acc_matches tr, #streams_vods tr, #rankings tr, #news tr {
+	cursor:pointer;
+}
+.faq {
+	display: block;
+	margin-top: -10px;
+	margin-left: 10px;
+}
+.textRight {
+	text-align: right !important;
+}
+.permalink {
+	opacity: 0.7;
+	float: right;
+}
+.permalink:hover {
+	opacity: 1;
+}
+/*OVERWRITTING*/
+.nav {
+	margin-bottom:-1px !important;
+}
+.accordion {
+	margin-bottom: 0px !important;
+}
+.accordion-heading .accordion-toggle {
+	padding: 6px 15px !important;
+	text-decoration:none !important;
+}
+.accordion-inner {
+	padding: 0px !important;
+	border-top: none !important;
+}
+.table {
+	margin-bottom: 0px !important;
+}
+.table th, .table td {
+	line-height: 18px !important;
+}
+.table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
+	background-color: antiqueWhite;
+}
+.tooltip-inner {
+	max-width: 240px !important;
+}

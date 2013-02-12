@@ -1,0 +1,19 @@
+{
+  "name": "DotA 2 Match Ticker",
+  "version": "1.5.1",
+  "manifest_version": 2,
+  "description": "Competitive coverage on the go!",
+  "icons": {
+		"16": "icon16.png",
+		"48": "icon48.png",
+		"128": "icon128.png"
+  },
+  "browser_action": {
+    "default_icon": "icon128dev.png",
+	"default_popup": "index_gc_151.html"
+  },
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+  "permissions": [
+    "http://api.dotaprj.me/"
+  ]
+}
