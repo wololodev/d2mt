@@ -11,7 +11,7 @@
 	<link href="css/custom.css" rel="stylesheet">
 </head>
 <body>
-	<ul class="nav nav-tabs">
+	<ul id="menu" class="nav nav-tabs">
 		<li><a id="nav_news" href="#news" data-toggle="tab"><i class="icon-home"></i></a></li>
 		<li><a id="nav_jd" href="#acc_matches" data-toggle="tab">jD</a></li>
 		<li><a id="nav_gg" href="#gg_acc_matches" data-toggle="tab">GG</a></li>
@@ -215,8 +215,8 @@
 								<tr>
 									<td>Spoiler Mode</td>
 									<td><div class="btn-group" data-toggle="buttons-radio">
-											<button id="spoilerTrue" alt="spoilerTrue" type="button" class="btn btn-info btn-small spoilerformat">On</button>
-											<button id="spoilerFalse" alt="spoilerFalse" type="button" class="btn btn-info btn-small spoilerformat">Off</button>
+											<button id="spoilerTrue" data-isspoiler="true" type="button" class="btn btn-info btn-small spoilerformat">On</button>
+											<button id="spoilerFalse" data-isspoiler="false" type="button" class="btn btn-info btn-small spoilerformat">Off</button>
 									</div></td>
 								</tr>
 							</tbody>
@@ -262,12 +262,11 @@
 					<div class="accordion-inner">
 						<small>
 						<ul>
-							<li><b>1.5.1</b> - 2/12/2013
+							<li><b>1.5.2</b> - 2/26/2013
 							<ul>
-								<li>Added Spoiler Mode!</li>
-								<li>Changes on the Stream Tab</li>
+								<li>Fixed Spoiler Bug</li>
+								<li>Fixed crap load of bug & refactored some shit</li>
 								<li>Performance Improvements</li>
-								<li>Small bug fix with the api</li>
 							</ul>
 							</li>
 						</ul>
@@ -285,7 +284,7 @@
 							<tbody>
 								<tr>
 									<td><b>Version:</b></td>
-									<td>1.5.1</td>
+									<td>1.5.2</td>
 								</tr>
 								<tr>
 									<td><b>Author:</b></td>
@@ -296,7 +295,7 @@
 									<td>dota@hotmail.ca</td>
 								</tr>
 								<tr>
-									<td><b>Contriute</b></td>
+									<td><b>Contribute:</b></td>
 									<td><a href="https://github.com/wololodev/d2mt.git">Fork me at GitHub</a></td>
 								</tr>
 							</tbody>
@@ -306,10 +305,10 @@
 			</div>	
 		</div>
 	</div>
-	<script src="js/ga.js"></script>
 	<script src="js/jquery-1.9.1.min.js"></script>
 	<script src="js/bootstrap.js"></script>
 	<script src="js/date.format.js"></script>
 	<script src="js/match.js"></script>
+	<script src="js/ga.js"></script>
 </body> 
 </html>

@@ -1,5 +1,5 @@
 body {
-	width:325px;
+	width:330px;
 }
 .gif {
 	background:url("../img/ajax-loader.gif");
@@ -18,66 +18,23 @@ tbody {
 #settingsList td {
 	vertical-align: middle;
 }
-#dropDownTimezone {
-	margin:0px !important;
-}
 .about{
 	margin-left:18px;
 }
-.iconTwitch {
-	background:url(../img/t.png) no-repeat 0 0 scroll transparent;
-	display:block;
-	height:16px;
-	width:16px
-}
-.iconOwned {
-	background:url(../img/o.png) no-repeat 0 0 scroll transparent;
-	display:block;
-	height:16px;
-	width:16px
-}
-.iconYT {
-	background:url(../img/yt.png) no-repeat 0 0 scroll transparent;
-	display:block;
-	height:16px;
-	width:16px
-}
-.iconJD {
-	background:url(../img/jd.ico) no-repeat 0 0 scroll transparent;
-	display:block;
-	height:16px;
-	width:16px
-}
-.iconSHEEV {
-	background:url(../img/sheev.png) no-repeat 0 0 scroll transparent;
-	display:block;
-	height:16px;
-	width:16px
-}
-.iconPURGE {
-	background:url(../img/purge.png) no-repeat 0 0 scroll transparent;
-	display:block;
-	height:16px;
-	width:16px
-}
-.iconBTS {
-	background:url(../img/bts.png) no-repeat 0 0 scroll transparent;
-	display:block;
-	height:16px;
-	width:16px
-}
-.iconLD {
-	background:url(../img/ld.png) no-repeat 0 0 scroll transparent;
-	display:block;
-	height:16px;
-	width:16px
-}
-.iconGODZ {
-	background:url(../img/godz.png) no-repeat 0 0 scroll transparent;
-	display:block;
-	height:16px;
-	width:16px
-}
+
+/* start spriting */
+.icons { background: url(../img/sprite.png) no-repeat top left; display: block;}
+.iconBTS{ background-position: 0 0; width: 16px; height: 16px; } 
+.iconGODZ{ background-position: 0 -18px; width: 16px; height: 16px; } 
+.iconJD{ background-position: 0 -36px; width: 16px; height: 16px; } 
+.iconLD{ background-position: 0 -54px; width: 16px; height: 16px; } 
+.iconO{ background-position: 0 -72px; width: 16px; height: 16px; } 
+.iconPURGE{ background-position: 0 -90px; width: 16px; height: 16px; } 
+.iconSAGAN{ background-position: 0 -108px; width: 16px; height: 16px; } 
+.iconSHEEV{ background-position: 0 -126px; width: 16px; height: 16px; } 
+.iconT{ background-position: 0 -144px; width: 16px; height: 16px; } 
+.iconYT{ background-position: 0 -162px; width: 16px; height: 16px; } 
+
 #gg_acc_matches tr, #acc_matches tr, #streams_vods tr, #rankings tr, #news tr {
 	cursor:pointer;
 }
@@ -122,4 +79,7 @@ tbody {
 }
 .tooltip-inner {
 	max-width: 240px !important;
+}
+.unboldWinner {
+	font-weight: normal !important;
 }

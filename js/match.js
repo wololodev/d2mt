@@ -1,93 +1,33 @@
-;(function($) {
+(function($) {
 	"use strict";
-	defineDefaults();
-	onLoadAjax();
 
-	$('#finishedList').on('mouseover mouseout', '.eventDone', function(e) {
-		if (localStorage.isSpoilerOn === "spoilerTrue"){
-			var closeResNode = $(this).find('.winResult');
-			var jdWinnerSeries = $(this).find('.series');
-			if (e.type === 'mouseover') {
-				var result = closeResNode.attr('data-winner');
-				closeResNode.text(result);
-				jdWinnerSeries.css('opacity', '1');
-			} else {
-				jdWinnerSeries.css('opacity', '0');
-				closeResNode.text("?");
-			}
+	var d2mt = {
+		settings: {
+			isSpoilerOn: localStorage.isSpoilerOn == "true"
 		}
-	});
+	};
 
-	$('#gg_finishedList').on('mouseover mouseout', '.eventDone', function(e) {
-		if (localStorage.isSpoilerOn === "spoilerTrue"){
-			var closeResNode = $(this).find('.winResult');
-			if (e.type === 'mouseover') {
-				var result = closeResNode.attr('data-winner');
-				closeResNode.text(result);
-			} else {
-				closeResNode.text("?");
-			}
-		}
-	});
+	var isSpoilerOn = d2mt.settings.isSpoilerOn;
 
-	$('#acc_matches, #gg_acc_matches, #streams_vods, #rankings, #news').on('click', 'tr', function(){
-		var url = $(this).attr('href');
-		window.open(url);
-	});
+	var setResultsSpoiler = function(isSpoilerOn) {
+		var result,
+			$winResultNode = $('.winResult');
 
-	$('a[data-toggle="tab"]').on('shown', function(e) {
-		var lastTab = e.target;
-		localStorage.lastOpenedTab = $(lastTab).attr('id');
-	});
-
-	$('.timeformat').click(function(){
-		localStorage.timeFormat = $(this).attr('alt');
-		setUpdatedTime();
-	});
-	
-	$('.dateformat').click(function(){
-		localStorage.dateFormat = $(this).attr('alt');
-		setUpdatedTime();
-	});
-
-	$('.spformat').click(function(){
-		localStorage.isPopout = $(this).attr('alt');
-		setStreamLink(localStorage.isPopout);
-	});
-	
-	$('.spoilerformat').click(function(){
-		localStorage.isSpoilerOn = $(this).attr('alt');
-		setResultsSpoiler(localStorage.isSpoilerOn);
-	});
-	
-	$('#nav_update').click(function(){
-		update();
-	});
-
-	$('.permalink').click(function(e){
-		var url = $(this).attr("data-link");
-		window.open(url);
-		e.stopPropagation();
-	});
-
-	function setResultsSpoiler(isSpoilerOn) {
-		var winResultNode = $('.winResult');
-		var result;
-		if (isSpoilerOn === "spoilerTrue") {
-			winResultNode.text("?");
+		if (isSpoilerOn) {
+			$winResultNode.text("?");
 			$('.series').css('opacity', '0');
-			$('#finishedList').find('b').css('font-weight', 'normal');
-			$('#gg_finishedList').find('b').css('font-weight', 'normal');
+			$('#finishedList, #gg_finishedList').find('b').addClass("unboldWinner");
 		} else {
 			$('.series').css('opacity', '1');
-			$(winResultNode).each(function(){
+			$('.unboldWinner').removeClass("unboldWinner");
+			$winResultNode.each(function(){
 				result = $(this).attr('data-winner');
 				$(this).text(result);
 			});
 		}
-	}
+	};
 
-	function setStreamLink(isPopout) {
+	var setStreamLink = function(isPopout) {
 		if (isPopout === "spTrue") {
 			$('.twitch').each(function(){
 				var id = $(this).attr("data-id");
@@ -99,9 +39,9 @@
 				$(this).attr("href", "http://www.twitch.tv/" + id);
 			});
 		}
-	}
+	};
 	
-	function setTime(phm, cssClass) {
+	var setTime = function(phm, cssClass) {
 		$(cssClass).each(function(){
 			var timestamp = $(this).attr('alt');
 			var newDate = new Date(timestamp*1000);
@@ -111,9 +51,9 @@
 			var newEventTime = prevEventTime + "<br>" + fulldate;
 			$(this).parent().attr('data-original-title', newEventTime);
 		});
-	}
+	};
 	
-	function setUpdatedTime() {
+	var setUpdatedTime = function() {
 		$('.jd_date, .gg_date, .vod_date, .news_date').each(function(){
 			var timestamp = $(this).attr('alt');
 			var newDate = new Date(timestamp*1000);
@@ -125,9 +65,9 @@
 			var newEventTime = prevEventTime + "<br>" + fulldate;
 			$(this).parent().attr('data-original-title', newEventTime);
 		});
-	}
+	};
 	
-	function defineDefaults() {
+	var defineDefaults = function() {
 		// Last Opened Tab
 		if (localStorage.lastOpenedTab !== undefined) {
 			$('#'+localStorage.lastOpenedTab).tab('show');
@@ -171,20 +111,20 @@
 			$('#spFalse').addClass("active");
 		}
 
-		// Stream Link Format
-		if (localStorage.isSpoilerOn !== undefined) {
-			if (localStorage.isSpoilerOn === "spoilerTrue") {
+		// Spoiler
+		if (isSpoilerOn !== undefined) {
+			if (isSpoilerOn) {
 				$('#spoilerTrue').addClass("active");
 			} else {
 				$('#spoilerFalse').addClass("active");
 			}
 		} else {
-			localStorage.isSpoilerOn = "spoilerFalse";
+			localStorage.isSpoilerOn = false;
 			$('#spoilerFalse').addClass("active");
 		}
-	}
+	};
 	
-	function onLoadAjax() {
+	var onLoadAjax = function() {
 		// JOINDOTA MATCH TICKER
 		$.ajax({
 			url: "http://api.dotaprj.me/jd/matches/v130/api.json",
@@ -214,7 +154,7 @@
 				$('#matchList > tbody').html(recent);
 				$('#finishedList > tbody').html(finished);
 				$('#acc_matches tr').tooltip({html:true});
-				setResultsSpoiler(localStorage.isSpoilerOn);
+				setResultsSpoiler(isSpoilerOn);
 				setTime(0, ".jd_date");
 			},
 			error: function() {
@@ -251,7 +191,7 @@
 				$('#gg_matchList > tbody').html(recent);
 				$('#gg_finishedList > tbody').html(finished);
 				$('#gg_acc_matches tr').tooltip({html:true});
-				setResultsSpoiler(localStorage.isSpoilerOn);
+				setResultsSpoiler(isSpoilerOn);
 				setTime(0, ".gg_date");
 			},
 			error: function() {
@@ -354,11 +294,88 @@
 				$('#streams_vods .gif').attr('class', 'err').html("Somewhere, somehow, went wrong. Please update to the <a href='https://chrome.google.com/webstore/detail/dota-2-match-ticker/nejdjlaibiicicciokonbbkecjleilon' target='_blank'>latest version.</a>");
 			}
 		});
-	}
+	};
 	
-	function update() {
+	var update = function() {
 		$('#acc_matches tr, #gg_acc_matches tr, #streams_vods tr, #news tr, #rankings tr, .err, .tooltip').remove();
 		$('.gif').show();
 		onLoadAjax();
-	}
+	};
+
+	defineDefaults();
+	onLoadAjax();
+
+	$('#finishedList').on('mouseover mouseout', '.eventDone', function(e) {
+		if (isSpoilerOn){
+			var $closeResNode = $(this).find('.winResult');
+			var $jdWinnerSeries = $(this).find('.series');
+			var $winner = $(this).find('b');
+			if (e.type === 'mouseover') {
+				var result = $closeResNode.attr('data-winner');
+				$closeResNode.text(result);
+				$jdWinnerSeries.css('opacity', '1');
+				$winner.removeClass("unboldWinner");
+			} else {
+				$jdWinnerSeries.css('opacity', '0');
+				$closeResNode.text("?");
+				$winner.addClass("unboldWinner");
+			}
+		}
+	});
+
+	$('#gg_finishedList').on('mouseover mouseout', '.eventDone', function(e) {
+		if (isSpoilerOn){
+			var $closeResNode = $(this).find('.winResult');
+			var $winner = $(this).find('b');
+			if (e.type === 'mouseover') {
+				var result = $closeResNode.attr('data-winner');
+				$closeResNode.text(result);
+				$winner.removeClass("unboldWinner");
+			} else {
+				$closeResNode.text("?");
+				$winner.addClass("unboldWinner");
+			}
+		}
+	});
+
+	$('#acc_matches, #gg_acc_matches, #streams_vods, #rankings, #news').on('click', 'tr', function(){
+		var url = $(this).attr('href');
+		window.open(url);
+	});
+
+	$('a[data-toggle="tab"]').on('shown', function(e) {
+		var lastTab = e.target;
+		localStorage.lastOpenedTab = $(lastTab).attr('id');
+	});
+
+	$('.timeformat').click(function(){
+		localStorage.timeFormat = $(this).attr('alt');
+		setUpdatedTime();
+	});
+	
+	$('.dateformat').click(function(){
+		localStorage.dateFormat = $(this).attr('alt');
+		setUpdatedTime();
+	});
+
+	$('.spformat').click(function(){
+		localStorage.isPopout = $(this).attr('alt');
+		setStreamLink(localStorage.isPopout);
+	});
+	
+	$('.spoilerformat').click(function(){
+		isSpoilerOn = $(this).data('isspoiler');
+		localStorage.isSpoilerOn = isSpoilerOn;
+		setResultsSpoiler(isSpoilerOn);
+	});
+	
+	$('#nav_update').click(function(){
+		update();
+	});
+
+	$('.permalink').click(function(e){
+		var url = $(this).attr("data-link");
+		window.open(url);
+		e.stopPropagation();
+	});
 })(jQuery);

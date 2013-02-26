@@ -1,3 +1,7 @@
+## 1.5.2 - 02/26/2013
+    -   Fixed Spoiler Bug
+    -   Fixed crap load of bug & refactored some shit
+    -   Performance Improvements
 ## 1.5.1 - 02/12/2013
     -   Added Spoiler Mode!
     -   Changes on the Stream Tab
