@@ -83,3 +83,6 @@ tbody {
 .unboldWinner {
 	font-weight: normal !important;
 }
+.opaque {
+	opacity: 0.0;
+}
