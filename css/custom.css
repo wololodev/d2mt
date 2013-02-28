@@ -35,7 +35,7 @@ tbody {
 .iconT{ background-position: 0 -144px; width: 16px; height: 16px; } 
 .iconYT{ background-position: 0 -162px; width: 16px; height: 16px; } 
 
-#gg_acc_matches tr, #acc_matches tr, #streams_vods tr, #rankings tr, #news tr {
+#gg_acc_matches tr, #jd_matches tr, #streams_vods tr, #rankings tr, #news tr {
 	cursor:pointer;
 }
 .faq {

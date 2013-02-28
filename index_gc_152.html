@@ -12,13 +12,13 @@
 </head>
 <body>
 	<ul id="menu" class="nav nav-tabs">
-		<li><a id="nav_news" href="#news" data-toggle="tab"><i class="icon-home"></i></a></li>
-		<li><a id="nav_jd" href="#acc_matches" data-toggle="tab">jD</a></li>
-		<li><a id="nav_gg" href="#gg_acc_matches" data-toggle="tab">GG</a></li>
-		<li><a id="nav_ranking" href="#rankings" data-toggle="tab"><i class="icon-signal"></i></a></li>
-		<li><a id="nav_stream" href="#streams_vods" data-toggle="tab"><i class="icon-play"></i></a></li>
-		<li><a id="nav_sett" href="#settings" data-toggle="tab"><i class="icon-wrench"></i></a></li>
-		<li><a id="nav_update" href="#"><i class="icon-refresh"></i></a></li>
+		<li><a id="nav_news" title="News" href="#news" data-toggle="tab"><i class="icon-home"></i></a></li>
+		<li><a id="nav_jd" title="joinDota Matches" href="#jd_matches" data-toggle="tab">jD</a></li>
+		<li><a id="nav_gg" title="GosuGamers Matches" href="#gg_acc_matches" data-toggle="tab">GG</a></li>
+		<li><a id="nav_ranking" title="Rankings" href="#rankings" data-toggle="tab"><i class="icon-signal"></i></a></li>
+		<li><a id="nav_stream" title="Streams and VODs" title="News" href="#streams_vods" data-toggle="tab"><i class="icon-play"></i></a></li>
+		<li><a id="nav_sett" title="Settings" href="#settings" data-toggle="tab"><i class="icon-wrench"></i></a></li>
+		<li><a id="nav_update" title="Refresh" href="#"><i class="icon-refresh"></i></a></li>
 	</ul>
 	<div class="tab-content">
 		<!-- ========================= News Tab ========================= -->
@@ -30,7 +30,7 @@
 				<div id="jdNews" class="accordion-body collapse in">
 					<div class="accordion-inner">
 						<table id="jdNewsList" class="table table-hover table-condensed">
-							<tbody>
+							<tbody id="tbody_jdNews">
 								<tr class="gif"></tr>
 							</tbody>
 						</table>
@@ -44,7 +44,7 @@
 				<div id="ggNews" class="accordion-body collapse">
 					<div class="accordion-inner">
 						<table id="ggNewsList" class="table table-hover table-condensed">
-							<tbody>
+							<tbody id="tbody_ggNews">
 								<tr class="gif"></tr>
 							</tbody>
 						</table>
@@ -54,15 +54,15 @@
 		</div>
 
 		<!-- ========================= joinDota Tab ========================= -->
-		<div class="accordion tab-pane" id="acc_matches">
+		<div class="accordion tab-pane" id="jd_matches">
 			<div class="accordion-group">
 				<div class="accordion-heading">
-					<a class="accordion-toggle" data-toggle="collapse" data-parent="#acc_matches" href="#collapseOne">Upcoming Matches<span title="Go to: http://www.joindota.com/en/matches" data-link="http://www.joindota.com/en/matches" href="#" class="permalink"><i class="icon-tags"></i></span></a>
+					<a class="accordion-toggle" data-toggle="collapse" data-parent="#jd_matches" href="#collapseOne">Upcoming Matches<span title="Go to: http://www.joindota.com/en/matches" data-link="http://www.joindota.com/en/matches" href="#" class="permalink"><i class="icon-tags"></i></span></a>
 				</div>
 				<div id="collapseOne" class="accordion-body collapse in">
 					<div class="accordion-inner">
 						<table id="matchList" class="table table-hover table-condensed">
-							<tbody>
+							<tbody id="tbody_jdUpMatches">
 								<tr class="gif"></tr>
 							</tbody>
 						</table>
@@ -71,12 +71,12 @@
 			</div>
 			<div class="accordion-group">
 				<div class="accordion-heading">
-					<a class="accordion-toggle" data-toggle="collapse" data-parent="#acc_matches" href="#collapseTwo">Recent Results</a>
+					<a class="accordion-toggle" data-toggle="collapse" data-parent="#jd_matches" href="#collapseTwo">Recent Results</a>
 				</div>
 				<div id="collapseTwo" class="accordion-body collapse">
 					<div class="accordion-inner">
 						<table id="finishedList" class="table table-hover table-condensed">
-							<tbody>
+							<tbody id="tbody_jdReMatches">
 								<tr class="gif"></tr>
 							</tbody>
 						</table>
@@ -94,7 +94,7 @@
 				<div id="ggcollapseOne" class="accordion-body collapse in">
 					<div class="accordion-inner">
 						<table id="gg_matchList" class="table table-hover table-condensed">
-							<tbody>
+							<tbody id="tbody_ggUpMatches">
 								<tr class="gif"></tr>
 							</tbody>
 						</table>
@@ -108,7 +108,7 @@
 				<div id="ggcollapseTwo" class="accordion-body collapse">
 					<div class="accordion-inner">
 						<table id="gg_finishedList" class="table table-hover table-condensed">
-							<tbody>
+							<tbody id="tbody_ggReMatches">
 								<tr class="gif"></tr>
 							</tbody>
 						</table>
@@ -126,7 +126,7 @@
 				<div id="jdRankings" class="accordion-body collapse in">
 					<div class="accordion-inner">
 						<table id="jd_rankList" class="table table-hover table-condensed">
-							<tbody>
+							<tbody id="tbody_jdRankings">
 								<tr class="gif"></tr>
 							</tbody>
 						</table>
@@ -140,7 +140,7 @@
 				<div id="ggRankings" class="accordion-body collapse">
 					<div class="accordion-inner">
 						<table id="gg_rankList" class="table table-hover table-condensed">
-							<tbody>
+							<tbody id="tbody_ggRankings">
 								<tr class="gif"></tr>
 							</tbody>
 						</table>
@@ -158,7 +158,7 @@
 				<div id="streams" class="accordion-body collapse in">
 					<div class="accordion-inner">
 						<table id="streamList" class="table table-hover table-condensed">
-							<tbody>
+							<tbody id="tbody_streams">
 								<tr class="gif"></tr>
 							</tbody>
 						</table>
@@ -172,7 +172,7 @@
 				<div id="vods" class="accordion-body collapse">
 					<div class="accordion-inner">
 						<table id="vodsList" class="table table-hover table-condensed">
-							<tbody>
+							<tbody id="tbody_vods">
 								<tr class="gif"></tr>
 							</tbody>
 						</table>
@@ -265,7 +265,7 @@
 							<li><b>1.5.2</b> - 2/26/2013
 							<ul>
 								<li>Fixed Spoiler Bug</li>
-								<li>Fixed crap load of bug & refactored some shit</li>
+								<li>Fixed crap load of bug and refactored some shit</li>
 								<li>Performance Improvements</li>
 							</ul>
 							</li>

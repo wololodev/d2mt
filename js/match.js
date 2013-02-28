@@ -1,14 +1,28 @@
 (function($) {
 	"use strict";
+	$.ajaxSetup({
+		type: "GET",
+		dataType: "json"
+	});
 
 	var d2mt = {
+		config: {
+			version: "1.5.2",
+			browser: "chrome",
+			exturl: "https://chrome.google.com/webstore/detail/dota-2-match-ticker/nejdjlaibiicicciokonbbkecjleilon",
+			joinDotaUrl: "http://www.joindota.com/",
+			gosugamersUrl: "http://www.gosugamers.net/dota2"
+		},
 		settings: {
 			isSpoilerOn: localStorage.isSpoilerOn === "true",
 			isPopout: localStorage.isPopout === "true"
 		},
 		nodes: {
 			jdRecentResults: $('#finishedList'),
-			ggRecentResults: $('#gg_finishedList')
+			ggRecentResults: $('#gg_finishedList'),
+			jdMatches: $('#jd_matches'),
+			ggMatches: $('#gg_acc_matches'),
+			rankings: $('#rankings')
 		},
 		init: function() {
 			defineDefaults();
@@ -22,7 +36,10 @@
 
 	// Cache Nodes
 	var $jdRecentResults = d2mt.nodes.jdRecentResults,
-		$ggRecentResults = d2mt.nodes.ggRecentResults;
+		$ggRecentResults = d2mt.nodes.ggRecentResults,
+		$jdMatches = d2mt.nodes.jdMatches,
+		$ggMatches = d2mt.nodes.ggMatches,
+		$rankings = d2mt.nodes.rankings;
 
 	var setResultsSpoiler = function(isSpoilerOn) {
 		var result;
@@ -31,11 +48,9 @@
 
 		if (isSpoilerOn) {
 			$winResults.text("?");
-			console.log("foobar");
 			$jdSeriesResults.addClass('opaque');
 			$($jdRecentResults, $ggRecentResults).find('b').addClass("unboldWinner");
 		} else {
-			console.log("Sdf");
 			$jdSeriesResults.removeClass('opaque');
 			$('.unboldWinner').removeClass("unboldWinner");
 			$winResults.each(function(){
@@ -93,7 +108,7 @@
 			});
 		}
 	};
-	
+
 	var setTime = function(phm, cssClass) {
 		$(cssClass).each(function(){
 			var timestamp = $(this).attr('alt');
@@ -105,7 +120,7 @@
 			$(this).parent().attr('data-original-title', newEventTime);
 		});
 	};
-	
+
 	var setUpdatedTime = function() {
 		$('.jd_date, .gg_date, .vod_date, .news_date').each(function(){
 			var timestamp = $(this).attr('alt');
@@ -119,7 +134,7 @@
 			$(this).parent().attr('data-original-title', newEventTime);
 		});
 	};
-	
+
 	var defineDefaults = function() {
 		// Last Opened Tab
 		if (localStorage.lastOpenedTab !== undefined) {
@@ -127,7 +142,7 @@
 		} else {
 			$('#nav_jd').tab('show');
 		}
-		
+
 		// Time Format
 		if (localStorage.timeFormat !== undefined) {
 			if ("H:MM Z" === localStorage.timeFormat)
@@ -140,7 +155,7 @@
 			localStorage.timeFormat = "H:MM Z";
 			$('#twfh').addClass('active');
 		}
-		
+
 		// Date Format
 		if (localStorage.dateFormat !== undefined) {
 			if ("d/mm/yyyy " === localStorage.dateFormat)
@@ -166,111 +181,77 @@
 			$('#spoilerFalse').addClass("active");
 		}
 	};
-	
+
 	var onLoadAjax = function() {
 		// JOINDOTA MATCH TICKER
-		$.ajax({
-			url: "http://api.dotaprj.me/jd/matches/v130/api.json",
-			dataType: 'json',
-			success: function(data) {
-				var eventLive = [];
-				var eventSoon = [];
-				var eventDone = [];
-				var eventDoneExtra = [];
-				
-				$.each(data, function(key, val) {
-					switch (key) {
-						case "eventLive":
-							eventLive.push(val);
-							break;
-						case "eventSoon":
-							eventSoon.push(val);
-							break;
-						default:
-							eventDone.push(val);
-					}
-				});
-				
-				var recent = eventLive + eventSoon;
-				var finished = eventDone + eventDoneExtra;
-				$('#acc_matches .gif').hide();
-				$('#matchList > tbody').html(recent);
-				$('#finishedList > tbody').html(finished);
-				$('#acc_matches tr').tooltip({html:true});
-				setResultsSpoiler(isSpoilerOn);
-				setTime(0, ".jd_date");
-			},
-			error: function() {
-				$('#acc_matches .gif').attr('class', 'err').html("Somewhere, somehow, went wrong. Please update to the <a href='https://chrome.google.com/webstore/detail/dota-2-match-ticker/nejdjlaibiicicciokonbbkecjleilon' target='_blank'>latest version.</a>");
-			}
+		var load_jdmatches = $.ajax("http://api.dotaprj.me/jd/matches/v130/api.json")
+		.success(function(data) {
+			var recent, finished;
+			$jdMatches.find('.gif').hide();
+			$.each(data, function(key, val) {
+				if (key === "eventDone") {
+					finished += val;
+				} else {
+					recent += val;
+				}
+			});
+
+			$('#tbody_jdUpMatches').append(recent);
+			$('#tbody_jdReMatches').append(finished);
+			$jdMatches.find('tr').tooltip({html:true});
+			setTime(0, ".jd_date");
+		}).error(function() {
+			$jdMatches.find('.gif').attr('class', 'err').html("Either <a href='" + d2mt.config.joinDotaUrl + "'>" +
+					"joinDota</a> is down or you need to <a href='" + d2mt.config.exturl + "'>upgrade.</a>");
 		});
 
 		// GOSUGAMERS MATCH TICKER
-		$.ajax({
-			url: "http://api.dotaprj.me/gg/matches/v120/api.json",
-			dataType: 'json',
-			success: function(data) {
-				var eventLive = [];
-				var eventSoon = [];
-				var eventDone = [];
-				var eventDoneExtra = [];
-				
-				$.each(data, function(key, val) {
-					switch (key) {
-						case "eventLive":
-							eventLive.push(val);
-							break;
-						case "eventSoon":
-							eventSoon.push(val);
-							break;
-						default:
-							eventDone.push(val);
-					}
-				});
-				
-				var recent = eventLive + eventSoon;
-				var finished = eventDone + eventDoneExtra;
-				$('#gg_acc_matches .gif').hide();
-				$('#gg_matchList > tbody').html(recent);
-				$('#gg_finishedList > tbody').html(finished);
-				$('#gg_acc_matches tr').tooltip({html:true});
+		var load_ggmatches = $.ajax("http://api.dotaprj.me/gg/matches/v120/api.json")
+		.success(function(data) {
+			var recent, finished;
+			$ggMatches.find('.gif').hide();
+			$.each(data, function(key, val) {
+				if (key === "eventSoon") {
+					recent += val;
+				} else {
+					finished += val;
+				}
+			});
+
+			$('#tbody_ggUpMatches').append(recent);
+			$('#tbody_ggReMatches').append(finished);
+			$ggMatches.find('tr').tooltip({html:true});
+			setTime(0, ".gg_date");
+		}).error(function() {
+			$ggMatches.find('.gif').attr('class', 'err').html("Either <a href='" + d2mt.config.gosugamersUrl + "'>" +
+					"GosuGamers</a> is down or you need to <a href='" + d2mt.config.exturl + "'>upgrade.</a>");
+		});
+
+		$.when(load_jdmatches, load_ggmatches).done(function() {
+			if (isSpoilerOn) {
 				setResultsSpoiler(isSpoilerOn);
-				setTime(0, ".gg_date");
-			},
-			error: function() {
-				$('#gg_acc_matches .gif').attr('class', 'err').html("Somewhere, somehow, went wrong. Please update to the <a href='https://chrome.google.com/webstore/detail/dota-2-match-ticker/nejdjlaibiicicciokonbbkecjleilon' target='_blank'>latest version.</a>");
 			}
 		});
 
 		// RANKINGS AND STANDINGS
-		$.ajax({
-			url: "http://api.dotaprj.me/rankings/v150/api.json",
-			dataType: 'json',
-			success: function(data) {
-				var jd = [];
-				var gg = [];
-				var tmp = [];
-				
-				$.each(data, function(key, val) {
-					switch (key) {
-						case "jd":
-							jd.push(val);
-							break;
-						default:
-							gg.push(val);
-					}
-				});
-				
-				var jdList = jd + tmp;
-				var ggList = gg + tmp;
-				$('#rankings .gif').hide();
-				$('#jd_rankList > tbody').html(jdList);
-				$('#gg_rankList > tbody').html(ggList);
-				$('#rankings tr').tooltip({html:true});
-			},
-			error: function() {
-				$('#rankings .gif').attr('class', 'err').html("Somewhere, somehow, went wrong. Please update to the <a href='https://chrome.google.com/webstore/detail/dota-2-match-ticker/nejdjlaibiicicciokonbbkecjleilon' target='_blank'>latest version.</a>");
-			}
+		var load_rankings = $.ajax("http://api.dotaprj.me/rankings/v150/api.json")
+		.success(function(data) {
+			var jdrankings, ggrankings;
+			$rankings.find('.gif').hide();
+			$.each(data, function(key, val) {
+				if (key === "jd") {
+					jdrankings += val;
+				} else {
+					ggrankings += val;
+				}
+			});
+
+			$('#tbody_jdRankings').append(jdrankings);
+			$('#tbody_ggRankings').append(ggrankings);
+			$rankings.find('tr').tooltip({html:true});
+		}).error(function() {
+			$rankings.find('.gif').attr('class', 'err').html("Either <a href='" + d2mt.config.gosugamersUrl + "'>" +
+					"GosuGamers</a> is down or you need to <a href='" + d2mt.config.exturl + "'>upgrade.</a>");
 		});
 
 		// NEWS COVERAGE
@@ -337,10 +318,12 @@
 				$('#streams_vods .gif').attr('class', 'err').html("Somewhere, somehow, went wrong. Please update to the <a href='https://chrome.google.com/webstore/detail/dota-2-match-ticker/nejdjlaibiicicciokonbbkecjleilon' target='_blank'>latest version.</a>");
 			}
 		});
+
+		
 	};
-	
+
 	var update = function() {
-		$('#acc_matches tr, #gg_acc_matches tr, #streams_vods tr, #news tr, #rankings tr, .err, .tooltip').remove();
+		$('#jd_matches tr, #gg_acc_matches tr, #streams_vods tr, #news tr, #rankings tr, .err, .tooltip').remove();
 		$('.gif').show();
 		onLoadAjax();
 	};
@@ -348,7 +331,7 @@
 	d2mt.init();
 
 
-	$('#acc_matches, #gg_acc_matches, #streams_vods, #rankings, #news').on('click', 'tr', function(){
+	$('#jd_matches, #gg_acc_matches, #streams_vods, #rankings, #news').on('click', 'tr', function(){
 		var url = $(this).attr('href');
 		window.open(url);
 	});
@@ -362,7 +345,7 @@
 		localStorage.timeFormat = $(this).attr('alt');
 		setUpdatedTime();
 	});
-	
+
 	$('.dateformat').click(function(){
 		localStorage.dateFormat = $(this).attr('alt');
 		setUpdatedTime();
