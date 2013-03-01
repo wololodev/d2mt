@@ -53,6 +53,12 @@ tbody {
 .permalink:hover {
 	opacity: 1;
 }
+.unboldWinner {
+	font-weight: normal !important;
+}
+.opaque {
+	opacity: 0.0;
+}
 /*OVERWRITTING*/
 .nav {
 	margin-bottom:-1px !important;
@@ -79,10 +85,4 @@ tbody {
 }
 .tooltip-inner {
 	max-width: 240px !important;
-}
-.unboldWinner {
-	font-weight: normal !important;
-}
-.opaque {
-	opacity: 0.0;
 }
