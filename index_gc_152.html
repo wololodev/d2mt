@@ -9,16 +9,17 @@
 	<!-- Le styles -->
 	<link href="css/bootstrap.css" rel="stylesheet">
 	<link href="css/custom.css" rel="stylesheet">
+	<script src="js/vendor/ga.js"></script>
 </head>
 <body>
 	<ul id="menu" class="nav nav-tabs">
-		<li><a id="nav_news" title="News" href="#news" data-toggle="tab"><i class="icon-home"></i></a></li>
-		<li><a id="nav_jd" title="joinDota Matches" href="#jd_matches" data-toggle="tab">jD</a></li>
-		<li><a id="nav_gg" title="GosuGamers Matches" href="#gg_acc_matches" data-toggle="tab">GG</a></li>
-		<li><a id="nav_ranking" title="Rankings" href="#rankings" data-toggle="tab"><i class="icon-signal"></i></a></li>
-		<li><a id="nav_stream" title="Streams and VODs" title="News" href="#streams_vods" data-toggle="tab"><i class="icon-play"></i></a></li>
-		<li><a id="nav_sett" title="Settings" href="#settings" data-toggle="tab"><i class="icon-wrench"></i></a></li>
-		<li><a id="nav_update" title="Refresh" href="#"><i class="icon-refresh"></i></a></li>
+		<li><a class="menutab" id="nav_news" title="News" href="#news" data-toggle="tab"><i class="icon-home"></i></a></li>
+		<li><a class="menutab" id="nav_jd" title="joinDota Matches" href="#jd_matches" data-toggle="tab">jD</a></li>
+		<li><a class="menutab" id="nav_gg" title="GosuGamers Matches" href="#gg_acc_matches" data-toggle="tab">GG</a></li>
+		<li><a class="menutab" id="nav_ranking" title="Rankings" href="#rankings" data-toggle="tab"><i class="icon-signal"></i></a></li>
+		<li><a class="menutab" id="nav_stream" title="Streams and VODs" title="News" href="#streams_vods" data-toggle="tab"><i class="icon-play"></i></a></li>
+		<li><a class="menutab" id="nav_sett" title="Settings" href="#settings" data-toggle="tab"><i class="icon-wrench"></i></a></li>
+		<li><a class="menutab" id="nav_update" title="Refresh" href="#"><i class="icon-refresh"></i></a></li>
 	</ul>
 	<div class="tab-content">
 		<!-- ========================= News Tab ========================= -->
@@ -30,7 +31,7 @@
 				<div id="jdNews" class="accordion-body collapse in">
 					<div class="accordion-inner">
 						<table id="jdNewsList" class="table table-hover table-condensed">
-							<tbody id="tbody_jdNews">
+							<tbody class="listload" id="tbody_jdNews">
 								<tr class="gif"></tr>
 							</tbody>
 						</table>
@@ -44,7 +45,7 @@
 				<div id="ggNews" class="accordion-body collapse">
 					<div class="accordion-inner">
 						<table id="ggNewsList" class="table table-hover table-condensed">
-							<tbody id="tbody_ggNews">
+							<tbody class="listload" id="tbody_ggNews">
 							</tbody>
 						</table>
 					</div>
@@ -61,7 +62,7 @@
 				<div id="collapseOne" class="accordion-body collapse in">
 					<div class="accordion-inner">
 						<table id="matchList" class="table table-hover table-condensed">
-							<tbody id="tbody_jdUpMatches">
+							<tbody class="listload" id="tbody_jdUpMatches">
 								<tr class="gif"></tr>
 							</tbody>
 						</table>
@@ -75,7 +76,7 @@
 				<div id="collapseTwo" class="accordion-body collapse">
 					<div class="accordion-inner">
 						<table id="finishedList" class="table table-hover table-condensed">
-							<tbody id="tbody_jdReMatches">
+							<tbody class="listload" id="tbody_jdReMatches">
 							</tbody>
 						</table>
 					</div>
@@ -92,7 +93,7 @@
 				<div id="ggcollapseOne" class="accordion-body collapse in">
 					<div class="accordion-inner">
 						<table id="gg_matchList" class="table table-hover table-condensed">
-							<tbody id="tbody_ggUpMatches">
+							<tbody class="listload" id="tbody_ggUpMatches">
 								<tr class="gif"></tr>
 							</tbody>
 						</table>
@@ -106,7 +107,7 @@
 				<div id="ggcollapseTwo" class="accordion-body collapse">
 					<div class="accordion-inner">
 						<table id="gg_finishedList" class="table table-hover table-condensed">
-							<tbody id="tbody_ggReMatches">
+							<tbody class="listload" id="tbody_ggReMatches">
 							</tbody>
 						</table>
 					</div>
@@ -123,7 +124,7 @@
 				<div id="jdRankings" class="accordion-body collapse in">
 					<div class="accordion-inner">
 						<table id="jd_rankList" class="table table-hover table-condensed">
-							<tbody id="tbody_jdRankings">
+							<tbody class="listload" id="tbody_jdRankings">
 								<tr class="gif"></tr>
 							</tbody>
 						</table>
@@ -137,7 +138,7 @@
 				<div id="ggRankings" class="accordion-body collapse">
 					<div class="accordion-inner">
 						<table id="gg_rankList" class="table table-hover table-condensed">
-							<tbody id="tbody_ggRankings">
+							<tbody class="listload" id="tbody_ggRankings">
 							</tbody>
 						</table>
 					</div>
@@ -154,7 +155,7 @@
 				<div id="streams" class="accordion-body collapse in">
 					<div class="accordion-inner">
 						<table id="streamList" class="table table-hover table-condensed">
-							<tbody id="tbody_streams">
+							<tbody class="listload" id="tbody_streams">
 								<tr class="gif"></tr>
 							</tbody>
 						</table>
@@ -168,7 +169,7 @@
 				<div id="vods" class="accordion-body collapse">
 					<div class="accordion-inner">
 						<table id="vodsList" class="table table-hover table-condensed">
-							<tbody id="tbody_vods">
+							<tbody class="listload" id="tbody_vods">
 							</tbody>
 						</table>
 					</div>
@@ -196,8 +197,8 @@
 								<tr>
 									<td>Date Format</td>
 									<td><div class="btn-group" data-toggle="buttons-radio">
-											<button id="dateInt" alt="d/mm/yyyy " type="button" class="btn btn-info btn-small dateformat">DD/MM/YYYY</button>
-											<button id="dateUS" alt="mm/d/yyyy " type="button" class="btn btn-info btn-small dateformat">MM/DD/YYYY</button>
+											<button id="dateInt" alt="d/mm/yyyy" type="button" class="btn btn-info btn-small dateformat">DD/MM/YYYY</button>
+											<button id="dateUS" alt="mm/d/yyyy" type="button" class="btn btn-info btn-small dateformat">MM/DD/YYYY</button>
 									</div></td>
 								</tr>
 								<tr>
@@ -257,7 +258,7 @@
 					<div class="accordion-inner">
 						<small>
 						<ul>
-							<li><b>1.5.2</b> - 2/26/2013
+							<li><b>1.5.2</b> - 1/03/2013
 							<ul>
 								<li>Fixed Spoiler Bug</li>
 								<li>Fixed crap load of bug and refactored some shit</li>
@@ -287,11 +288,15 @@
 								</tr>
 								<tr>
 									<td><b>Contact:</b></td>
-									<td>dota@hotmail.ca</td>
+									<td><a target="_blank" href="mailto:dota@hotmail.ca">dota@hotmail.ca</a></td>
+								</tr>
+								<tr>
+									<td><b>Follow me:</b></td>
+									<td><a target="_blank" href="https://twitter.com/wololodev">@wololodev</a></td>
 								</tr>
 								<tr>
 									<td><b>Contribute:</b></td>
-									<td><a href="https://github.com/wololodev/d2mt.git">Fork me at GitHub</a></td>
+									<td><a target="_blank" href="https://github.com/wololodev/d2mt.git">Fork me at GitHub</a></td>
 								</tr>
 							</tbody>
 						</table>
@@ -304,6 +309,5 @@
 	<script src="js/vendor/bootstrap.js"></script>
 	<script src="js/vendor/date.format.js"></script>
 	<script src="js/match.js"></script>
-	<script src="js/vendor/ga.js"></script>
 </body> 
 </html>

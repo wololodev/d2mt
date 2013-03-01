@@ -4,10 +4,10 @@
 		type: "GET",
 		dataType: "json",
 		success: function() {
-			$preloadGif.remove();
+			$('.gif').remove();
 		},
 		error: function() {
-			$preloadGif.attr('class', 'err').html("Either <a href='" + d2mt.config.joinDotaUrl + "'>" +
+			$('.gif').attr('class', 'err').html("Either <a href='" + d2mt.config.joinDotaUrl + "'>" +
 					"joinDota</a> or <a href='" + d2mt.config.gosugamersUrl + "'>" + "GosuGamers</a> " +
 					"is down or you need to <a href='" + d2mt.config.exturl + "'>upgrade</a>. Click refresh to " +
 					"retry. If problems persist contact me as soon as possible: <a href='mailto:" +
@@ -26,10 +26,11 @@
 		},
 		settings: {
 			isSpoilerOn: localStorage.isSpoilerOn === "true",
-			isPopout: localStorage.isPopout === "true"
+			isPopout: localStorage.isPopout === "true",
+			timeFormat: localStorage.timeFormat === "h:MMTT Z" ? "h:MMTT Z" : "H:MM Z",
+			dateFormat: localStorage.dateFormat === "d/mm/yyyy" ? "d/mm/yyyy" : "mm/d/yyyy"
 		},
 		nodes: {
-			preloadGif: $('.gif'),
 			jdRecentResults: $('#finishedList'),
 			ggRecentResults: $('#gg_finishedList'),
 			jdMatches: $('#jd_matches'),
@@ -44,11 +45,12 @@
 
 	// Cache Settings
 	var isSpoilerOn = d2mt.settings.isSpoilerOn,
-		isPopout = d2mt.settings.isPopout;
+		isPopout = d2mt.settings.isPopout,
+		timeFormat = d2mt.settings.timeFormat,
+		dateFormat = d2mt.settings.dateFormat;
 
 	// Cache Nodes
-	var $preloadGif = d2mt.nodes.preloadGif,
-		$jdRecentResults = d2mt.nodes.jdRecentResults,
+	var $jdRecentResults = d2mt.nodes.jdRecentResults,
 		$ggRecentResults = d2mt.nodes.ggRecentResults,
 		$jdMatches = d2mt.nodes.jdMatches,
 		$ggMatches = d2mt.nodes.ggMatches,
@@ -90,27 +92,29 @@
 
 	var setTime = function() {
 		$('.push-tt').each(function(){
+			var $parentNode = $(this).parent();
 			var timestamp = $(this).attr('alt');
 			var newDate = new Date(timestamp*1000);
 			newDate.setHours(newDate.getHours());
-			var fulldate = newDate.format(localStorage.dateFormat + localStorage.timeFormat);
-			var prevEventTime = $(this).parent().attr('data-original-title');
+			var fulldate = newDate.format(dateFormat + " " + timeFormat);
+			var prevEventTime = $parentNode.attr('data-original-title');
 			var newEventTime = prevEventTime + "<br>" + fulldate;
-			$(this).parent().attr('data-original-title', newEventTime);
+			$parentNode.attr('data-original-title', newEventTime);
 		});
 	};
 
 	var setUpdatedTime = function() {
 		$('.push-tt').each(function(){
+			var $parentNode = $(this).parent();
 			var timestamp = $(this).attr('alt');
 			var newDate = new Date(timestamp*1000);
 			newDate.setHours(newDate.getHours());
-			var fulldate = newDate.format(localStorage.dateFormat + localStorage.timeFormat);
-			var prevEventStr = $(this).parent().attr('data-original-title');
+			var fulldate = newDate.format(dateFormat + " " + timeFormat);
+			var prevEventStr = $parentNode.attr('data-original-title');
 			var prevEventIndex = prevEventStr.indexOf('<br>');
 			var prevEventTime = prevEventStr.substring(0, prevEventIndex);
 			var newEventTime = prevEventTime + "<br>" + fulldate;
-			$(this).parent().attr('data-original-title', newEventTime);
+			$parentNode.attr('data-original-title', newEventTime);
 		});
 	};
 
@@ -123,28 +127,19 @@
 		}
 
 		// Time Format
-		if (localStorage.timeFormat !== undefined) {
-			if ("H:MM Z" === localStorage.timeFormat)
-				$('#twfh').addClass('active');
-			else {
-				localStorage.timeFormat = "h:MMTT Z";
-				$('#PM').addClass('active');
-			}
-		} else {
-			localStorage.timeFormat = "H:MM Z";
+		if ("H:MM Z" === timeFormat)
 			$('#twfh').addClass('active');
+		else {
+			$('#PM').addClass('active');
 		}
 
 		// Date Format
-		if (localStorage.dateFormat !== undefined) {
-			if ("d/mm/yyyy " === localStorage.dateFormat)
-				$('#dateInt').addClass('active');
-			else
-				$('#dateUS').addClass('active');
-		} else {
-			localStorage.dateFormat = "d/mm/yyyy ";
+		if ("d/mm/yyyy" === dateFormat) {
 			$('#dateInt').addClass('active');
+		} else {
+			$('#dateUS').addClass('active');
 		}
+
 
 		// Stream Link Format
 		if (isPopout) {
@@ -185,8 +180,10 @@
 			$.each(data, function(key, val) {
 				if (key === "eventDone") {
 					finished += val;
-				} else {
+				} else if (key === "eventSoon") {
 					recent += val;
+				} else {
+					recent = val + recent;
 				}
 			});
 
@@ -199,10 +196,10 @@
 		.success(function(data) {
 			var recent, finished;
 			$.each(data, function(key, val) {
-				if (key === "eventSoon") {
-					recent += val;
-				} else {
+				if (key === "eventDone") {
 					finished += val;
+				} else {
+					recent += val;
 				}
 			});
 
@@ -254,31 +251,33 @@
 	};
 
 	var update = function() {
-		$('#jd_matches tr, #gg_acc_matches tr, #streams_vods tr, #news tr, #rankings tr, .err, .tooltip').remove();
-		$('.gif').show();
+		$('.d2mtrow, .err, .tooltip').remove();
+		$('.listload').html("<tr class='gif'></tr>");
 		onLoadAjax();
 	};
 
+	// Start Main
 	d2mt.init();
 
-
-	$('#jd_matches, #gg_acc_matches, #streams_vods, #rankings, #news').on('click', 'tr', function(){
+	$('.tab-content').on('click', '.d2mtrow', function(){
 		var url = $(this).attr('href');
 		window.open(url);
 	});
 
-	$('a[data-toggle="tab"]').on('shown', function(e) {
+	$('.menutab').on('shown', function(e) {
 		var lastTab = e.target;
 		localStorage.lastOpenedTab = $(lastTab).attr('id');
 	});
 
 	$('.timeformat').click(function(){
-		localStorage.timeFormat = $(this).attr('alt');
+		timeFormat = $(this).attr('alt');
+		localStorage.timeFormat = timeFormat;
 		setUpdatedTime();
 	});
 
 	$('.dateformat').click(function(){
-		localStorage.dateFormat = $(this).attr('alt');
+		dateFormat = $(this).attr('alt');
+		localStorage.dateFormat = dateFormat;
 		setUpdatedTime();
 	});
 
@@ -306,11 +305,12 @@
 
 	$jdRecentResults.on('mouseover mouseout', '.eventDone', function(e) {
 		if (isSpoilerOn) {
+			var result;
 			var $closeResNode = $(this).find('.winResult');
 			var $jdWinnerSeries = $(this).find('.series');
 			var $winner = $(this).find('b');
 			if (e.type === 'mouseover') {
-				var result = $closeResNode.attr('data-winner');
+				result = $closeResNode.attr('data-winner');
 				$closeResNode.text(result);
 				$jdWinnerSeries.removeClass('opaque');
 				$winner.removeClass("unboldWinner");
@@ -324,10 +324,11 @@
 
 	$ggRecentResults.on('mouseover mouseout', '.eventDone', function(e) {
 		if (isSpoilerOn){
+			var result;
 			var $closeResNode = $(this).find('.winResult');
 			var $winner = $(this).find('b');
 			if (e.type === 'mouseover') {
-				var result = $closeResNode.attr('data-winner');
+				result = $closeResNode.attr('data-winner');
 				$closeResNode.text(result);
 				$winner.removeClass("unboldWinner");
 			} else {
