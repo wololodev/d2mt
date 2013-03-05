@@ -1,4 +1,5 @@
-## 1.5.2 - 01/03/2013
+## 1.5.2 - 01/05/2013
+    -   Added more VODs channels
     -   Fixed Spoiler Bug
     -   Fixed crap load of bug & refactored some shit
     -   Performance Improvements

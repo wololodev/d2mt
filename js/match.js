@@ -40,6 +40,7 @@
 		init: function() {
 			defineDefaults();
 			onLoadAjax();
+			_gaq.push(['_trackPageview']);
 		}
 	};
 
@@ -96,7 +97,7 @@
 			var timestamp = $(this).attr('alt');
 			var newDate = new Date(timestamp*1000);
 			newDate.setHours(newDate.getHours());
-			var fulldate = newDate.format(dateFormat + " " + timeFormat);
+			var fulldate = format(newDate, dateFormat + " " + timeFormat);
 			var prevEventTime = $parentNode.attr('data-original-title');
 			var newEventTime = prevEventTime + "<br>" + fulldate;
 			$parentNode.attr('data-original-title', newEventTime);
@@ -109,7 +110,7 @@
 			var timestamp = $(this).attr('alt');
 			var newDate = new Date(timestamp*1000);
 			newDate.setHours(newDate.getHours());
-			var fulldate = newDate.format(dateFormat + " " + timeFormat);
+			var fulldate = format(newDate, dateFormat + " " + timeFormat);
 			var prevEventStr = $parentNode.attr('data-original-title');
 			var prevEventIndex = prevEventStr.indexOf('<br>');
 			var prevEventTime = prevEventStr.substring(0, prevEventIndex);
@@ -267,6 +268,8 @@
 	$('.menutab').on('shown', function(e) {
 		var lastTab = e.target;
 		localStorage.lastOpenedTab = $(lastTab).attr('id');
+		_gaq.push(['_trackEvent', e.target.id, 'clicked']);
+		_gaq.push(['_trackPageview']);
 	});
 
 	$('.timeformat').click(function(){
