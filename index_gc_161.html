@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Dota 2 Match Ticker">
+  <meta name="author" content="Wololo">
+
+  <!-- Le styles -->
+  <link href="css/bootstrap.css" rel="stylesheet">
+  <link href="css/custom.css" rel="stylesheet">
+  <script src="js/vendor/ga.js"></script>
+</head>
+<body>
+  <div class="tabbable tabs-left">
+    <ul id="menu" class="nav nav-tabs">
+      <li><a class="menutab hovmenu" id="nav_news" title="News" href="#news" data-toggle="tab"><i class="icon-home"></i></a></li>
+      <li><a class="menutab hovmenu" id="nav_jd" title="joinDota Matches" href="#jd_matches" data-toggle="tab">jD</a></li>
+      <li><a class="menutab hovmenu" id="nav_gg" title="GosuGamers Matches" href="#gg_acc_matches" data-toggle="tab">GG</a></li>
+      <li><a class="menutab hovmenu" id="nav_ranking" title="Rankings" href="#rankings" data-toggle="tab"><i class="icon-signal"></i></a></li>
+      <li><a class="menutab hovmenu" id="nav_stream" title="Streams and VODs" title="News" href="#streams_vods" data-toggle="tab"><i class="icon-play"></i></a></li>
+      <li><a class="menutab hovmenu" id="nav_sett" title="Settings" href="#settings" data-toggle="tab"><i class="icon-wrench"></i></a></li>
+      <li><a class="menutab" id="nav_update" title="Refresh" href="#"><i class="icon-refresh"></i></a></li>
+    </ul>
+  </div>
+  <div class="tab-content">
+    <!-- ========================= News Tab ========================= -->
+    <div class="tab-pane alignborder" id="news">
+      <ul class="nav nav-tabs" id="js-newstab">
+        <li class="active"><a class="submenu" data-toggle="tab" href="#jdNews">joinDota News &nbsp;<span title="Go to: http://www.joindota.com/" data-link="http://www.joindota.com/" href="#" class="permalink"><i class="icon-share"></i></span></a></li>
+        <li><a class="submenu" data-toggle="tab" href="#ggNews">GosuGamers News &nbsp;<span title="Go to: http://www.gosugamers.net/dota2" data-link="http://www.gosugamers.net/dota2" href="#" class="permalink"><i class="icon-share"></i></span></a></li>
+      </ul>
+      <div class="tab-content">
+        <div class="tab-pane active" id="jdNews">
+          <table id="jdNewsList" class="table table-hover table-condensed">
+            <tbody class="listload" id="tbody_jdNews">
+              <tr class="gif"></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="tab-pane" id="ggNews">
+          <table id="ggNewsList" class="table table-hover table-condensed">
+            <tbody class="listload" id="tbody_ggNews">
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========================= joinDota Tab ========================= -->
+    <div class="tab-pane alignborder" id="jd_matches">
+      <ul class="nav nav-tabs">
+        <li class="active"><a class="submenu" data-toggle="tab" href="#tb-jdummatch">Upcoming Matches &nbsp;<span title="Go to: http://www.joindota.com/en/matches" data-link="http://www.joindota.com/en/matches" href="#" class="permalink"><i class="icon-share"></i></span></a></li>
+        <li><a class="submenu" data-toggle="tab" href="#tb-jdrrmatch">Recent Results</a></li>
+      </ul>
+      <div class="tab-content">
+        <div class="tab-pane active" id="tb-jdummatch">
+          <table id="matchList" class="table table-hover table-condensed">
+            <tbody class="listload" id="tbody_jdUpMatches">
+              <tr class="gif"></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="tab-pane" id="tb-jdrrmatch">
+          <table id="finishedList" class="table table-hover table-condensed">
+            <tbody class="listload" id="tbody_jdReMatches">
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    
+    <!-- ========================= GosuGamers Tab ========================= -->
+    <div class="tab-pane alignborder" id="gg_acc_matches">
+      <ul class="nav nav-tabs">
+        <li class="active"><a class="submenu" data-toggle="tab" href="#tb-ggummatch">Upcoming Matches &nbsp;<span title="Go to: http://www.gosugamers.net/dota2/gosubet" data-link="http://www.gosugamers.net/dota2/gosubet" href="#" class="permalink"><i class="icon-share"></i></span></a></li>
+        <li><a class="submenu" data-toggle="tab" href="#tb-ggrrmatch">Recent Results</a></li>
+      </ul>
+      <div class="tab-content">
+        <div class="tab-pane active" id="tb-ggummatch">
+          <table id="gg_matchList" class="table table-hover table-condensed">
+            <tbody class="listload" id="tbody_ggUpMatches">
+              <tr class="gif"></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="tab-pane" id="tb-ggrrmatch">
+          <table id="gg_finishedList" class="table table-hover table-condensed">
+            <tbody class="listload" id="tbody_ggReMatches">
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========================= Rankings Tab ========================= -->
+    <div class="tab-pane alignborder" id="rankings">
+      <ul class="nav nav-tabs">
+        <li class="active"><a class="submenu" data-toggle="tab" href="#jdRankings">jD Standings &nbsp;<span title="Go to: http://www.joindota.com/en/edb/teams" data-link="http://www.joindota.com/en/edb/teams" href="#" class="permalink"><i class="icon-share"></i></span></a></li>
+        <li><a class="submenu" data-toggle="tab" href="#ggRankings">GG Standings &nbsp;<span title="Go to: http://www.gosugamers.net/dota2/rankings/clans" data-link="http://www.gosugamers.net/dota2/rankings/clans" href="#" class="permalink"><i class="icon-share"></i></span></a></li>
+      </ul>
+      <div class="tab-content">
+        <div class="tab-pane active" id="jdRankings">
+          <table id="jd_rankList" class="table table-hover table-condensed">
+            <tbody class="listload" id="tbody_jdRankings">
+              <tr class="gif"></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="tab-pane" id="ggRankings">
+          <table id="gg_rankList" class="table table-hover table-condensed">
+            <tbody class="listload" id="tbody_ggRankings">
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========================= Streams/VODs Tab ========================= -->
+    <div class="tab-pane alignborder" id="streams_vods">
+      <ul class="nav nav-tabs">
+        <li class="active"><a class="submenu" data-toggle="tab" href="#streams">Live Streams</a></li>
+        <li><a class="submenu" data-toggle="tab" href="#dota2vods">Dota2Vods &nbsp;<span title="Go to: http://dota2vods.net/" data-link="http://dota2vods.net/" href="#" class="permalink"><i class="icon-share"></i></span></a></li>
+        <li><a class="submenu" data-toggle="tab" href="#vods">VODs</a></li>
+      </ul>
+      <div class="tab-content">
+        <div class="tab-pane active" id="streams">
+          <table id="streamList" class="table table-hover table-condensed">
+            <tbody class="listload" id="tbody_streams">
+              <tr class="gif"></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="tab-pane" id="dota2vods">
+          <table id="d2vodsList" class="table table-hover table-condensed">
+            <tbody class="listload" id="tbody_d2vods">
+            </tbody>
+          </table>
+        </div>
+        <div class="tab-pane" id="vods">
+          <table id="vodsList" class="table table-hover table-condensed">
+            <tbody class="listload" id="tbody_vods">
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========================= SETTIGNS ==================== -->
+    <div class="accordion tab-pane" id="settings">
+      <div class="accordion-group">
+        <div class="accordion-heading">
+          <a class="accordion-toggle" data-toggle="collapse" data-parent="#settings" href="#settingsOne">Settings</a>
+        </div>
+        <div id="settingsOne" class="accordion-body collapse in">
+          <div class="accordion-inner">
+            <table id="settingsList" class="table table-condensed">
+              <tbody>
+                <tr>
+                  <td>Time Format</td>
+                  <td><div class="btn-group" data-toggle="buttons-radio">
+                      <button id="twfh" alt="H:MM Z" type="button" class="btn btn-info btn-small timeformat">24h</button>
+                      <button id="PM" alt="h:MMTT Z" type="button" class="btn btn-info btn-small timeformat">PM</button>
+                  </div></td>
+                </tr>
+                <tr>
+                  <td>Date Format</td>
+                  <td><div class="btn-group" data-toggle="buttons-radio">
+                      <button id="dateInt" alt="d/mm/yyyy" type="button" class="btn btn-info btn-small dateformat">DD/MM/YYYY</button>
+                      <button id="dateUS" alt="mm/d/yyyy" type="button" class="btn btn-info btn-small dateformat">MM/DD/YYYY</button>
+                  </div></td>
+                </tr>
+                <tr>
+                  <td>Streams Popout</td>
+                  <td><div class="btn-group" data-toggle="buttons-radio">
+                      <button id="spTrue" data-ispopout="true" type="button" class="btn btn-info btn-small spformat">On</button>
+                      <button id="spFalse" data-ispopout="false" type="button" class="btn btn-info btn-small spformat">Off</button>
+                  </div></td>
+                </tr>
+                <tr>
+                  <td>Spoiler Mode</td>
+                  <td><div class="btn-group" data-toggle="buttons-radio">
+                      <button id="spoilerTrue" data-isspoiler="true" type="button" class="btn btn-info btn-small spoilerformat">On</button>
+                      <button id="spoilerFalse" data-isspoiler="false" type="button" class="btn btn-info btn-small spoilerformat">Off</button>
+                  </div></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="accordion-group">
+        <div class="accordion-heading">
+          <a class="accordion-toggle" data-toggle="collapse" data-parent="#settings" href="#settingsTwo"><i class="icon-question-sign"></i>&nbsp;FAQ</a>
+        </div>
+        <div id="settingsTwo" class="accordion-body collapse">
+          <div class="accordion-inner">
+            <small class="faq">
+              <dl>
+                <dt>How frequently is this updated ?</dt>
+                <dd>Depends. It could update every minute, 5 minutes, or every 15 minutes max.</dd>
+                
+                <dt>Is there D2MT for other browsers ?</dt>
+                <dd>Yes, <a href="https://chrome.google.com/webstore/detail/dota-2-match-ticker/nejdjlaibiicicciokonbbkecjleilon" target="_blank">Chrome</a> - <a href="https://addons.mozilla.org/en-US/firefox/addon/dota-2-match-ticker/" target="_blank">Firefox</a> - <a href="https://addons.opera.com/en/extensions/details/dota-2-match-ticker/" target="_blank">Opera</a> - <a href="http://dotaprj.me/" target="_blank">Web</a></dd>
+                
+                <dt>Does this run as a background process ?</dt>
+                <dd>No. Unlike many extensions, this one does not. As soon as you close the extension, you are freeing resource. (Except for firefox)</dd>
+                
+                <dt>What channels are you taking VODs from ?</dt>
+                <dd>VODs section will show you the 15 most recent uploads from the most popular DotA2 channels (currently 12). Contact me if you want to add yours.</dd>
+
+                <dt>Why are some news bolded ?</dt>
+                <dd>It's to show news that are hot. (Over 50 comments)</dd>
+
+                <dt>Joindota has points not elo, what gives ?</dt>
+                <dd>I devided the points by 22 to give the same elo feeling that GosuGamers gives.</dd>
+              </dl>
+            </small>
+          </div>
+        </div>
+      </div>
+      <div class="accordion-group">
+        <div class="accordion-heading">
+          <a class="accordion-toggle" data-toggle="collapse" data-parent="#settings" href="#settingsThree"><i class="icon-search"></i>&nbsp;Changelog</a>
+        </div>
+        <div id="settingsThree" class="accordion-body collapse">
+          <div class="accordion-inner">
+            <small>
+            <ul>
+              <li><b>1.6.1</b> - 30/4/2013
+              <ul>
+                <li style="text-decoration: line-through;">Changed layout. Clickless son.</li>
+                <li>Added <a href="http://dota2vods.net">Dota2Vods.net</a> VODs</li>
+                <li>Lots of bug fixes in regards to jD's updates</li>
+                <li>Timezone DST fix</li>
+                <li>More VOD channels!</li>
+              </ul>
+              </li>
+            </ul>
+            </small>
+          </div>
+        </div>
+      </div>
+      <div class="accordion-group">
+        <div class="accordion-heading">
+          <a class="accordion-toggle" data-toggle="collapse" data-parent="#settings" href="#settingsFour"><i class="icon-info-sign"></i>&nbsp;About</a>
+        </div>
+        <div id="settingsFour" class="accordion-body collapse">
+          <div class="accordion-inner">
+            <table class="about">
+              <tbody>
+                <tr>
+                  <td><b>Version:</b></td>
+                  <td>1.6.1</td>
+                </tr>
+                <tr>
+                  <td><b>Author:</b></td>
+                  <td>Hamed "Wololo" Al-Khabaz</td>
+                </tr>
+                <tr>
+                  <td><b>Contact:</b></td>
+                  <td><a target="_blank" href="mailto:dota@hotmail.ca">dota@hotmail.ca</a></td>
+                </tr>
+                <tr>
+                  <td><b>Follow me:</b></td>
+                  <td><a target="_blank" href="https://twitter.com/wololodev">@wololodev</a></td>
+                </tr>
+                <tr>
+                  <td><b>Contribute:</b></td>
+                  <td><a target="_blank" href="https://github.com/wololodev/d2mt.git">Fork me at GitHub</a></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>  
+    </div>
+  </div>
+  <script src="js/vendor/jquery-1.9.1.min.js"></script>
+  <script src="js/vendor/bootstrap.js"></script>
+  <script src="js/vendor/date.format.js"></script>
+  <script src="js/match.js"></script>
+</body> 
+</html>

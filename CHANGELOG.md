@@ -1,3 +1,9 @@
+## 1.6.0 - 29/4/2013
+    -   Changed layout. Clickless son.
+    -   Added Dota2Vods.net VODs
+    -   Lots of bug fixes in regards to jD's updates
+    -   Timezone DST fix
+    -   More VOD channels!
 ## 1.5.2 - 05/3/2013
     -   Added more VODs channels
     -   Fixed Spoiler Bug
