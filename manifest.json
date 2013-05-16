@@ -1,6 +1,6 @@
 {
   "name": "DotA 2 Match Ticker",
-  "version": "1.6.1",
+  "version": "1.6.2",
   "manifest_version": 2,
   "description": "DotA 2 competitive coverage on the go!",
   "icons": {
@@ -10,7 +10,7 @@
   },
   "browser_action": {
     "default_icon": "icon128.png",
-	"default_popup": "index_gc_161.html"
+	"default_popup": "index_gc_162.html"
   },
   "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
   "permissions": [

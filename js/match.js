@@ -17,7 +17,7 @@
 
   var d2mt = {
     config: {
-      version: "1.6.1",
+      version: "1.6.2",
       browser: "chrome",
       email: "dota@hotmail.ca",
       exturl: "https://chrome.google.com/webstore/detail/dota-2-match-ticker/nejdjlaibiicicciokonbbkecjleilon",
@@ -28,7 +28,8 @@
       isSpoilerOn: localStorage.isSpoilerOn === "true",
       isPopout: localStorage.isPopout === "true",
       timeFormat: localStorage.timeFormat === "h:MMTT Z" ? "h:MMTT Z" : "H:MM Z",
-      dateFormat: localStorage.dateFormat === "d/mm/yyyy" ? "d/mm/yyyy" : "mm/d/yyyy"
+      dateFormat: localStorage.dateFormat === "d/mm/yyyy" ? "d/mm/yyyy" : "mm/d/yyyy",
+      menuPos: localStorage.menuPos === "left" ? "left" : "top"
     },
     nodes: {
       jdRecentResults: $('#finishedList'),
@@ -48,7 +49,8 @@
   var isSpoilerOn = d2mt.settings.isSpoilerOn,
     isPopout = d2mt.settings.isPopout,
     timeFormat = d2mt.settings.timeFormat,
-    dateFormat = d2mt.settings.dateFormat;
+    dateFormat = d2mt.settings.dateFormat,
+    menuPos = d2mt.settings.menuPos;
 
   // Cache Nodes
   var $jdRecentResults = d2mt.nodes.jdRecentResults,
@@ -88,6 +90,21 @@
         id = $(this).data("id");
         $(this).attr("href", "http://www.twitch.tv/" + id);
       });
+    }
+  };
+
+  var setMenuPosition = function(menuPos) {
+    var $tab = $('.tabbable');
+    if (menuPos === "top") {
+      $tab.removeClass("tabs-left");
+      $('.ph-tableft').removeClass("sub-tabs-left");
+      $tab.addClass("tabs-top");
+      $('.ph-tabstop').addClass("sub-tabs-top");
+    } else {
+      $tab.removeClass("tabs-top");
+      $('.ph-tabstop').removeClass("sub-tabs-top");
+      $tab.addClass("tabs-left");
+      $('.ph-tableft').addClass("sub-tabs-left");
     }
   };
 
@@ -154,6 +171,14 @@
       $('#spoilerTrue').addClass("active");
     } else {
       $('#spoilerFalse').addClass("active");
+    }
+
+    // Spoiler
+    if (menuPos === "top") {
+      $('#menuTop').addClass("active");
+    } else {
+      $('#menuLeft').addClass("active");
+      setMenuPosition();
     }
   };
 
@@ -311,6 +336,12 @@
     setResultsSpoiler(isSpoilerOn);
   });
 
+  $('.menu-position').click(function(){
+    menuPos = $(this).data('position');
+    localStorage.menuPos = menuPos;
+    setMenuPosition(menuPos);
+  });
+
   $('#nav_update').click(function(){
     update();
   });
@@ -320,18 +351,6 @@
     window.open(url);
     e.stopPropagation();
   });
-
-  // $('#menu').menuAim({
-  //   activate: activateSubmenu
-  // });
-
-  // function activateSubmenu(row) {
-  //   $(row).find('.hovmenu').tab('show');
-  // }
-
-  // $('.submenu').mouseover(function() {
-  //   $(this).tab('show');
-  // });
 
   $jdRecentResults.on('mouseover mouseout', '.eventDone', function(e) {
     if (isSpoilerOn) {

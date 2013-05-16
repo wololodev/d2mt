@@ -1,3 +1,8 @@
+## 1.6.2 - 16/5/2013
+    -   Added settings to change layout
+    -   Added my project to help gamers travel to places
+## 1.6.1 - 1/5/2013
+    -   Removed hover per users angst.
 ## 1.6.0 - 29/4/2013
     -   Changed layout. Clickless son.
     -   Added Dota2Vods.net VODs

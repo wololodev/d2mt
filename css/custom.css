@@ -26,7 +26,8 @@ tbody {
 .icons { background: url(../img/sprite.png) no-repeat top left; display: block;}
 .iconBTS{ background-position: 0 0; width: 16px; height: 16px; } 
 .iconD2{ background-position: -17px 0; width: 16px; height: 16px; } 
-.iconDC{ background-position: -34px 0; width: 16px; height: 16px; } 
+.iconDC{ background-position: -34px 0; width: 16px; height: 16px; }
+.iconLUMI{ background-position: -34px 0; width: 16px; height: 16px; }
 .iconDH{ background-position: -51px 0; width: 16px; height: 16px; } 
 .iconEG{ background-position: -68px 0; width: 16px; height: 16px; } 
 .iconEPI{ background-position: -85px 0; width: 16px; height: 16px; } 
@@ -97,9 +98,13 @@ tbody {
 	max-width: 240px !important;
 }
 
-.submenu {
-/*	border-top: 0 !important;
-	margin-top: 1px !important;*/
+.sub-tabs-top {
+	border-top: 0 !important;
+	margin-top: 1px !important;
+}
+
+.sub-tabs-left {
+	border-left: 0 !important;
 }
 
 .menutab {
@@ -114,4 +119,29 @@ tbody {
 
 .alignborder {
 	border-left: 1px solid #ddd;
+}
+
+.outpostimg {
+	float: left;
+	margin-right: 5px;
+}
+
+.outpostimg:hover {
+	opacity: 0.8;
+}
+
+.ti2img {
+	display: block;
+	width: 264px;
+	height: 114px;
+	background-image: url('../img/international-button.png');
+	margin: 3px auto;
+}
+
+.ti2img:hover {
+	background-position: bottom;
+}
+
+.outpostdesc {
+	padding:0 5px;
 }
