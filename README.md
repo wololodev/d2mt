@@ -5,7 +5,8 @@ Competitive coverage on the go!
 This repo is based on Google Chrome extension's manifest rules. This build will not work if wrapped on a Firefox or an Opera extension. I don't know if anyone will contribute, so I won't put a how to or coding guide so in case you want to, just fork and pull and I'll merge for now! The golden rule is to remember that your code must look like as if one developer coded the whole thing.
 
 ## API
-I will soon release a RESTful API that fetches all the matches. For now, deal with the DOM nodes I'm giving you, in JSON format. You can find them by crawling in my source code. Once I'm done with the API, I will document it so everyone can use it.
+[GG Matches](http://api.dotaprj.me/v2/gg/)  
+[JD Matches](http://api.dotaprj.me/v2/jd/)  
 
 ## Download
 *  [Google Chrome](https://chrome.google.com/webstore/detail/dota-2-match-ticker/nejdjlaibiicicciokonbbkecjleilon/)
