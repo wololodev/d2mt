@@ -51,22 +51,24 @@
 	$upcoming = $matchList->find('.matches', $d1);
 	foreach($upcoming->find('tr') as $aGame) {
 		$img1 = "http://www.gosugamers.net".$aGame->find('img', 0)->src;
-		$team1 =  trim($aGame->find('span', 0)->plaintext);
+		$team1 =  trim($aGame->find('.opp1', 0)->plaintext);
 		if (!$team1) {
 			continue;
 		}
 		$img2  = "http://www.gosugamers.net".$aGame->find('img', 1)->src;
-		$team2 =  trim($aGame->find('span', 2)->plaintext);
+		$team2 =  trim($aGame->find('.opp2', 0)->plaintext);
 		$linkID = "http://www.gosugamers.net".$aGame->find('a', 0)->href;
-		$date = trim($aGame->find('.starts', 0)->plaintext);
+		$date = trim($aGame->find('.live-in', 0)->plaintext);
 		
 		$html = file_get_contents($linkID);
 		$titleList->load($html);
-		$bestof = $titleList->find('#match-details td', 3)->plaintext;
-		$eventName = $titleList->find('#match-details td', 2)->plaintext . " [BO{$bestof}]";
-		$fullDate = $titleList->find('#match-details td', 0)->plaintext;
+		$bestof = $titleList->find('.match-extras .bestof', 0)->plaintext;
+        $bestof = explode(' ', $bestof)[2];
+        if(!is_numeric($bestof)) $bestof = '?';
+		$eventName = $titleList->find('.box-match-page > h2 a', 0)->plaintext . " [BO{$bestof}]";
+		$fullDate = $titleList->find('.match-extras .datetime', 0)->plaintext;
 		$fullDate = str_replace("at", "", $fullDate);
-		$fullDate = $fullDate . "CEST";
+		$fullDate = $fullDate . "Europe/Berlin";
 		$timeStamp = strtotime($fullDate);
 		
 		$gameArray["eventSoon"][] =  "<tr class='d2mtrow eventSoon' href='{$linkID}' title='{$eventName}' rel='tooltip'><td alt='{$timeStamp}' class='push-tt gg_date'>{$date}</td><td><img src='{$img1}' width='14px' height='9px'> {$team1}</td><td>v</td><td><img src='{$img2}' width='14px' height='9px'> {$team2}</td></tr>";
@@ -76,25 +78,26 @@
 	$done = $matchList->find('.matches', $d2);
 	foreach($done->find('tr') as $aGame) {
 		$img1 = "http://www.gosugamers.net".$aGame->find('img', 0)->src;
-		$team1 =  trim($aGame->find('span', 0)->plaintext);
+		$team1 =  trim($aGame->find('.opp1', 0)->plaintext);
 		if (!$team1) {
 			continue;
 		}
 		$img2  = "http://www.gosugamers.net".$aGame->find('img', 1)->src;
-		$team2 =  trim($aGame->find('span', 2)->plaintext);
+		$team2 =  trim($aGame->find('.opp2', 0)->plaintext);
 		$linkID = "http://www.gosugamers.net".$aGame->find('a', 0)->href;
-		$date = trim($aGame->find('.starts', 0)->plaintext);
 
 		$html = file_get_contents($linkID);
 		$titleList->load($html);
-		$bestof = $titleList->find('#match-details td', 3)->plaintext;
-		$eventName = $titleList->find('#match-details td', 2)->plaintext . " [BO{$bestof}]";
-		$fullDate = $titleList->find('#match-details td', 0)->plaintext;
+		$bestof = $titleList->find('.match-extras .bestof', 0)->plaintext;
+        $bestof = explode(' ', $bestof)[2];
+        if(!is_numeric($bestof)) $bestof = '?';
+		$eventName = $titleList->find('.box-match-page > h2 a', 0)->plaintext . " [BO{$bestof}]";
+		$fullDate = $titleList->find('.match-extras .datetime', 0)->plaintext;
 		$fullDate = str_replace("at", "", $fullDate);
-		$fullDate = $fullDate . "CEST";
+		$fullDate = $fullDate . "Europe/Berlin";
 		$timeStamp = strtotime($fullDate);
-		$score1 = 0 + trim($titleList->find('.score', 0)->plaintext);
-		$score2 = 0 + trim($titleList->find('.score', 1)->plaintext);
+		$score1 = 0 + trim($titleList->find('.match-extras .hidden span', 0)->plaintext);
+		$score2 = 0 + trim($titleList->find('.match-extras .hidden span', 1)->plaintext);
 		$series = "{$score1}:{$score2}";
 		if ($score1 == $score2)
 			$winner = "x";
