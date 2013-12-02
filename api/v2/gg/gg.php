@@ -30,23 +30,23 @@
     $i = 0;
     foreach($started->find('tr') as $aGame) {
       $img1 = "http://www.gosugamers.net".$aGame->find('img', 0)->src;
-      $team1 =  trim($aGame->find('span', 0)->plaintext);
+      $team1 =  trim($aGame->find('.opp1', 0)->plaintext);
       if (!$team1) {
         continue;
       }
       $img2  = "http://www.gosugamers.net".$aGame->find('img', 1)->src;
-      $team2 =  trim($aGame->find('span', 2)->plaintext);
+      $team2 =  trim($aGame->find('.opp2', 0)->plaintext);
       $linkID = "http://www.gosugamers.net".$aGame->find('a', 0)->href;
 
       $html = file_get_contents($linkID);
       $titleList->load($html);
-      $bestof = $titleList->find('#match-details td', 3)->plaintext;
-      $eventName = $titleList->find('#match-details td', 2)->plaintext . " [BO{$bestof}]";
-      $fullDate = $titleList->find('#match-details td', 0)->plaintext;
+      $bestof = $titleList->find('.match-extras .bestof', 0)->plaintext;
+      $bestof = explode(' ', $bestof)[2];
+      if(!is_numeric($bestof)) $bestof = '?';
+      $eventName = $titleList->find('.box-match-page > h2 a', 0)->plaintext . " [BO{$bestof}]";
+      $fullDate = $titleList->find('.match-extras .datetime', 0)->plaintext;
       $fullDate = str_replace("at", "", $fullDate);
-      $fullDate = $fullDate . "CEST";
-      // comment the below line when DST happens
-      // $fullDate =  str_replace("CET", "CEST", $fullDate);
+      $fullDate = $fullDate . "Europe/Berlin";
       $timeStamp = strtotime($fullDate);
 
       $date = "Live";
