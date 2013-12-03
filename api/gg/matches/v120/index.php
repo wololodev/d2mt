@@ -35,7 +35,7 @@
 			$html = file_get_contents($linkID);
 			$titleList->load($html);
             $bestof = $titleList->find('.match-extras .bestof', 0)->plaintext;
-            $bestof = explode(' ', $bestof)[2];
+            $bestof = current(array_slice(explode(' ', $bestof), 2, 1));
             if(!is_numeric($bestof)) $bestof = '?';
             $eventName = $titleList->find('.box-match-page > h2 a', 0)->plaintext . " [BO{$bestof}]";
             $fullDate = $titleList->find('.match-extras .datetime', 0)->plaintext;
@@ -63,7 +63,7 @@
 		$html = file_get_contents($linkID);
 		$titleList->load($html);
 		$bestof = $titleList->find('.match-extras .bestof', 0)->plaintext;
-        $bestof = explode(' ', $bestof)[2];
+        $bestof = current(array_slice(explode(' ', $bestof), 2, 1));
         if(!is_numeric($bestof)) $bestof = '?';
 		$eventName = $titleList->find('.box-match-page > h2 a', 0)->plaintext . " [BO{$bestof}]";
 		$fullDate = $titleList->find('.match-extras .datetime', 0)->plaintext;
@@ -89,7 +89,7 @@
 		$html = file_get_contents($linkID);
 		$titleList->load($html);
 		$bestof = $titleList->find('.match-extras .bestof', 0)->plaintext;
-        $bestof = explode(' ', $bestof)[2];
+        $bestof = current(array_slice(explode(' ', $bestof), 2, 1));
         if(!is_numeric($bestof)) $bestof = '?';
 		$eventName = $titleList->find('.box-match-page > h2 a', 0)->plaintext . " [BO{$bestof}]";
 		$fullDate = $titleList->find('.match-extras .datetime', 0)->plaintext;
