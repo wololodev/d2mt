@@ -257,8 +257,6 @@
       $.each(data, function(key, val) {
         if (key === "stream") {
           streams += val;
-        } else if (key === "dota2vods") {
-          dota2vods += val;
         } else {
           vods += val;
         }
@@ -266,7 +264,6 @@
 
       $('#tbody_streams').html(streams);
       $('#tbody_vods').html(vods);
-      $('#tbody_d2vods').html(dota2vods);
       setStreamLink(isPopout);
     });
 
