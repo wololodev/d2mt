@@ -5,7 +5,7 @@
 	$combinedList = array();
 	$ultimateList = array();
 	$dota2vodslist = array();
-	
+
 	$i = 0;
 	foreach($twitch_json->streams as $aStream) {
 		if ($aStream->viewers <= 1)
@@ -13,7 +13,7 @@
 
 		if ($i >= 14)
 			break;
-			
+
 		$title = str_replace(array("'", '"'), "", $aStream->channel->status);
 		$link = $aStream->channel->url;
 		$name = $aStream->channel->display_name;
@@ -33,7 +33,7 @@
 	}
 
 	krsort($combinedList);
-	
+
 	$jd_json = json_decode(file_get_contents("http://gdata.youtube.com/feeds/api/users/joindota/uploads?&v=2&alt=jsonc&max-results=15"));
 	$sltv_json = json_decode(file_get_contents("http://gdata.youtube.com/feeds/api/users/dotasltv/uploads?&v=2&alt=jsonc&max-results=15"));
 	$sheever_json = json_decode(file_get_contents("http://gdata.youtube.com/feeds/api/users/sheevergaming/uploads?&v=2&alt=jsonc&max-results=15"));
@@ -52,7 +52,7 @@
 	$wo_json = json_decode(file_get_contents("http://gdata.youtube.com/feeds/api/users/WoDotA/uploads?&v=2&alt=jsonc&max-results=15"));
 	$dh_json = json_decode(file_get_contents("http://gdata.youtube.com/feeds/api/users/DreamhackMedia/uploads?&v=2&alt=jsonc&max-results=15"));
 	$ytList = array();
-	
+
 	foreach($jd_json->data->items as $aVOD) {
 		parseVods("joinDota", 'icons iconJD', $aVOD);
 	}
@@ -134,7 +134,7 @@
 		$timeStamp = strtotime($date);
 		$ago = ago($timeStamp);
 		$title = $comp;
-		
+
 		$id = $aD2Vod->id;
 		$link = "http://www.dotacinema.com/vods/{$id}";
 
@@ -143,7 +143,7 @@
 
 		$img1 = "<img width='16px' height='16px' src='{$aD2Vod->team1_big_logo_file_name}'>";
 		$img2 = "<img width='16px' height='16px' src='{$aD2Vod->team2_big_logo_file_name}'>";
-		$vs = $img1. "&nbsp;".$team1 . ' <span class=\'muted\'> vs </span>' . $img2."&nbsp;".$team2;
+		$vs = $team1 . ' <span class=\'muted\'> vs </span>' . $team2;
 
 		$dota2vodslist[$id][] ="<tr href='{$link}' data-id='{$id}' class='d2mtrow dota2vods' title='{$title}' rel='tooltip'><td class='muted' alt='{$timeStamp}'>{$ago}</td><td>{$vs}</td><td class='textRight'>{$bo}</td></tr>";
 	}
@@ -158,19 +158,19 @@
 	foreach($dota2vodslist as $aStream) {
 		$ultimateList["dota2vods"][] = $aStream;
 	}
-	
+
 	$str = json_encode($ultimateList);
 	$filestr    = "api.json";
 	$fp=@fopen($filestr, 'w');
 	fwrite($fp, $str);
-	fwrite($fp, ""); 
+	fwrite($fp, "");
 	fclose($fp);
 	echo $str;
-	
+
 	function secToTime($duration) {
 		return $duration <= 3600 ? gmdate("i:s", $duration) : gmdate("H:i:s", $duration);
 	}
-	
+
 	function parseVods($dude, $dudeIcon, $aVOD) {
 		global $ytList;
 		$timeStamp = strtotime($aVOD->uploaded);
@@ -181,7 +181,7 @@
 		$name = $aVOD->title;
 		$viewers = $aVOD->viewCount;
 		$title = "$likes likes - $comments comments [$duration]";
-		
+
 		$titleIfNameis2Long = '';
 		if (strlen($name) > 38) {
 			$titleIfNameis2Long = str_replace(array("'", '"'), "", $name);

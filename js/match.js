@@ -41,7 +41,6 @@
     init: function() {
       defineDefaults();
       onLoadAjax();
-      _gaq.push(['_trackPageview']);
     }
   };
 
@@ -308,8 +307,6 @@
   $('.menutab').on('shown', function(e) {
     var lastTab = e.target;
     localStorage.lastOpenedTab = $(lastTab).attr('id');
-    _gaq.push(['_trackEvent', e.target.id, 'clicked']);
-    _gaq.push(['_trackPageview']);
   });
 
   $('.timeformat').click(function(){

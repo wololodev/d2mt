@@ -9,7 +9,6 @@
   <!-- Le styles -->
   <link href="css/bootstrap.css" rel="stylesheet">
   <link href="css/custom.css" rel="stylesheet">
-  <script src="js/vendor/ga.js"></script>
 </head>
 <body>
   <div class="tabbable tabs-top">
@@ -20,7 +19,6 @@
       <li><a class="menutab hovmenu" id="nav_ranking" title="Rankings" href="#rankings" data-toggle="tab"><i class="icon-signal"></i></a></li>
       <li><a class="menutab hovmenu" id="nav_stream" title="Streams and VODs" title="News" href="#streams_vods" data-toggle="tab"><i class="icon-play"></i></a></li>
       <li><a class="menutab hovmenu" id="nav_sett" title="Settings" href="#settings" data-toggle="tab"><i class="icon-wrench"></i></a></li>
-      <li><a class="menutab" id="nav_outpost" title="Outpost" href="#outpost" data-toggle="tab"><img src="img/outpost.ico" alt=""></a></li>
       <li><a class="menutab" id="nav_update" title="Refresh" href="#"><i class="icon-refresh"></i></a></li>
     </ul>
   </div>
@@ -70,7 +68,7 @@
         </div>
       </div>
     </div>
-    
+
     <!-- ========================= GosuGamers Tab ========================= -->
     <div class="tab-pane alignborder" id="gg_acc_matches">
       <ul class="nav nav-tabs">
@@ -207,13 +205,13 @@
               <dl>
                 <dt>How frequently is this updated ?</dt>
                 <dd>Depends. It could update every minute, 5 minutes, or every 15 minutes max.</dd>
-                
+
                 <dt>Is there D2MT for other browsers ?</dt>
                 <dd>Yes, <a href="https://chrome.google.com/webstore/detail/dota-2-match-ticker/nejdjlaibiicicciokonbbkecjleilon" target="_blank">Chrome</a> - <a href="https://addons.mozilla.org/en-US/firefox/addon/dota-2-match-ticker/" target="_blank">Firefox</a> - <a href="https://addons.opera.com/en/extensions/details/dota-2-match-ticker/" target="_blank">Opera</a> - <a href="http://dotaprj.me/" target="_blank">Web</a></dd>
-                
+
                 <dt>Does this run as a background process ?</dt>
                 <dd>No. Unlike many extensions, this one does not. As soon as you close the extension, you are freeing resource. (Except for firefox)</dd>
-                
+
                 <dt>What channels are you taking VODs from ?</dt>
                 <dd>VODs section will show you the 15 most recent uploads from the most popular DotA2 channels (currently 12). Contact me if you want to add yours.</dd>
 
@@ -235,10 +233,11 @@
           <div class="accordion-inner">
             <small>
             <ul>
-              <li><b>1.6.2</b> - 16/5/2013
+              <li><b>1.6.3</b> - 19/1/2013
               <ul>
-                <li>Added settings to change layout</li>
-                <li>Added my project to help gamers travel to places</li>
+                <li>Fixes on the VODs section</li>
+                <li>Server side improvements</li>
+                <li>Some spelling crap for those OCD users</li>
               </ul>
               </li>
             </ul>
@@ -256,11 +255,15 @@
               <tbody>
                 <tr>
                   <td><b>Version:</b></td>
-                  <td>1.6.2</td>
+                  <td>1.6.3</td>
                 </tr>
                 <tr>
                   <td><b>Author:</b></td>
                   <td>Hamed "Wololo" Al-Khabaz</td>
+                </tr>
+                <tr>
+                  <td><b>Thanks to:</b></td>
+                  <td>Matthew "MasterOdin" Peveler, Blasz</td>
                 </tr>
                 <tr>
                   <td><b>Contact:</b></td>
@@ -278,33 +281,12 @@
             </table>
           </div>
         </div>
-      </div>  
-    </div>
-
-    <!-- ========================= Outoist Tab ========================= -->
-    <div class="tab-pane alignborder" id="outpost">
-      <div class="text-center">
-        <a class="ti2img" target="_blank" href="http://www.dota2.com/tournaments/international/announcement/"></a>
-      </div>
-      <div class="media">
-        <a class="pull-left outpostimg" target="_blank" href="http://outpost.travel">
-          <img class="media-object" src="img/outpost.png" alt="outpost logo">
-        </a>
-        <div class="media-body">
-          <a href="http://outpost.travel" target="_blank"><h4 class="media-heading">Outpost Travel</h4></a>
-          <span class="outpostdesc">
-            Planning to attend The International 3 in person ? Living in North America ? <a href="http://outpost.travel" target="_blank">Outpost</a> is here to nerf those hefty prices into something more affordable for the average Dota player. Just go to <a href="http://outpost.travel" target="_blank">Outpost</a> and input your location to where you want to travel (in this case it would be Seattle). You will find rideshares going to any city and place rentals posted by house owners. No more having a headache to rent a car or booking expensive hotels.
-            <hr>
-            <p><a href="http://outpost.travel" target="_blank">Outpost</a> is a personal side project to help Dota players afford to attend TI3. It could be used for any other purpose. Let me know what you think at <a href="mailto:info@outpost.travel">info@outpost.travel</a></p>
-          </span>
-        </div>
       </div>
     </div>
-
   </div>
-  <script src="js/vendor/jquery-1.9.1.min.js"></script>
+  <script src="js/vendor/jquery-2.0.3.min.js"></script>
   <script src="js/vendor/bootstrap.js"></script>
   <script src="js/vendor/date.format.js"></script>
   <script src="js/match.js"></script>
-</body> 
+</body>
 </html>
