@@ -21,7 +21,7 @@
 		$date = trim($date);
 		//check to see if there's a ':' in the string (denonating a finished game)
 		if (!strpos($date, ':')) {
-			$id = substr($id, -5);
+			$id = str_replace('score_','',$id);
 			$linkID = "http://www.joindota.com/en/matches/{$id}";
 			$titleExt = file_get_contents($linkID);
 			$titleList->load($titleExt);
