@@ -23,12 +23,16 @@
 		$started = $matchList->find('.matches', $d0);
 		$i = 0;
 		foreach($started->find('tr') as $aGame) {
-			$img1 = "http://www.gosugamers.net".$aGame->find('img', 0)->src;
+			$img1 = strtolower(substr($aGame->find('.flag', 0)->class,-2));
+			$img1 = ($img1 == "un") ? "world" : $img1;
+			$img1 = "http://flags.cdn.gamesports.net/".$img1.".gif";
 			$team1 =  trim($aGame->find('.opp1', 0)->plaintext);
 			if (!$team1) {
 				continue;
 			}
-			$img2  = "http://www.gosugamers.net".$aGame->find('img', 1)->src;
+			$img2 = strtolower(substr($aGame->find('.flag', 1)->class,-2));
+			$img2 = ($img2 == "un") ? "world" : $img2;
+			$img2 = "http://flags.cdn.gamesports.net/".$img2.".gif";
 			$team2 =  trim($aGame->find('.opp2', 0)->plaintext);
 			$linkID = "http://www.gosugamers.net".$aGame->find('a', 0)->href;
 			
@@ -46,16 +50,21 @@
 			$date = "Live";
 			$gameArray["eventLive"][] = "<tr class='d2mtrow eventLive' href='{$linkID}' title='{$eventName}' rel='tooltip'><td alt='{$timeStamp}' class='push-tt gg_date'><b>{$date}</b></td><td><img src='{$img1}' width='14px' height='9px'> {$team1}</td><td>v</td><td><img src='{$img2}' width='14px' height='9px'> {$team2}</td></tr>";
 		}
-	}	
+	}
+
 	//upcoming
 	$upcoming = $matchList->find('.matches', $d1);
 	foreach($upcoming->find('tr') as $aGame) {
-		$img1 = "http://www.gosugamers.net".$aGame->find('img', 0)->src;
+		$img1 = strtolower(substr($aGame->find('.flag', 0)->class,-2));
+		$img1 = ($img1 == "un") ? "world" : $img1;
+		$img1 = "http://flags.cdn.gamesports.net/".$img1.".gif";
 		$team1 =  trim($aGame->find('.opp1', 0)->plaintext);
 		if (!$team1) {
 			continue;
 		}
-		$img2  = "http://www.gosugamers.net".$aGame->find('img', 1)->src;
+		$img2 = strtolower(substr($aGame->find('.flag', 1)->class,-2));
+		$img2 = ($img2 == "un") ? "world" : $img2;
+		$img2 = "http://flags.cdn.gamesports.net/".$img2.".gif";
 		$team2 =  trim($aGame->find('.opp2', 0)->plaintext);
 		$linkID = "http://www.gosugamers.net".$aGame->find('a', 0)->href;
 		$date = trim($aGame->find('.live-in', 0)->plaintext);
@@ -77,12 +86,16 @@
 	//done
 	$done = $matchList->find('.matches', $d2);
 	foreach($done->find('tr') as $aGame) {
-		$img1 = "http://www.gosugamers.net".$aGame->find('img', 0)->src;
+		$img1 = strtolower(substr($aGame->find('.flag', 0)->class,-2));
+		$img1 = ($img1 == "un") ? "world" : $img1;
+		$img1 = "http://flags.cdn.gamesports.net/".$img1.".gif";
 		$team1 =  trim($aGame->find('.opp1', 0)->plaintext);
 		if (!$team1) {
 			continue;
 		}
-		$img2  = "http://www.gosugamers.net".$aGame->find('img', 1)->src;
+		$img2 = strtolower(substr($aGame->find('.flag', 1)->class,-2));
+		$img2 = ($img2 == "un") ? "world" : $img2;
+		$img2 = "http://flags.cdn.gamesports.net/".$img2.".gif";
 		$team2 =  trim($aGame->find('.opp2', 0)->plaintext);
 		$linkID = "http://www.gosugamers.net".$aGame->find('a', 0)->href;
 
