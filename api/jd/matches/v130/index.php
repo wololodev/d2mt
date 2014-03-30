@@ -4,10 +4,7 @@
 	date_default_timezone_set("America/Montreal");
 	$url = "http://www.joindota.com/en/matches/&c1=&c2=&c3=&archiv_page=";
 	$page = 1;
-	$html = file_get_contents($url.$page);
-	$matchList = new simple_html_dom();
-	$matchList->load($html);
-	$titleList = new simple_html_dom();
+	$matchList = file_get_html($url.$page);
 	$output = array();
 	$finishedList = array();
 	$i = 0;
@@ -26,8 +23,7 @@
 		if (!strpos($date, ':')) {
 			$id = str_replace('score_','',$id);
 			$linkID = "http://www.joindota.com/en/matches/{$id}";
-			$titleExt = file_get_contents($linkID);
-			$titleList->load($titleExt);
+			$titleList = file_get_html($linkID);
 			$titleStr = $titleList->find('.match_head .left', 0)->plaintext;
 			$timeStampOrig = $titleList->find('.match_head .right', 0)->plaintext;
 			$timeStamp = strtotime($timeStampOrig);
@@ -67,11 +63,9 @@
 				}
 				
 				$linkID = $aGame->find('a', 0)->href;
-				$titleExt = file_get_contents($linkID);
-				$titleList->load($titleExt);
+				$titleList = file_get_html($linkID);
 				$titleStr = $titleList->find('.match_head .left', 0)->plaintext;
 				$date = $titleList->find('.match_head .right', 0)->plaintext;
-				
 				$timeStamp = strtotime($date);
 				//$whenAdv = date('j/m/Y G:i T', $timeStamp);
 				$finishedList["eventDone"][] =  "<tr class='d2mtrow eventDone' href='{$linkID}' title='{$titleStr}' rel='tooltip' id='{$id}'><td class='jd_date push-tt series' alt='{$timeStamp}'>{$winner}</td><td><img title='{$img1tit}' src='{$img1}' width='14px' height='9px'> <span>{$team1}</span></td><td class='winResult' data-winner='{$vs}'>{$vs}</td><td><img title='{$img2tit}' src='{$img2}' width='14px' height='9px'> <span>{$team2}</span></td></tr>";
@@ -83,9 +77,7 @@
 			}
 		}
 		$page++;
-		$html = file_get_contents($url.$page);
-		print $url.$page."<br />";
-		$matchList->load($html);
+		$matchList = file_get_html($url.$page);
 	}
 
 	$output["eventSoon"] = array_reverse($output["eventSoon"]); 
