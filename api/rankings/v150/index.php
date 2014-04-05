@@ -1,10 +1,10 @@
 <?php
 	// error_reporting(E_ERROR | E_PARSE);
 	require_once('php/simple_html_dom.php');
-
-	$rankList = file_get_html('http://www.joindota.com/en/edb/teams');
+	
 	$rankArray = array();
 
+	$rankList = file_get_html('http://www.joindota.com/en/edb/teams');
 	$i = 0;
 	foreach($rankList->find('.small') as $aTeam) {
 		if ($i < 18) {
@@ -24,19 +24,28 @@
 		}
 	}
 
-	$html = file_get_contents('http://www.gosugamers.net/dota2/rankings');
-	$rankList->load($html);
+	$rankList = file_get_html('http://www.gosugamers.net/dota2/rankings');
 	$i = 0;
-	foreach($rankList->find('.profile') as $aTeam) {
+	//http://www.gosugamers.net/dota2/rankings/show/team/2930
+	// last one is "data-id" on each row in the rankings table. ugh!
+	foreach($rankList->find('.ranking-link') as $aTeam) {
 		if ($i < 18) {
 			$i++;
-			$stats = trim($aTeam->find('.details', 0)->plaintext);
-			$teamName = trim($aTeam->find('a', 1)->plaintext);
-			$elo = trim(str_replace(array('(', ')', ','), '', $aTeam->find('span', 0)->plaintext));
-			$link = "http://www.gosugamers.net".$aTeam->find('a', 0)->href;
-			$img = "http://www.gosugamers.net".$aTeam->find('img', 0)->src;
+			$teamName = trim($aTeam->children(1)->children(0)->children(0)->children(1)->plaintext);
+			$elo = trim($aTeam->children(2)->plaintext);
+			$id = $aTeam->getAttribute('data-id');
+			$linkID = "http://www.gosugamers.net/dota2/rankings/show/team/".$id;
+			$teamPage = file_get_html($linkID);
+			$rankPage = $teamPage->find('.rank-box')[0];
+			$base = $rankPage->children(0);
+			$img  = str_replace("');","",str_replace("background-image: url('","http://www.gosugamers.net",$base->children(0)->getAttribute('style')));
+			$link = "http://www.gosugamers.net/dota2/".$base->children(1)->children(0)->href;
+			$statsBase = $rankPage->children(2)->children(0);
+			$winPrc = $statsBase->children(0)->children(1)->plaintext;
+			$winPrc = substr($winPrc,1,(strpos($winPrc,"%")));
+			$stats = str_replace(" ","",$statsBase->children(1)->children(1)->plaintext);
 		
-			$rankArray["gg"][] = "<tr class='d2mtrow rank_gd' href='{$link}' title='{$stats}' rel='tooltip'><td class='muted'>{$i}.</td><td><img src='{$img}' width='14px'> {$teamName}</td><td class='textRight'>{$elo}</td></tr>";
+			$rankArray["gg"][] = "<tr class='d2mtrow rank_gd' href='{$link}' title='Statistics: {$stats} ({$winPrc})' rel='tooltip'><td class='muted'>{$i}.</td><td><img src='{$img}' width='14px'> {$teamName}</td><td class='textRight'>{$elo}</td></tr>";
 		} else {
 			break;
 		}
@@ -49,4 +58,5 @@
 	fwrite($fp, ""); 
 	fclose($fp);
 	echo $str;
+
 ?>
