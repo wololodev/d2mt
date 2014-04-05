@@ -1,6 +1,6 @@
 <?php
-	$twitch_json = json_decode(file_get_contents("https://api.twitch.tv/kraken/streams?game=Dota+2&limit=15"));
-	$dota2vd_json = json_decode(file_get_contents("http://www.dotacinema.com/feed_shoutcast_match_list_search?casters=&tournaments=&heroes=&teams=&rates=&descriptions=&dates=&actualPage=1&JSON=Y"));
+	$twitch_json = json_decode(get_contents("https://api.twitch.tv/kraken/streams?game=Dota+2&limit=15"));
+	$dota2vd_json = json_decode(get_contents("http://www.dotacinema.com/feed_shoutcast_match_list_search?casters=&tournaments=&heroes=&teams=&rates=&descriptions=&dates=&actualPage=1&JSON=Y"));
 
 	$combinedList = array();
 	$ultimateList = array();
@@ -34,23 +34,23 @@
 
 	krsort($combinedList);
 
-	$jd_json = json_decode(file_get_contents("http://gdata.youtube.com/feeds/api/users/joindota/uploads?&v=2&alt=jsonc&max-results=15"));
-	$sltv_json = json_decode(file_get_contents("http://gdata.youtube.com/feeds/api/users/dotasltv/uploads?&v=2&alt=jsonc&max-results=15"));
-	$sheever_json = json_decode(file_get_contents("http://gdata.youtube.com/feeds/api/users/sheevergaming/uploads?&v=2&alt=jsonc&max-results=15"));
-	$purge_json = json_decode(file_get_contents("http://gdata.youtube.com/feeds/api/users/PurgeGamers/uploads?&v=2&alt=jsonc&max-results=15"));
-	$bts_json = json_decode(file_get_contents("http://gdata.youtube.com/feeds/api/users/beyondthesummittv/uploads?&v=2&alt=jsonc&max-results=15"));
-	$ld_json = json_decode(file_get_contents("http://gdata.youtube.com/feeds/api/users/ldDOTA/uploads?&v=2&alt=jsonc&max-results=15"));
-	$godz_json = json_decode(file_get_contents("http://gdata.youtube.com/feeds/api/users/GoDzStudios/uploads?&v=2&alt=jsonc&max-results=15"));
-	$sagan_json = json_decode(file_get_contents("http://gdata.youtube.com/feeds/api/users/sagan9ne/uploads?&v=2&alt=jsonc&max-results=15"));
-	$tpl_json = json_decode(file_get_contents("http://gdata.youtube.com/feeds/api/users/thepremierrleague/uploads?&v=2&alt=jsonc&max-results=15"));
-	$eg_json = json_decode(file_get_contents("http://gdata.youtube.com/feeds/api/users/myEGnet/uploads?&v=2&alt=jsonc&max-results=15"));
-	$lumi_json = json_decode(file_get_contents("http://gdata.youtube.com/feeds/api/users/luminousinverse/uploads?&v=2&alt=jsonc&max-results=15"));
-	$epi_json = json_decode(file_get_contents("http://gdata.youtube.com/feeds/api/users/SocialPathology/uploads?&v=2&alt=jsonc&max-results=15"));
-	$neo_json = json_decode(file_get_contents("http://gdata.youtube.com/feeds/api/users/neodota2/uploads?&v=2&alt=jsonc&max-results=15"));
-	$d2_json = json_decode(file_get_contents("http://gdata.youtube.com/feeds/api/users/dota2/uploads?&v=2&alt=jsonc&max-results=15"));
-	$dc_json = json_decode(file_get_contents("http://gdata.youtube.com/feeds/api/users/DotaCinema/uploads?&v=2&alt=jsonc&max-results=15"));
-	$wo_json = json_decode(file_get_contents("http://gdata.youtube.com/feeds/api/users/WoDotA/uploads?&v=2&alt=jsonc&max-results=15"));
-	$dh_json = json_decode(file_get_contents("http://gdata.youtube.com/feeds/api/users/DreamhackMedia/uploads?&v=2&alt=jsonc&max-results=15"));
+	$jd_json = json_decode(get_contents("http://gdata.youtube.com/feeds/api/users/joindota/uploads?&v=2&alt=jsonc&max-results=15"));
+	$sltv_json = json_decode(get_contents("http://gdata.youtube.com/feeds/api/users/dotasltv/uploads?&v=2&alt=jsonc&max-results=15"));
+	$sheever_json = json_decode(get_contents("http://gdata.youtube.com/feeds/api/users/sheevergaming/uploads?&v=2&alt=jsonc&max-results=15"));
+	$purge_json = json_decode(get_contents("http://gdata.youtube.com/feeds/api/users/PurgeGamers/uploads?&v=2&alt=jsonc&max-results=15"));
+	$bts_json = json_decode(get_contents("http://gdata.youtube.com/feeds/api/users/beyondthesummittv/uploads?&v=2&alt=jsonc&max-results=15"));
+	$ld_json = json_decode(get_contents("http://gdata.youtube.com/feeds/api/users/ldDOTA/uploads?&v=2&alt=jsonc&max-results=15"));
+	$godz_json = json_decode(get_contents("http://gdata.youtube.com/feeds/api/users/GoDzStudios/uploads?&v=2&alt=jsonc&max-results=15"));
+	$sagan_json = json_decode(get_contents("http://gdata.youtube.com/feeds/api/users/sagan9ne/uploads?&v=2&alt=jsonc&max-results=15"));
+	$tpl_json = json_decode(get_contents("http://gdata.youtube.com/feeds/api/users/thepremierrleague/uploads?&v=2&alt=jsonc&max-results=15"));
+	$eg_json = json_decode(get_contents("http://gdata.youtube.com/feeds/api/users/myEGnet/uploads?&v=2&alt=jsonc&max-results=15"));
+	$lumi_json = json_decode(get_contents("http://gdata.youtube.com/feeds/api/users/luminousinverse/uploads?&v=2&alt=jsonc&max-results=15"));
+	$epi_json = json_decode(get_contents("http://gdata.youtube.com/feeds/api/users/SocialPathology/uploads?&v=2&alt=jsonc&max-results=15"));
+	$neo_json = json_decode(get_contents("http://gdata.youtube.com/feeds/api/users/neodota2/uploads?&v=2&alt=jsonc&max-results=15"));
+	$d2_json = json_decode(get_contents("http://gdata.youtube.com/feeds/api/users/dota2/uploads?&v=2&alt=jsonc&max-results=15"));
+	$dc_json = json_decode(get_contents("http://gdata.youtube.com/feeds/api/users/DotaCinema/uploads?&v=2&alt=jsonc&max-results=15"));
+	$wo_json = json_decode(get_contents("http://gdata.youtube.com/feeds/api/users/WoDotA/uploads?&v=2&alt=jsonc&max-results=15"));
+	$dh_json = json_decode(get_contents("http://gdata.youtube.com/feeds/api/users/DreamhackMedia/uploads?&v=2&alt=jsonc&max-results=15"));
 	$ytList = array();
 
 	foreach($jd_json->data->items as $aVOD) {
@@ -176,7 +176,7 @@
 		$timeStamp = strtotime($aVOD->uploaded);
 		$link = $aVOD->player->default;
 		$duration = secToTime($aVOD->duration);
-		$likes = $aVOD->likeCount;
+		$likes = !(isset($aVOD->likeCount)) ? 0 : $aVOD->likeCount;
 		$comments = $aVOD->commentCount;
 		$name = $aVOD->title;
 		$viewers = $aVOD->viewCount;
@@ -207,5 +207,17 @@
 	   $difference = round($difference);
 
 	   return "$difference{$periods[$j]} ago";
+	}
+
+	function get_contents($url) 
+	{
+		$ch = curl_init();
+	    curl_setopt($ch, CURLOPT_URL, $url);
+	    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+	    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+//	    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+	    $output = curl_exec($ch);
+	    curl_close($ch);
+	    return $output;
 	}
 ?>

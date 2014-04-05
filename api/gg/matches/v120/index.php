@@ -1,11 +1,7 @@
 <?php
 	require_once('php/simple_html_dom.php');
 	date_default_timezone_set("CET");
-	$html = file_get_contents('http://www.gosugamers.net/dota2/gosubet');
-	$matchList = new simple_html_dom();
-	$matchList->load($html);
-	$titleList = new simple_html_dom();
-	$gameArray = array();
+	$matchList = file_get_html('http://www.gosugamers.net/dota2/gosubet');
 	$done = $matchList->find('.matches', 2);
 	if ($done) {
 		$d0 = 0;
@@ -36,8 +32,7 @@
 			$team2 =  trim($aGame->find('.opp2', 0)->plaintext);
 			$linkID = "http://www.gosugamers.net".$aGame->find('a', 0)->href;
 			
-			$html = file_get_contents($linkID);
-			$titleList->load($html);
+			$titleList = file_get_html($linkID);
             $bestof = $titleList->find('.match-extras .bestof', 0)->plaintext;
             $bestof = current(array_slice(explode(' ', $bestof), 2, 1));
             if(!is_numeric($bestof)) $bestof = '?';
@@ -69,8 +64,7 @@
 		$linkID = "http://www.gosugamers.net".$aGame->find('a', 0)->href;
 		$date = trim($aGame->find('.live-in', 0)->plaintext);
 		
-		$html = file_get_contents($linkID);
-		$titleList->load($html);
+		$titleList = file_get_html($linkID);
 		$bestof = $titleList->find('.match-extras .bestof', 0)->plaintext;
         $bestof = current(array_slice(explode(' ', $bestof), 2, 1));
         if(!is_numeric($bestof)) $bestof = '?';
@@ -99,8 +93,7 @@
 		$team2 =  trim($aGame->find('.opp2', 0)->plaintext);
 		$linkID = "http://www.gosugamers.net".$aGame->find('a', 0)->href;
 
-		$html = file_get_contents($linkID);
-		$titleList->load($html);
+		$titleList = file_get_html($linkID);
 		$bestof = $titleList->find('.match-extras .bestof', 0)->plaintext;
         $bestof = current(array_slice(explode(' ', $bestof), 2, 1));
         if(!is_numeric($bestof)) $bestof = '?';
