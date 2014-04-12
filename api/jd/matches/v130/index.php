@@ -35,9 +35,9 @@
 			}
 		}
 	}
-	while ($i < 10) {
+	while ($i < 16) {
 		foreach($matchList->find('.pad .item') as $aGame) {
-			if ($i < 10) {
+			if ($i < 16) {
 				
 				$winner = str_replace(' ', '', $aGame->find('.sub', 2)->plaintext);
 				if (strlen($winner) != 3)
@@ -67,10 +67,11 @@
 				$titleStr = $titleList->find('.match_head .left', 0)->plaintext;
 				$date = $titleList->find('.match_head .right', 0)->plaintext;
 				$timeStamp = strtotime($date);
+				if ($winner == "tba") 
+					continue;
 				//$whenAdv = date('j/m/Y G:i T', $timeStamp);
 				$finishedList["eventDone"][] =  "<tr class='d2mtrow eventDone' href='{$linkID}' title='{$titleStr}' rel='tooltip' id='{$id}'><td class='jd_date push-tt series' alt='{$timeStamp}'>{$winner}</td><td><img title='{$img1tit}' src='{$img1}' width='14px' height='9px'> <span>{$team1}</span></td><td class='winResult' data-winner='{$vs}'>{$vs}</td><td><img title='{$img2tit}' src='{$img2}' width='14px' height='9px'> <span>{$team2}</span></td></tr>";
 				/**/
-				print $i;
 				$i++;
 			} else {
 				break 2;

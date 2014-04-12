@@ -17,7 +17,6 @@
 	//started
 	if ($live) {
 		$started = $matchList->find('.matches', $d0);
-		$i = 0;
 		foreach($started->find('tr') as $aGame) {
 			$img1 = strtolower(substr($aGame->find('.flag', 0)->class,-2));
 			$img1 = ($img1 == "un") ? "world" : $img1;
@@ -79,7 +78,10 @@
 	
 	//done
 	$done = $matchList->find('.matches', $d2);
+	$i = 0;
 	foreach($done->find('tr') as $aGame) {
+		if ($i > 15)
+			break;
 		$img1 = strtolower(substr($aGame->find('.flag', 0)->class,-2));
 		$img1 = ($img1 == "un") ? "world" : $img1;
 		$img1 = "http://flags.cdn.gamesports.net/".$img1.".gif";
@@ -115,6 +117,7 @@
 			$winner = "<";
 		}
 		$gameArray["eventDone"][] = "<tr class='d2mtrow eventDone' href='{$linkID}' title='{$eventName}' rel='tooltip'><td alt='{$timeStamp}' class='push-tt gg_date series'>{$series}</td><td><img src='{$img1}' width='14px' height='9px'> {$team1}</td><td class='winResult' data-winner='{$winner}'>{$winner}</td><td><img src='{$img2}' width='14px' height='9px'> {$team2}</td></tr>";
+		$i++;
 	}
 
 	$str = trim(json_encode($gameArray));
