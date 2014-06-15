@@ -32,7 +32,7 @@
 		if ($i < 18) {
 			$i++;
 			$teamName = trim($aTeam->children(1)->children(0)->children(0)->children(1)->plaintext);
-			$elo = trim($aTeam->children(2)->plaintext);
+			$elo = str_replace(",","",trim($aTeam->children(2)->plaintext));
 			$id = $aTeam->getAttribute('data-id');
 			$linkID = "http://www.gosugamers.net/dota2/rankings/show/team/".$id;
 			$teamPage = file_get_html($linkID);
@@ -41,10 +41,10 @@
 			$img  = str_replace("');","",str_replace("background-image: url('","http://www.gosugamers.net",$base->children(0)->getAttribute('style')));
 			$link = "http://www.gosugamers.net/dota2/".$base->children(1)->children(0)->href;
 			$statsBase = $rankPage->children(2)->children(0);
-			$winPrc = $statsBase->children(0)->children(1)->plaintext;
-			$winPrc = substr($winPrc,1,(strpos($winPrc,"%")));
-			$stats = str_replace(" ","",$statsBase->children(1)->children(1)->plaintext);
-		
+			$winPrc = $statsBase->children(1)->children(3)->plaintext;
+			//$winPrc = substr($winPrc,1,(strpos($winPrc,"%")));
+			$stats = str_replace(" ","",$statsBase->children(2)->children(3)->plaintext);
+
 			$rankArray["gg"][] = "<tr class='d2mtrow rank_gd' href='{$link}' title='Statistics: {$stats} ({$winPrc})' rel='tooltip'><td class='muted'>{$i}.</td><td><img src='{$img}' width='14px'> {$teamName}</td><td class='textRight'>{$elo}</td></tr>";
 		} else {
 			break;
