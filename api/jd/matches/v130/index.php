@@ -1,5 +1,5 @@
 <?php
-	//error_reporting(0);
+	// error_reporting(E_ALL | E_PARSE);
 	require_once('php/simple_html_dom.php');
 	date_default_timezone_set("America/Montreal");
 	$url = "http://www.joindota.com/en/matches/&c1=&c2=&c3=&archiv_page=";
@@ -39,8 +39,8 @@
 		foreach($matchList->find('.pad .item') as $aGame) {
 			if ($i < 16) {
 				
-				$winner = str_replace(' ', '', $aGame->find('.sub', 2)->plaintext);
-				if (strlen($winner) != 3)
+				$winner = trim(str_replace("(def)","",str_replace(' ', '', $aGame->find('.sub', 2)->plaintext)));
+				if (strlen($winner) != 3 || $winner == "tba")
 					continue;
 				$img1 = $aGame->find('img', 0)->src;
 				$img1tit = $aGame->find('img', 0)->title;

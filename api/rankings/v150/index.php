@@ -36,7 +36,8 @@
 			$id = $aTeam->getAttribute('data-id');
 			$linkID = "http://www.gosugamers.net/dota2/rankings/show/team/".$id;
 			$teamPage = file_get_html($linkID);
-			$rankPage = $teamPage->find('.rank-box')[0];
+			$rankPage = $teamPage->find('.rank-box');
+			$rankPage = $rankPage[0];
 			$base = $rankPage->children(0);
 			$img  = str_replace("');","",str_replace("background-image: url('","http://www.gosugamers.net",$base->children(0)->getAttribute('style')));
 			$link = "http://www.gosugamers.net/dota2/".$base->children(1)->children(0)->href;
