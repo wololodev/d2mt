@@ -1,4 +1,5 @@
 <?php
+	error_reporting(0);
 	require_once('php/simple_html_dom.php');
 	date_default_timezone_set("CET");
 	$matchList = file_get_html('http://www.gosugamers.net/dota2/gosubet');

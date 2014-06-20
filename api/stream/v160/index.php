@@ -1,4 +1,6 @@
 <?php
+	error_reporting(0);
+
 	$twitch_json = json_decode(get_contents("https://api.twitch.tv/kraken/streams?game=Dota+2&limit=15"));
 	$dota2vd_json = json_decode(get_contents("http://www.dotacinema.com/feed_shoutcast_match_list_search?casters=&tournaments=&heroes=&teams=&rates=&descriptions=&dates=&actualPage=1&JSON=Y"));
 
@@ -106,7 +108,7 @@
 	}
 
 	krsort($ytList);
-	$ytList = array_slice($ytList, 0, 15);
+	//$ytList = array_slice($ytList, 0, 15);
 
 	$arr = array('/', 'Date', '(', ')', '-0500');
 	foreach($dota2vd_json as $aD2Vod) {
@@ -152,8 +154,11 @@
 	foreach($combinedList as $aStream) {
 		$ultimateList["stream"][] = $aStream;
 	}
+	$i = 0;
 	foreach($ytList as $aStream) {
+		if ($aStream == null) continue;
 		$ultimateList["vod"][] = $aStream;
+		if (++$i == 15) break;
 	}
 	foreach($dota2vodslist as $aStream) {
 		$ultimateList["dota2vods"][] = $aStream;
@@ -173,51 +178,54 @@
 
 	function parseVods($dude, $dudeIcon, $aVOD) {
 		global $ytList;
+		if ($aVOD == null) return;
 		$timeStamp = strtotime($aVOD->uploaded);
 		$link = $aVOD->player->default;
 		$duration = secToTime($aVOD->duration);
 		$likes = !(isset($aVOD->likeCount)) ? 0 : $aVOD->likeCount;
 		$comments = $aVOD->commentCount;
 		$name = $aVOD->title;
-		$viewers = $aVOD->viewCount;
+		$viewers = !(isset($aVOD->viewCount)) ? 0 : $aVOD->viewCount;
 		$title = "$likes likes - $comments comments [$duration]";
 
 		$titleIfNameis2Long = '';
 		if (strlen($name) > 38) {
 			$titleIfNameis2Long = str_replace(array("'", '"'), "", $name);
 			$name = substr($name, 0, 38)."..";
+			$title = $titleIfNameis2Long."<br />".$title;
 		}
-		$ytList[$timeStamp][] = "<tr href='{$link}' class='d2mtrow vod youtube' title='{$title}' rel='tooltip'><td title='{$dude}' class='push-tt vod_date' alt='{$timeStamp}'><span class='{$dudeIcon}'></span></td><td title='{$titleIfNameis2Long}'>{$name}</td><td class='textRight'>{$viewers}</td></tr>";
+		else {
+			$title = $name."<br />".$title;
+		}
+		$ytList[$timeStamp][] = "<tr href='{$link}' class='d2mtrow vod youtube' title='{$title}' rel='tooltip' id='{$aVOD->id}'><td title='{$dude}' class='push-tt vod_date' alt='{$timeStamp}'><span class='{$dudeIcon}'></span></td><td alt='{$titleIfNameis2Long}'>{$name}</td><td class='textRight'>{$viewers}</td></tr>";
 	}
 
 	function ago($time)
 	{
-	   $periods = array("s", "m", "h", "d", "w", "m", "y", "d");
-	   $lengths = array("60","60","24","7","4.35","12","10");
+		$periods = array("s", "m", "h", "d", "w", "m", "y", "d");
+		$lengths = array("60","60","24","7","4.35","12","10");
 
-	   $now = time();
+		$now = time();
+		$difference = $now - $time;
+		$tense = "ago";
 
-	       $difference     = $now - $time;
-	       $tense         = "ago";
+		for($j = 0; $difference >= $lengths[$j] && $j < count($lengths)-1; $j++) {
+			$difference /= $lengths[$j];
+		}
 
-	   for($j = 0; $difference >= $lengths[$j] && $j < count($lengths)-1; $j++) {
-	       $difference /= $lengths[$j];
-	   }
-
-	   $difference = round($difference);
-
-	   return "$difference{$periods[$j]} ago";
+		$difference = round($difference);
+		return "$difference{$periods[$j]} ago";
 	}
 
 	function get_contents($url) 
 	{
 		$ch = curl_init();
-	    curl_setopt($ch, CURLOPT_URL, $url);
-	    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-	    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-//	    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
-	    $output = curl_exec($ch);
-	    curl_close($ch);
-	    return $output;
+		curl_setopt($ch, CURLOPT_URL, $url);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+		//curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+		$output = curl_exec($ch);
+		curl_close($ch);
+		return $output;
 	}
 ?>
