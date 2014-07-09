@@ -3,6 +3,7 @@
 	require_once('php/simple_html_dom.php');
 	date_default_timezone_set("CET");
 	$matchList = file_get_html('http://www.gosugamers.net/dota2/gosubet');
+	$dota_suffixs = array('DotA2','Dota 2','.Dota2','.Dota 2','-Dota2','-Dota 2');
 	$done = $matchList->find('.matches', 2);
 	if ($done) {
 		$d0 = 0;
@@ -22,17 +23,20 @@
 			$img1 = strtolower(substr($aGame->find('.flag', 0)->class,-2));
 			$img1 = ($img1 == "un") ? "world" : $img1;
 			$img1 = "http://flags.cdn.gamesports.net/".$img1.".gif";
-			$team1 =  trim($aGame->find('.opp1', 0)->plaintext);
-			if (!$team1) {
-				continue;
-			}
+			
 			$img2 = strtolower(substr($aGame->find('.flag', 1)->class,-2));
 			$img2 = ($img2 == "un") ? "world" : $img2;
 			$img2 = "http://flags.cdn.gamesports.net/".$img2.".gif";
-			$team2 =  trim($aGame->find('.opp2', 0)->plaintext);
-			$linkID = "http://www.gosugamers.net".$aGame->find('a', 0)->href;
 			
+			$linkID = "http://www.gosugamers.net".$aGame->find('a', 0)->href;
 			$titleList = file_get_html($linkID);
+			
+			$team1 =  parse_name(trim($titleList->find('.opponent .opponent1', 0)->children(1)->plaintext));
+			if (!$team1) {
+				continue;
+			}
+
+			$team2 =  parse_name(trim($titleList->find('.opponent .opponent2', 0)->children(1)->plaintext));			
             $bestof = $titleList->find('.match-extras .bestof', 0)->plaintext;
             $bestof = current(array_slice(explode(' ', $bestof), 2, 1));
             if(!is_numeric($bestof)) $bestof = '?';
@@ -61,10 +65,16 @@
 		$img2 = ($img2 == "un") ? "world" : $img2;
 		$img2 = "http://flags.cdn.gamesports.net/".$img2.".gif";
 		$team2 =  trim($aGame->find('.opp2', 0)->plaintext);
-		$linkID = "http://www.gosugamers.net".$aGame->find('a', 0)->href;
 		$date = trim($aGame->find('.live-in', 0)->plaintext);
-		
+
+		$linkID = "http://www.gosugamers.net".$aGame->find('a', 0)->href;
 		$titleList = file_get_html($linkID);
+
+		$team1 =  parse_name(trim($titleList->find('.opponent1', 0)->children(1)->plaintext));
+		if (!$team1) {
+			continue;
+		}
+		$team2 =  parse_name(trim($titleList->find('.opponent2', 0)->children(1)->plaintext));
 		$bestof = $titleList->find('.match-extras .bestof', 0)->plaintext;
         $bestof = current(array_slice(explode(' ', $bestof), 2, 1));
         if(!is_numeric($bestof)) $bestof = '?';
@@ -94,9 +104,18 @@
 		$img2 = ($img2 == "un") ? "world" : $img2;
 		$img2 = "http://flags.cdn.gamesports.net/".$img2.".gif";
 		$team2 =  trim($aGame->find('.opp2', 0)->plaintext);
+		
 		$linkID = "http://www.gosugamers.net".$aGame->find('a', 0)->href;
-
 		$titleList = file_get_html($linkID);
+		if (!$titleList) {
+			continue;
+		}
+
+		$team1 =  parse_name(trim($titleList->find('.opponent1', 0)->children(1)->plaintext));
+		if (!$team1) {
+			continue;
+		}
+		$team2 =  parse_name(trim($titleList->find('.opponent2', 0)->children(1)->plaintext));		
 		$bestof = $titleList->find('.match-extras .bestof', 0)->plaintext;
         $bestof = current(array_slice(explode(' ', $bestof), 2, 1));
         if(!is_numeric($bestof)) $bestof = '?';
@@ -128,4 +147,13 @@
 	fwrite($fp, ""); 
 	fclose($fp);
 	echo $str;
+
+	function parse_name($name) {
+		global $dota_suffixs;
+
+		foreach($dota_suffixs as $k) {
+			$name = str_replace($k,'',$name);
+		}
+		return $name;
+	}
 ?>

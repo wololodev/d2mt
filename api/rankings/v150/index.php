@@ -1,5 +1,5 @@
 <?php
-	// error_reporting(E_ERROR | E_PARSE);
+	error_reporting(0);
 	require_once('php/simple_html_dom.php');
 	
 	$rankArray = array();
@@ -28,10 +28,13 @@
 	$i = 0;
 	//http://www.gosugamers.net/dota2/rankings/show/team/2930
 	// last one is "data-id" on each row in the rankings table. ugh!
+	$dota_suffixs = array('DotA2','Dota 2','.Dota2','.Dota 2','-Dota2','-Dota 2');
 	foreach($rankList->find('.ranking-link') as $aTeam) {
 		if ($i < 18) {
 			$i++;
 			$teamName = trim($aTeam->children(1)->children(0)->children(0)->children(1)->plaintext);
+			foreach($dota_suffixs as $k) 
+				$teamName = str_replace($k,'',$teamName);
 			$elo = str_replace(",","",trim($aTeam->children(2)->plaintext));
 			$id = $aTeam->getAttribute('data-id');
 			$linkID = "http://www.gosugamers.net/dota2/rankings/show/team/".$id;
