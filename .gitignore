@@ -41,3 +41,4 @@ Thumbs.db
 sitemap.xml
 sitemaps/
 /api/misc/currency.php
+*.json

@@ -30,13 +30,13 @@
 			
 			$linkID = "http://www.gosugamers.net".$aGame->find('a', 0)->href;
 			$titleList = file_get_html($linkID);
-			
-			$team1 =  parse_name(trim($titleList->find('.opponent .opponent1', 0)->children(1)->plaintext));
+
+			$team1 =  parse_name(trim($titleList->find('.opponent1', 0)->children(1)->plaintext));
 			if (!$team1) {
 				continue;
 			}
 
-			$team2 =  parse_name(trim($titleList->find('.opponent .opponent2', 0)->children(1)->plaintext));			
+			$team2 =  parse_name(trim($titleList->find('.opponent2', 0)->children(1)->plaintext));			
             $bestof = $titleList->find('.match-extras .bestof', 0)->plaintext;
             $bestof = current(array_slice(explode(' ', $bestof), 2, 1));
             if(!is_numeric($bestof)) $bestof = '?';
@@ -107,9 +107,6 @@
 		
 		$linkID = "http://www.gosugamers.net".$aGame->find('a', 0)->href;
 		$titleList = file_get_html($linkID);
-		if (!$titleList) {
-			continue;
-		}
 
 		$team1 =  parse_name(trim($titleList->find('.opponent1', 0)->children(1)->plaintext));
 		if (!$team1) {
