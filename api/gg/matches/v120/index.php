@@ -17,7 +17,7 @@
 		$d1 = 1;
 		$d2 = 2;
 		$live = true;
-        $comping = true;
+        $upcoming = true;
     }
     else if ($boxes == 2) {
 		$d0 = 0;
@@ -25,6 +25,8 @@
 		$d2 = 1;
 		$upcoming = true;   
     }
+    
+    $i = 0;
     
 	//started
 	if ($live) {
@@ -58,6 +60,7 @@
 			
 			$date = "Live";
 			$gameArray["eventLive"][] = "<tr class='d2mtrow eventLive' href='{$linkID}' title='{$eventName}' rel='tooltip'><td alt='{$timeStamp}' class='push-tt gg_date'><b>{$date}</b></td><td><img src='{$img1}' width='14px' height='9px'> {$team1}</td><td>v</td><td><img src='{$img2}' width='14px' height='9px'> {$team2}</td></tr>";
+            $i++;
 		}
 	}
     
@@ -96,6 +99,8 @@
             $timeStamp = strtotime($fullDate);
             
             $gameArray["eventSoon"][] =  "<tr class='d2mtrow eventSoon' href='{$linkID}' title='{$eventName}' rel='tooltip'><td alt='{$timeStamp}' class='push-tt gg_date'>{$date}</td><td><img src='{$img1}' width='14px' height='9px'> {$team1}</td><td>v</td><td><img src='{$img2}' width='14px' height='9px'> {$team2}</td></tr>";
+            if ($i == 13) break;
+            $i++;
         }
     }
 	
