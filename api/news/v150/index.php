@@ -29,7 +29,6 @@
 	$i = 0;
 	// fix time bug next time
 	foreach($newsList->find('.content tr') as $aNews) {
-		print $i."<br />";
 		if ($i < 18) {
 			$i++;
 			if ($i == 1)

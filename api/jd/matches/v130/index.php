@@ -8,6 +8,9 @@
 	$output = array();
 	$finishedList = array();
 	$i = 0;
+
+	$output = array("eventSoon"=>array(),"eventLive"=>array());
+
 	foreach(array_reverse($matchList->find('div[id=matchticker] .item')) as $aGame) {
 		if ($i < 16) {
 			$img1 = $aGame->find('img', 0)->src;
@@ -18,12 +21,13 @@
 			$team2 = $aGame->find('.sub', 2)->plaintext;
 			$date = $aGame->find('.sub', 3)->plaintext;
 			$id = $aGame->find('div', 3)->id;
-			
+
 			$date = trim($date);
 			//check to see if there's a ':' in the string (denonating a finished game)
+
 			if (!strpos($date, ':')) {
 				$id = str_replace('score_','',$id);
-				$linkID = "http://www.joindota.com/en/matches/{$id}";
+				$linkID = $aGame->attr['href'];
 				$titleList = file_get_html($linkID);
 				$titleStr = $titleList->find('.match_head .left', 0)->plaintext;
 				$timeStampOrig = $titleList->find('.match_head .right', 0)->plaintext;
@@ -44,7 +48,7 @@
 	$output["eventSoon"] = array_reverse($output["eventSoon"]);
 
 	$i = 0;
-	while ($i < 16) {
+	while ($i < 16 && $page < 5) {
 		foreach($matchList->find('.pad .item') as $aGame) {
 			if ($i < 16) {
 				
