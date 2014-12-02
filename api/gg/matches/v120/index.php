@@ -52,7 +52,7 @@
             $bestof = $titleList->find('.match-extras .bestof', 0)->plaintext;
             $bestof = current(array_slice(explode(' ', $bestof), 2, 1));
             if(!is_numeric($bestof)) $bestof = '?';
-            $eventName = $titleList->find('.box-match-page > h2 a', 0)->plaintext . " [BO{$bestof}]";
+            $eventName = $titleList->find('.box-match-page > h1 a', 0)->plaintext . " [BO{$bestof}]";
             $fullDate = $titleList->find('.match-extras .datetime', 0)->plaintext;
             $fullDate = str_replace("at", "", $fullDate);
             $fullDate = $fullDate . "Europe/Berlin";
@@ -92,7 +92,7 @@
             $bestof = $titleList->find('.match-extras .bestof', 0)->plaintext;
             $bestof = current(array_slice(explode(' ', $bestof), 2, 1));
             if(!is_numeric($bestof)) $bestof = '?';
-            $eventName = $titleList->find('.box-match-page > h2 a', 0)->plaintext . " [BO{$bestof}]";
+            $eventName = $titleList->find('.box-match-page > h1 a', 0)->plaintext . " [BO{$bestof}]";
             $fullDate = $titleList->find('.match-extras .datetime', 0)->plaintext;
             $fullDate = str_replace("at", "", $fullDate);
             $fullDate = $fullDate . "Europe/Berlin";
@@ -133,7 +133,7 @@
 		$bestof = $titleList->find('.match-extras .bestof', 0)->plaintext;
         $bestof = current(array_slice(explode(' ', $bestof), 2, 1));
         if(!is_numeric($bestof)) $bestof = '?';
-		$eventName = $titleList->find('.box-match-page > h2 a', 0)->plaintext . " [BO{$bestof}]";
+		$eventName = $titleList->find('.box-match-page > h1 a', 0)->plaintext . " [BO{$bestof}]";
 		$fullDate = $titleList->find('.match-extras .datetime', 0)->plaintext;
 		$fullDate = str_replace("at", "", $fullDate);
 		$fullDate = $fullDate . "Europe/Berlin";
