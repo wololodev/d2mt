@@ -49,10 +49,7 @@
 			}
 
 			$team2 =  parse_name(trim($titleList->find('.opponent2', 0)->children(1)->plaintext));			
-            $bestof = $titleList->find('.match-extras .bestof', 0)->plaintext;
-            $bestof = current(array_slice(explode(' ', $bestof), 2, 1));
-            if(!is_numeric($bestof)) $bestof = '?';
-            $eventName = $titleList->find('.box-match-page > h1 a', 0)->plaintext . " [BO{$bestof}]";
+            $eventName = get_event($titleList);
             $fullDate = $titleList->find('.match-extras .datetime', 0)->plaintext;
             $fullDate = str_replace("at", "", $fullDate);
             $fullDate = $fullDate . "Europe/Berlin";
@@ -62,7 +59,7 @@
 			$gameArray["eventLive"][] = "<tr class='d2mtrow eventLive' href='{$linkID}' title='{$eventName}' rel='tooltip'><td alt='{$timeStamp}' class='push-tt gg_date'><b>{$date}</b></td><td><img src='{$img1}' width='14px' height='9px'> {$team1}</td><td>v</td><td><img src='{$img2}' width='14px' height='9px'> {$team2}</td></tr>";
             $i++;
 		}
-	}
+	}  
     
     //upcoming
     if ($upcoming) {
@@ -89,10 +86,7 @@
                 continue;
             }
             $team2 =  parse_name(trim($titleList->find('.opponent2', 0)->children(1)->plaintext));
-            $bestof = $titleList->find('.match-extras .bestof', 0)->plaintext;
-            $bestof = current(array_slice(explode(' ', $bestof), 2, 1));
-            if(!is_numeric($bestof)) $bestof = '?';
-            $eventName = $titleList->find('.box-match-page > h1 a', 0)->plaintext . " [BO{$bestof}]";
+            $eventName = get_event($titleList);
             $fullDate = $titleList->find('.match-extras .datetime', 0)->plaintext;
             $fullDate = str_replace("at", "", $fullDate);
             $fullDate = $fullDate . "Europe/Berlin";
@@ -129,11 +123,8 @@
 		if (!$team1) {
 			continue;
 		}
-		$team2 =  parse_name(trim($titleList->find('.opponent2', 0)->children(1)->plaintext));		
-		$bestof = $titleList->find('.match-extras .bestof', 0)->plaintext;
-        $bestof = current(array_slice(explode(' ', $bestof), 2, 1));
-        if(!is_numeric($bestof)) $bestof = '?';
-		$eventName = $titleList->find('.box-match-page > h1 a', 0)->plaintext . " [BO{$bestof}]";
+		$team2 =  parse_name(trim($titleList->find('.opponent2', 0)->children(1)->plaintext));
+		$eventName = get_event($titleList);
 		$fullDate = $titleList->find('.match-extras .datetime', 0)->plaintext;
 		$fullDate = str_replace("at", "", $fullDate);
 		$fullDate = $fullDate . "Europe/Berlin";
@@ -153,6 +144,7 @@
 		$gameArray["eventDone"][] = "<tr class='d2mtrow eventDone' href='{$linkID}' title='{$eventName}' rel='tooltip'><td alt='{$timeStamp}' class='push-tt gg_date series'>{$series}</td><td><img src='{$img1}' width='14px' height='9px'> {$team1}</td><td class='winResult' data-winner='{$winner}'>{$winner}</td><td><img src='{$img2}' width='14px' height='9px'> {$team2}</td></tr>";
 		$i++;
 	}
+    
 
 	$str = trim(json_encode($gameArray));
 	$filestr    = "api.json";
@@ -170,4 +162,16 @@
 		}
 		return $name;
 	}
+
+    function get_event($titleList) {
+        $bestof = $titleList->find('.match-extras .bestof', 0)->plaintext;
+        $bestof = current(array_slice(explode(' ', $bestof), 2, 1));
+        if(!is_numeric($bestof)) $bestof = '?';
+        $eventName = $titleList->find('.box-match-page > h1 a', 0)->plaintext;
+        if ($eventName == "") {
+            $eventName = $titleList->find('.event-ad a', 0)->title;
+        }
+        return $eventName." [BO{$bestof}]";
+    }
+
 ?>
