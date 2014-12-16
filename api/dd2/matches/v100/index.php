@@ -5,17 +5,11 @@
 	$matchList = file_get_contents('http://dailydota2.com/match-api');
 	$data = json_decode($matchList, true); 
 
-	var_dump($data['matches']);
-
 	foreach ($data['matches'] as $match) {
-
-		echo "yes";
-
 		$img1 = "http://dailydota2.com/".$match['team1']['logo_url'];
 		$img2 = "http://dailydota2.com/".$match['team2']['logo_url'];
 			
 		$linkID = $match['link'];
-		$titleList = file_get_html($linkID);
 
 		$team1 = $match['team1']['team_name'];
 		$team2 =  $match['team2']['team_name'];
@@ -31,7 +25,7 @@
 			$gameArray["eventLive"][] = "<tr class='d2mtrow eventLive' href='{$linkID}' title='{$eventName}' rel='tooltip'><td alt='{$timeStamp}' class='push-tt gg_date'><b>{$date}</b></td><td><img src='{$img1}' width='14px' height='9px'> {$team1}</td><td>v</td><td><img src='{$img2}' width='14px' height='9px'> {$team2}</td></tr>";
 	    }
 	    if ($match['status'] == 0) {
-	    	$date = niceTime($match['timediff']);
+	    	$date = nice_time($match['timediff']);
        		$gameArray["eventSoon"][] =  "<tr class='d2mtrow eventSoon' href='{$linkID}' title='{$eventName}' rel='tooltip'><td alt='{$timeStamp}' class='push-tt gg_date'>{$date}</td><td><img src='{$img1}' width='14px' height='9px'> {$team1}</td><td>v</td><td><img src='{$img2}' width='14px' height='9px'> {$team2}</td></tr>";
         }
         if ($i == 13) break;
@@ -42,7 +36,7 @@
     
 
 	$str = trim(json_encode($gameArray));
-	$filestr    = "api.json";
+	$filestr = "api.json";
 	$fp=@fopen($filestr, 'w');
 	fwrite($fp, $str);
 	fwrite($fp, ""); 
