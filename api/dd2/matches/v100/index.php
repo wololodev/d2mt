@@ -43,9 +43,7 @@
 	fclose($fp);
 	echo $str;
 
-	function nice_time($seconds) {
-		$t = shift;
-
+	function nice_time($t) {
 		$h = floor($t/3600);
 		if ($h < 10) { $h = '0'.$h; }
 		$m = floor($t/60)%60;
