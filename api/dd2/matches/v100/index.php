@@ -6,8 +6,8 @@
 	$data = json_decode($matchList, true); 
 
 	foreach ($data['matches'] as $match) {
-		$img1 = "http://dailydota2.com/".$match['team1']['logo_url'];
-		$img2 = "http://dailydota2.com/".$match['team2']['logo_url'];
+		$img1 = "http://dailydota2.com".$match['team1']['logo_url'];
+		$img2 = "http://dailydota2.com".$match['team2']['logo_url'];
 			
 		$linkID = $match['link'];
 
