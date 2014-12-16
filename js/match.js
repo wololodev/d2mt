@@ -232,6 +232,21 @@
       $('#tbody_ggReMatches').html(finished);
     });
 
+    // DAILYDOTA2 MATCH TICKER
+    var load_ggmatches = $.ajax("http://api.dotaprj.me/dd2/matches/v100/api.json")
+    .success(function(data) {
+      var recent, finished;
+      $.each(data, function(key, val) {
+        if (key === "eventDone") {
+          finished += val;
+        } else {
+          recent += val;
+        }
+      });
+
+      $('#tbody_dd2UpMatches').html(recent);
+      $('#tbody_dd2ReMatches').html(finished);
+    });
 
     // RANKINGS AND STANDINGS
     var load_rankings = $.ajax("http://api.dotaprj.me/rankings/v150/api.json")
