@@ -15,8 +15,8 @@
     <ul id="menu" class="nav nav-tabs">
       <li><a class="menutab hovmenu" id="nav_news" title="News" href="#news" data-toggle="tab"><i class="icon-home"></i></a></li>
       <li><a class="menutab hovmenu" id="nav_jd" title="joinDota Matches" href="#jd_matches" data-toggle="tab">jD</a></li>
-      <!--li><a class="menutab hovmenu" id="nav_gg" title="GosuGamers Matches" href="#gg_acc_matches" data-toggle="tab">GG</a></li-->
-      <li><a class="menutab hovmenu" id="nav_dd2" title="DailyDota2 Matches" href="#dd2_acc_matches" data-toggle="tab">DD2</a></li>
+      <li><a class="menutab hovmenu" id="nav_gg" title="GosuGamers Matches" href="#gg_acc_matches" data-toggle="tab">GG</a></li>
+      <li><a class="menutab hovmenu" id="nav_dd" title="DailyDota2 Matches" href="#dd2_matches" data-toggle="tab">DD2</a></li>
       <li><a class="menutab hovmenu" id="nav_ranking" title="Rankings" href="#rankings" data-toggle="tab"><i class="icon-signal"></i></a></li>
       <li><a class="menutab hovmenu" id="nav_stream" title="Streams and VODs" title="News" href="#streams_vods" data-toggle="tab"><i class="icon-play"></i></a></li>
       <li><a class="menutab hovmenu" id="nav_sett" title="Settings" href="#settings" data-toggle="tab"><i class="icon-wrench"></i></a></li>
@@ -24,11 +24,12 @@
     </ul>
   </div>
   <div class="tab-content">
+
     <!-- ========================= News Tab ========================= -->
     <div class="tab-pane alignborder" id="news">
       <ul class="nav nav-tabs" id="js-newstab">
         <li class="active"><a class="submenu sub-tabs-top ph-tabstop ph-tableft" data-toggle="tab" href="#jdNews">joinDota News &nbsp;<span title="Go to: http://www.joindota.com/" data-link="http://www.joindota.com/" href="#" class="permalink"><i class="icon-share"></i></span></a></li>
-        <!--li><a class="submenu sub-tabs-top ph-tabstop" data-toggle="tab" href="#ggNews">GosuGamers News &nbsp;<span title="Go to: http://www.gosugamers.net/dota2" data-link="http://www.gosugamers.net/dota2" href="#" class="permalink"><i class="icon-share"></i></span></a></li-->
+        <li><a class="submenu sub-tabs-top ph-tabstop" data-toggle="tab" href="#ggNews">GosuGamers News &nbsp;<span title="Go to: http://www.gosugamers.net/dota2" data-link="http://www.gosugamers.net/dota2" href="#" class="permalink"><i class="icon-share"></i></span></a></li>
       </ul>
       <div class="tab-content">
         <div class="tab-pane active" id="jdNews">
@@ -93,14 +94,14 @@
       </div>
     </div>
 
-    <!-- ========================= GosuGamers Tab ========================= -->
-    <div class="tab-pane alignborder" id="dd2_acc_matches">
+    <!-- ========================= DailyDota2 Tab ======================= -->
+    <div class="tab-pane alignborder" id="dd2_matches">
       <ul class="nav nav-tabs">
-        <li class="active"><a class="submenu sub-tabs-top ph-tabstop ph-tableft" data-toggle="tab" href="#tb-dd2ummatch">Upcoming Matches &nbsp;<span title="Go to: http://dailydota2.com/" data-link="http://dailydota2.com/" href="#" class="permalink"><i class="icon-share"></i></span></a></li>
+        <li class="active"><a class="submenu sub-tabs-top ph-tabstop ph-tableft" data-toggle="tab" href="#tb-dd2umatch">Upcoming Matches &nbsp;<span title="Go to: http://dailydota2.com/" data-link="http://dailydota2.com/" href="#" class="permalink"><i class="icon-share"></i></span></a></li>
         <li><a class="submenu sub-tabs-top ph-tabstop" data-toggle="tab" href="#tb-dd2rrmatch">Recent Results</a></li>
       </ul>
       <div class="tab-content">
-        <div class="tab-pane active" id="tb-dd2ummatch">
+        <div class="tab-pane active" id="tb-dd2umatch">
           <table id="dd2_matchList" class="table table-hover table-condensed">
             <tbody class="listload" id="tbody_dd2UpMatches">
               <tr class="gif"></tr>
@@ -120,7 +121,7 @@
     <div class="tab-pane alignborder" id="rankings">
       <ul class="nav nav-tabs">
         <li class="active"><a class="submenu sub-tabs-top ph-tabstop ph-tableft" data-toggle="tab" href="#jdRankings">jD Standings &nbsp;<span title="Go to: http://www.joindota.com/en/edb/teams" data-link="http://www.joindota.com/en/edb/teams" href="#" class="permalink"><i class="icon-share"></i></span></a></li>
-        <!--li><a class="submenu sub-tabs-top ph-tabstop" data-toggle="tab" href="#ggRankings">GG Standings &nbsp;<span title="Go to: http://www.gosugamers.net/dota2/rankings" data-link="http://www.gosugamers.net/dota2/rankings" href="#" class="permalink"><i class="icon-share"></i></span></a></li-->
+        <li><a class="submenu sub-tabs-top ph-tabstop" data-toggle="tab" href="#ggRankings">GG Standings &nbsp;<span title="Go to: http://www.gosugamers.net/dota2/rankings" data-link="http://www.gosugamers.net/dota2/rankings" href="#" class="permalink"><i class="icon-share"></i></span></a></li>
       </ul>
       <div class="tab-content">
         <div class="tab-pane active" id="jdRankings">
@@ -169,7 +170,7 @@
       </div>
     </div>
 
-    <!-- ========================= SETTIGNS ==================== -->
+    <!-- ========================= SETTINGS ==================== -->
     <div class="accordion tab-pane" id="settings">
       <div class="accordion-group">
         <div class="accordion-heading">
@@ -257,11 +258,9 @@
           <div class="accordion-inner">
             <small>
             <ul>
-              <li><b>1.6.3</b> - 19/1/2013
+              <li><b>1.6.4</b> - --/--/----
               <ul>
-                <li>Fixes on the VODs section</li>
-                <li>Server side improvements</li>
-                <li>Some spelling crap for those OCD users</li>
+                <li>Added dailydota2.com match API</li>
               </ul>
               </li>
             </ul>
@@ -282,12 +281,16 @@
                   <td>1.6.3</td>
                 </tr>
                 <tr>
-                  <td><b>Author:</b></td>
+                  <td><b>Authors:</b></td>
                   <td>Hamed "Wololo" Al-Khabaz</td>
                 </tr>
                 <tr>
+                  <td></td>
+                  <td>Matthew "MasterOdin" Peveler</td>
+                </tr>
+                <tr>
                   <td><b>Thanks to:</b></td>
-                  <td>Matthew "MasterOdin" Peveler, Blasz</td>
+                  <td>Blasz, gkrambs</td>
                 </tr>
                 <tr>
                   <td><b>Contact:</b></td>

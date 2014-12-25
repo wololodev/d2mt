@@ -1,3 +1,10 @@
+## 1.7.0 - --/--/----
+    -   Added dailydota2.com match API
+    -   
+## 1.6.3 - 19/1/2014
+    -   Fixes on the VODs section
+    -   Server side improvements
+    -   Some spelling crap for those OCD users
 ## 1.6.2 - 16/5/2013
     -   Added settings to change layout
     -   Added my project to help gamers travel to places
