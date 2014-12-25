@@ -17,7 +17,7 @@
 
   var d2mt = {
     config: {
-      version: "1.6.2",
+      version: "1.6.4",
       browser: "chrome",
       email: "dota@hotmail.ca",
       exturl: "https://chrome.google.com/webstore/detail/dota-2-match-ticker/nejdjlaibiicicciokonbbkecjleilon",
