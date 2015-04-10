@@ -35,10 +35,4 @@
 .Trashes
 ehthumbs.db
 Thumbs.db
-
-# Added by Dustin #
-###################
-sitemap.xml
-sitemaps/
-/api/misc/currency.php
-*.json
+api/**/*.json

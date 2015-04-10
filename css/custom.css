@@ -22,30 +22,36 @@ tbody {
 	margin-left:18px;
 }
 
+#tbody_dd2UpMatches img {
+	width: 28px;
+	height: 18px;
+	background-color: #000;
+}
+
 /* start spriting */
 .icons { background: url(../img/sprite.png) no-repeat top left; display: block;}
-.iconBTS{ background-position: 0 0; width: 16px; height: 16px; } 
-.iconD2{ background-position: -17px 0; width: 16px; height: 16px; } 
+.iconBTS{ background-position: 0 0; width: 16px; height: 16px; }
+.iconD2{ background-position: -17px 0; width: 16px; height: 16px; }
 .iconDC{ background-position: -34px 0; width: 16px; height: 16px; }
 .iconLUMI{ background-position: -34px 0; width: 16px; height: 16px; }
-.iconDH{ background-position: -51px 0; width: 16px; height: 16px; } 
-.iconEG{ background-position: -68px 0; width: 16px; height: 16px; } 
-.iconEPI{ background-position: -85px 0; width: 16px; height: 16px; } 
-.iconGODZ{ background-position: -102px 0; width: 16px; height: 16px; } 
-.iconJD{ background-position: -119px 0; width: 16px; height: 16px; } 
-.iconLD{ background-position: -136px 0; width: 16px; height: 16px; } 
-.iconNEO{ background-position: -153px 0; width: 16px; height: 16px; } 
-.iconO{ background-position: -170px 0; width: 16px; height: 16px; } 
-.iconPURGE{ background-position: -187px 0; width: 16px; height: 16px; } 
-.iconSAGAN{ background-position: -204px 0; width: 16px; height: 16px; } 
-.iconSHEEV{ background-position: -221px 0; width: 16px; height: 16px; } 
-.iconT{ background-position: -238px 0; width: 16px; height: 16px; } 
-.iconTPL{ background-position: -255px 0; width: 16px; height: 16px; } 
-.iconWO{ background-position: -272px 0; width: 16px; height: 16px; } 
-.iconYT{ background-position: -289px 0; width: 16px; height: 16px; } 
+.iconDH{ background-position: -51px 0; width: 16px; height: 16px; }
+.iconEG{ background-position: -68px 0; width: 16px; height: 16px; }
+.iconEPI{ background-position: -85px 0; width: 16px; height: 16px; }
+.iconGODZ{ background-position: -102px 0; width: 16px; height: 16px; }
+.iconJD{ background-position: -119px 0; width: 16px; height: 16px; }
+.iconLD{ background-position: -136px 0; width: 16px; height: 16px; }
+.iconNEO{ background-position: -153px 0; width: 16px; height: 16px; }
+.iconO{ background-position: -170px 0; width: 16px; height: 16px; }
+.iconPURGE{ background-position: -187px 0; width: 16px; height: 16px; }
+.iconSAGAN{ background-position: -204px 0; width: 16px; height: 16px; }
+.iconSHEEV{ background-position: -221px 0; width: 16px; height: 16px; }
+.iconT{ background-position: -238px 0; width: 16px; height: 16px; }
+.iconTPL{ background-position: -255px 0; width: 16px; height: 16px; }
+.iconWO{ background-position: -272px 0; width: 16px; height: 16px; }
+.iconYT{ background-position: -289px 0; width: 16px; height: 16px; }
 
 
-#gg_acc_matches tr, #jd_matches tr, #dd2_matches tr, #streams_vods tr, #rankings tr, #news tr {
+.d2mtrow {
 	cursor:pointer;
 }
 .faq {

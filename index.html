@@ -4,7 +4,6 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Dota 2 Match Ticker">
-  <meta name="author" content="Wololo">
 
   <!-- Le styles -->
   <link href="css/bootstrap.css" rel="stylesheet">
@@ -14,22 +13,19 @@
   <div class="tabbable tabs-top">
     <ul id="menu" class="nav nav-tabs">
       <li><a class="menutab hovmenu" id="nav_news" title="News" href="#news" data-toggle="tab"><i class="icon-home"></i></a></li>
-      <li><a class="menutab hovmenu" id="nav_jd" title="joinDota Matches" href="#jd_matches" data-toggle="tab">jD</a></li>
-      <li><a class="menutab hovmenu" id="nav_gg" title="GosuGamers Matches" href="#gg_acc_matches" data-toggle="tab">GG</a></li>
-      <li><a class="menutab hovmenu" id="nav_dd" title="DailyDota2 Matches" href="#dd2_matches" data-toggle="tab">DD2</a></li>
+      <li><a class="menutab hovmenu" id="nav_dd2" title="DailyDota2 Matches" href="#dd2_acc_matches" data-toggle="tab">DD2</a></li>
       <li><a class="menutab hovmenu" id="nav_ranking" title="Rankings" href="#rankings" data-toggle="tab"><i class="icon-signal"></i></a></li>
       <li><a class="menutab hovmenu" id="nav_stream" title="Streams and VODs" title="News" href="#streams_vods" data-toggle="tab"><i class="icon-play"></i></a></li>
       <li><a class="menutab hovmenu" id="nav_sett" title="Settings" href="#settings" data-toggle="tab"><i class="icon-wrench"></i></a></li>
+      <li><a class="" id="nav_outpost" data-target="#" href="http://www.stay22.com/search?cid=oe&did=1&utm_source=d2mt&utm_medium=rowClick&utm_campaign=Dota2MatchTicker" target="_blank" data-toggle="tooltip" title="The cheapest way to stay for the upcoming DotA2 TI5 Championships" data-placement="bottom"><img src="img/sleeping.png" alt=""></a></li>
       <li><a class="menutab" id="nav_update" title="Refresh" href="#"><i class="icon-refresh"></i></a></li>
     </ul>
   </div>
   <div class="tab-content">
-
     <!-- ========================= News Tab ========================= -->
     <div class="tab-pane alignborder" id="news">
       <ul class="nav nav-tabs" id="js-newstab">
         <li class="active"><a class="submenu sub-tabs-top ph-tabstop ph-tableft" data-toggle="tab" href="#jdNews">joinDota News &nbsp;<span title="Go to: http://www.joindota.com/" data-link="http://www.joindota.com/" href="#" class="permalink"><i class="icon-share"></i></span></a></li>
-        <li><a class="submenu sub-tabs-top ph-tabstop" data-toggle="tab" href="#ggNews">GosuGamers News &nbsp;<span title="Go to: http://www.gosugamers.net/dota2" data-link="http://www.gosugamers.net/dota2" href="#" class="permalink"><i class="icon-share"></i></span></a></li>
       </ul>
       <div class="tab-content">
         <div class="tab-pane active" id="jdNews">
@@ -39,69 +35,17 @@
             </tbody>
           </table>
         </div>
-        <div class="tab-pane" id="ggNews">
-          <table id="ggNewsList" class="table table-hover table-condensed">
-            <tbody class="listload" id="tbody_ggNews">
-            </tbody>
-          </table>
-        </div>
       </div>
     </div>
 
-    <!-- ========================= joinDota Tab ========================= -->
-    <div class="tab-pane alignborder" id="jd_matches">
+    <!-- ========================= DailyDota2 Tab ========================= -->
+    <div class="tab-pane alignborder" id="dd2_acc_matches">
       <ul class="nav nav-tabs">
-        <li class="active"><a class="submenu sub-tabs-top ph-tabstop ph-tableft" data-toggle="tab" href="#tb-jdummatch">Upcoming Matches &nbsp;<span title="Go to: http://www.joindota.com/en/matches" data-link="http://www.joindota.com/en/matches" href="#" class="permalink"><i class="icon-share"></i></span></a></li>
-        <li><a class="submenu sub-tabs-top ph-tabstop" data-toggle="tab" href="#tb-jdrrmatch">Recent Results</a></li>
-      </ul>
-      <div class="tab-content">
-        <div class="tab-pane active" id="tb-jdummatch">
-          <table id="matchList" class="table table-hover table-condensed">
-            <tbody class="listload" id="tbody_jdUpMatches">
-              <tr class="gif"></tr>
-            </tbody>
-          </table>
-        </div>
-        <div class="tab-pane" id="tb-jdrrmatch">
-          <table id="finishedList" class="table table-hover table-condensed">
-            <tbody class="listload" id="tbody_jdReMatches">
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-
-    <!-- ========================= GosuGamers Tab ========================= -->
-    <div class="tab-pane alignborder" id="gg_acc_matches">
-      <ul class="nav nav-tabs">
-        <li class="active"><a class="submenu sub-tabs-top ph-tabstop ph-tableft" data-toggle="tab" href="#tb-ggummatch">Upcoming Matches &nbsp;<span title="Go to: http://www.gosugamers.net/dota2/gosubet" data-link="http://www.gosugamers.net/dota2/gosubet" href="#" class="permalink"><i class="icon-share"></i></span></a></li>
-        <li><a class="submenu sub-tabs-top ph-tabstop" data-toggle="tab" href="#tb-ggrrmatch">Recent Results</a></li>
-      </ul>
-      <div class="tab-content">
-        <div class="tab-pane active" id="tb-ggummatch">
-          <table id="gg_matchList" class="table table-hover table-condensed">
-            <tbody class="listload" id="tbody_ggUpMatches">
-              <tr class="gif"></tr>
-            </tbody>
-          </table>
-        </div>
-        <div class="tab-pane" id="tb-ggrrmatch">
-          <table id="gg_finishedList" class="table table-hover table-condensed">
-            <tbody class="listload" id="tbody_ggReMatches">
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-
-    <!-- ========================= DailyDota2 Tab ======================= -->
-    <div class="tab-pane alignborder" id="dd2_matches">
-      <ul class="nav nav-tabs">
-        <li class="active"><a class="submenu sub-tabs-top ph-tabstop ph-tableft" data-toggle="tab" href="#tb-dd2umatch">Upcoming Matches &nbsp;<span title="Go to: http://dailydota2.com/" data-link="http://dailydota2.com/" href="#" class="permalink"><i class="icon-share"></i></span></a></li>
+        <li class="active"><a class="submenu sub-tabs-top ph-tabstop ph-tableft" data-toggle="tab" href="#tb-dd2ummatch">Upcoming Matches &nbsp;<span title="Go to: http://dailydota2.com/" data-link="http://dailydota2.com/" href="#" class="permalink"><i class="icon-share"></i></span></a></li>
         <li><a class="submenu sub-tabs-top ph-tabstop" data-toggle="tab" href="#tb-dd2rrmatch">Recent Results</a></li>
       </ul>
       <div class="tab-content">
-        <div class="tab-pane active" id="tb-dd2umatch">
+        <div class="tab-pane active" id="tb-dd2ummatch">
           <table id="dd2_matchList" class="table table-hover table-condensed">
             <tbody class="listload" id="tbody_dd2UpMatches">
               <tr class="gif"></tr>
@@ -121,19 +65,12 @@
     <div class="tab-pane alignborder" id="rankings">
       <ul class="nav nav-tabs">
         <li class="active"><a class="submenu sub-tabs-top ph-tabstop ph-tableft" data-toggle="tab" href="#jdRankings">jD Standings &nbsp;<span title="Go to: http://www.joindota.com/en/edb/teams" data-link="http://www.joindota.com/en/edb/teams" href="#" class="permalink"><i class="icon-share"></i></span></a></li>
-        <li><a class="submenu sub-tabs-top ph-tabstop" data-toggle="tab" href="#ggRankings">GG Standings &nbsp;<span title="Go to: http://www.gosugamers.net/dota2/rankings" data-link="http://www.gosugamers.net/dota2/rankings" href="#" class="permalink"><i class="icon-share"></i></span></a></li>
       </ul>
       <div class="tab-content">
         <div class="tab-pane active" id="jdRankings">
           <table id="jd_rankList" class="table table-hover table-condensed">
             <tbody class="listload" id="tbody_jdRankings">
               <tr class="gif"></tr>
-            </tbody>
-          </table>
-        </div>
-        <div class="tab-pane" id="ggRankings">
-          <table id="gg_rankList" class="table table-hover table-condensed">
-            <tbody class="listload" id="tbody_ggRankings">
             </tbody>
           </table>
         </div>
@@ -170,7 +107,7 @@
       </div>
     </div>
 
-    <!-- ========================= SETTINGS ==================== -->
+    <!-- ========================= SETTIGNS ==================== -->
     <div class="accordion tab-pane" id="settings">
       <div class="accordion-group">
         <div class="accordion-heading">
@@ -258,9 +195,11 @@
           <div class="accordion-inner">
             <small>
             <ul>
-              <li><b>1.6.4</b> - --/--/----
+              <li><b>1.7.4</b> - 09/04/2015
               <ul>
                 <li>Added dailydota2.com match API</li>
+                <li>Removed other match providers</li>
+                <li>Changed servers</li>
               </ul>
               </li>
             </ul>
@@ -278,23 +217,19 @@
               <tbody>
                 <tr>
                   <td><b>Version:</b></td>
-                  <td>1.6.4</td>
+                  <td>1.7.4</td>
                 </tr>
                 <tr>
-                  <td><b>Authors:</b></td>
-                  <td>Hamed "Wololo" Al-Khabaz</td>
-                </tr>
-                <tr>
-                  <td></td>
-                  <td>Matthew "MasterOdin" Peveler</td>
+                  <td><b>Author:</b></td>
+                  <td>Hamed "Wololo" Al-Khabaz, Gregor "grex" Krambs</td>
                 </tr>
                 <tr>
                   <td><b>Thanks to:</b></td>
-                  <td>Blasz, gkrambs</td>
+                  <td>Matthew "MasterOdin" Peveler, Blasz</td>
                 </tr>
                 <tr>
                   <td><b>Contact:</b></td>
-                  <td><a target="_blank" href="mailto:dota@hotmail.ca">dota@hotmail.ca</a></td>
+                  <td><a target="_blank" href="mailto:gregorkrambs@gmail.com">gregorkrambs@gmail.com</a></td>
                 </tr>
                 <tr>
                   <td><b>Follow me:</b></td>
@@ -302,7 +237,7 @@
                 </tr>
                 <tr>
                   <td><b>Contribute:</b></td>
-                  <td><a target="_blank" href="https://github.com/wololodev/d2mt.git">Fork me at GitHub</a></td>
+                  <td><a target="_blank" href="https://github.com/wololodev/d2mt.git">Star this at GitHub</a></td>
                 </tr>
               </tbody>
             </table>

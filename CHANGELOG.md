@@ -1,6 +1,7 @@
-## 1.7.0 - --/--/----
+## 1.7.4 - 09/04/2015
     -   Added dailydota2.com match API
-    -   
+    -   Removed other match providers
+    -   Changed servers
 ## 1.6.3 - 19/1/2014
     -   Fixes on the VODs section
     -   Server side improvements

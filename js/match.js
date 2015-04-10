@@ -17,13 +17,12 @@
 
   var d2mt = {
     config: {
-      version: "1.6.4",
+      version: "1.6.2",
       browser: "chrome",
       email: "dota@hotmail.ca",
       exturl: "https://chrome.google.com/webstore/detail/dota-2-match-ticker/nejdjlaibiicicciokonbbkecjleilon",
       joinDotaUrl: "http://www.joindota.com/",
-      gosugamersUrl: "http://www.gosugamers.net/dota2",
-      apiUrl: "http://api.dotaprj.me/"
+      gosugamersUrl: "http://www.gosugamers.net/dota2"
     },
     settings: {
       isSpoilerOn: localStorage.isSpoilerOn === "true",
@@ -35,10 +34,10 @@
     nodes: {
       jdRecentResults: $('#finishedList'),
       ggRecentResults: $('#gg_finishedList'),
-      ddRecentResults: $('#dd2_finishedList'),
+      dd2RecentResults: $('#dd2_finishedList'),
       jdMatches: $('#jd_matches'),
       ggMatches: $('#gg_acc_matches'),
-      dd2Matches: $('#dd2_matches'),
+      dd2Matches: $('#dd2_acc_matches'),
       rankings: $('#rankings')
     },
     init: function() {
@@ -188,10 +187,9 @@
 
   var onLoadAjax = function() {
     // NEWS COVERAGE
-    var load_news = $.ajax(d2mt.config.apiUrl + "news/v150/api.json")
+    var load_news = $.ajax("http://api.dotaprj.me/news/v150/api.json")
     .success(function(data) {
-      var jdnews = ""; 
-      var ggnews = "";
+      var jdnews, ggnews;
       $.each(data, function(key, val) {
         if (key === "jd") {
           jdnews += val;
@@ -201,50 +199,12 @@
       });
 
       $('#tbody_jdNews').html(jdnews);
-      $('#tbody_ggNews').html(ggnews);
-    });
-
-    // JOINDOTA MATCH TICKER
-    var load_jdmatches = $.ajax(d2mt.config.apiUrl + "jd/matches/v130/api.json")
-    .success(function(data) {
-      var recent = "";
-      var finished = "";
-      $.each(data, function(key, val) {
-        if (key === "eventDone") {
-          finished += val;
-        } else if (key === "eventSoon") {
-          recent += val;
-        } else {
-          recent = val + recent;
-        }
-      });
-
-      $('#tbody_jdUpMatches').html(recent);
-      $('#tbody_jdReMatches').html(finished);
-    });
-
-    // GOSUGAMERS MATCH TICKER
-    var load_ggmatches = $.ajax(d2mt.config.apiUrl + "gg/matches/v120/api.json")
-    .success(function(data) {
-      var recent = "";
-      var finished = "";
-      $.each(data, function(key, val) {
-        if (key === "eventDone") {
-          finished += val;
-        } else {
-          recent += val;
-        }
-      });
-
-      $('#tbody_ggUpMatches').html(recent);
-      $('#tbody_ggReMatches').html(finished);
     });
 
     // DAILYDOTA2 MATCH TICKER
-    var load_dd2matches = $.ajax(d2mt.config.apiUrl + "dd2/matches/v100/api.json")
+    var load_dd2matches = $.ajax("http://api.dotaprj.me/dd2/matches/v100/api.json")
     .success(function(data) {
-      var recent = "";
-      var finished = "";
+      var recent, finished;
       $.each(data, function(key, val) {
         if (key === "eventDone") {
           finished += val;
@@ -258,10 +218,9 @@
     });
 
     // RANKINGS AND STANDINGS
-    var load_rankings = $.ajax(d2mt.config.apiUrl + "rankings/v150/api.json")
+    var load_rankings = $.ajax("http://api.dotaprj.me/rankings/v150/api.json")
     .success(function(data) {
-      var jdrankings = "";
-      var ggrankings = "";
+      var jdrankings, ggrankings;
       $.each(data, function(key, val) {
         if (key === "jd") {
           jdrankings += val;
@@ -271,15 +230,12 @@
       });
 
       $('#tbody_jdRankings').html(jdrankings);
-      $('#tbody_ggRankings').html(ggrankings);
     });
 
     // VODS AND STREAMS
-    var load_streamsAndVods = $.ajax(d2mt.config.apiUrl + "stream/v160/api.json")
+    var load_streamsAndVods = $.ajax("http://api.dotaprj.me/stream/v160/api.json")
     .success(function(data) {
-      var streams = "";
-      var vods = "";
-      var dota2vods = "";
+      var streams, vods, dota2vods;
       $.each(data, function(key, val) {
         if (key === "stream") {
           streams += val;
@@ -296,7 +252,7 @@
       setStreamLink(isPopout);
     });
 
-    $.when(load_news, load_jdmatches, load_ggmatches, load_dd2matches, load_rankings, load_streamsAndVods).done(function() {
+    $.when(load_news, load_dd2matches, load_rankings, load_streamsAndVods).done(function() {
       if (isSpoilerOn) {
         setResultsSpoiler(true);
       }
@@ -376,41 +332,6 @@
     e.stopPropagation();
   });
 
-  $jdRecentResults.on('mouseover mouseout', '.eventDone', function(e) {
-    if (isSpoilerOn) {
-      var result;
-      var $closeResNode = $(this).find('.winResult');
-      var $jdWinnerSeries = $(this).find('.series');
-      var $winner = $(this).find('b');
-      if (e.type === 'mouseover') {
-        result = $closeResNode.attr('data-winner');
-        $closeResNode.text(result);
-        $jdWinnerSeries.removeClass('opaque');
-        $winner.removeClass("unboldWinner");
-      } else {
-        $jdWinnerSeries.addClass('opaque');
-        $closeResNode.text("?");
-        $winner.addClass("unboldWinner");
-      }
-    }
-  });
-
-  $ggRecentResults.on('mouseover mouseout', '.eventDone', function(e) {
-    if (isSpoilerOn){
-      var result;
-      var $closeResNode = $(this).find('.winResult');
-      var $winner = $(this).find('b');
-      if (e.type === 'mouseover') {
-        result = $closeResNode.attr('data-winner');
-        $closeResNode.text(result);
-        $winner.removeClass("unboldWinner");
-      } else {
-        $closeResNode.text("?");
-        $winner.addClass("unboldWinner");
-      }
-    }
-  });
-
   $dd2RecentResults.on('mouseover mouseout', '.eventDone', function(e) {
     if (isSpoilerOn){
       var result;
@@ -426,4 +347,6 @@
       }
     }
   });
+
+  $('#nav_outpost').tooltip();
 })(jQuery);
