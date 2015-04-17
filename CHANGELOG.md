@@ -1,3 +1,6 @@
+## 1.7.5 - 17/04/2015
+    -   Removed news and rankings
+    -   Added GG back and fixed issues, we ready for TI5 bois
 ## 1.7.4 - 09/04/2015
     -   Added dailydota2.com match API
     -   Removed other match providers

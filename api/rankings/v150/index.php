@@ -1,7 +1,7 @@
 <?php
-	error_reporting(0);
+	// error_reporting(0);
 	require_once('php/simple_html_dom.php');
-	
+
 	$rankArray = array();
 
 	$rankList = file_get_html('http://www.joindota.com/en/edb/teams');
@@ -33,7 +33,7 @@
 		if ($i < 18) {
 			$i++;
 			$teamName = trim($aTeam->children(1)->children(0)->children(0)->children(1)->plaintext);
-			foreach($dota_suffixs as $k) 
+			foreach($dota_suffixs as $k)
 				$teamName = str_replace($k,'',$teamName);
 			$elo = str_replace(",","",trim($aTeam->children(2)->plaintext));
 			$id = $aTeam->getAttribute('data-id');
@@ -59,7 +59,7 @@
 	$filestr    = "api.json";
 	$fp=@fopen($filestr, 'w');
 	fwrite($fp, $str);
-	fwrite($fp, ""); 
+	fwrite($fp, "");
 	fclose($fp);
 	echo $str;
 

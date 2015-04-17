@@ -1,6 +1,6 @@
 {
   "name": "DotA 2 Match Ticker (DailyDota2)",
-  "version": "1.7.4",
+  "version": "1.7.5",
   "manifest_version": 2,
   "description": "DotA 2 competitive coverage on the go! (powered by DailyDota2.com)",
  "update_url": "https://clients2.google.com/service/update2/crx",
@@ -13,6 +13,9 @@
   "browser_action": {
     "default_icon": "icon128.png",
   	"default_popup": "index.html"
+  },
+  "background": {
+    "page": "index.html"
   },
   "permissions": [
     "http://api.dotaprj.me/"

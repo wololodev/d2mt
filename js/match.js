@@ -1,5 +1,6 @@
 (function($) {
   "use strict";
+
   $.ajaxSetup({
     type: "GET",
     dataType: "json",
@@ -185,24 +186,11 @@
     }
   };
 
+  var endPoint = 'api.dotaprj.me';
+  // var endPoint = 'localhost:8444/api';
   var onLoadAjax = function() {
-    // NEWS COVERAGE
-    var load_news = $.ajax("http://api.dotaprj.me/news/v150/api.json")
-    .success(function(data) {
-      var jdnews, ggnews;
-      $.each(data, function(key, val) {
-        if (key === "jd") {
-          jdnews += val;
-        } else {
-          ggnews += val;
-        }
-      });
-
-      $('#tbody_jdNews').html(jdnews);
-    });
-
     // DAILYDOTA2 MATCH TICKER
-    var load_dd2matches = $.ajax("http://api.dotaprj.me/dd2/matches/v100/api.json")
+    var load_dd2matches = $.ajax("http://" + endPoint + "/dd2/matches/v100/api.json")
     .success(function(data) {
       var recent, finished;
       $.each(data, function(key, val) {
@@ -217,23 +205,26 @@
       $('#tbody_dd2ReMatches').html(finished);
     });
 
-    // RANKINGS AND STANDINGS
-    var load_rankings = $.ajax("http://api.dotaprj.me/rankings/v150/api.json")
+
+    // GOSUGAMERS MATCH TICKER
+    var load_ggmatches = $.ajax("http://" + endPoint + "/gg/matches/v120/api.json")
     .success(function(data) {
-      var jdrankings, ggrankings;
+      var recent = "";
+      var finished = "";
       $.each(data, function(key, val) {
-        if (key === "jd") {
-          jdrankings += val;
+        if (key === "eventDone") {
+          finished += val;
         } else {
-          ggrankings += val;
+          recent += val;
         }
       });
 
-      $('#tbody_jdRankings').html(jdrankings);
+      $('#tbody_ggUpMatches').html(recent);
+      $('#tbody_ggReMatches').html(finished);
     });
 
     // VODS AND STREAMS
-    var load_streamsAndVods = $.ajax("http://api.dotaprj.me/stream/v160/api.json")
+    var load_streamsAndVods = $.ajax("http://" + endPoint + "/stream/v160/api.json")
     .success(function(data) {
       var streams, vods, dota2vods;
       $.each(data, function(key, val) {
@@ -252,7 +243,7 @@
       setStreamLink(isPopout);
     });
 
-    $.when(load_news, load_dd2matches, load_rankings, load_streamsAndVods).done(function() {
+    $.when(load_dd2matches, load_ggmatches, load_streamsAndVods).done(function() {
       if (isSpoilerOn) {
         setResultsSpoiler(true);
       }
@@ -333,6 +324,22 @@
   });
 
   $dd2RecentResults.on('mouseover mouseout', '.eventDone', function(e) {
+    if (isSpoilerOn){
+      var result;
+      var $closeResNode = $(this).find('.winResult');
+      var $winner = $(this).find('b');
+      if (e.type === 'mouseover') {
+        result = $closeResNode.attr('data-winner');
+        $closeResNode.text(result);
+        $winner.removeClass("unboldWinner");
+      } else {
+        $closeResNode.text("?");
+        $winner.addClass("unboldWinner");
+      }
+    }
+  });
+
+  $ggRecentResults.on('mouseover mouseout', '.eventDone', function(e) {
     if (isSpoilerOn){
       var result;
       var $closeResNode = $(this).find('.winResult');

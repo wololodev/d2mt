@@ -12,9 +12,8 @@
 <body>
   <div class="tabbable tabs-top">
     <ul id="menu" class="nav nav-tabs">
-      <li><a class="menutab hovmenu" id="nav_news" title="News" href="#news" data-toggle="tab"><i class="icon-home"></i></a></li>
-      <li><a class="menutab hovmenu" id="nav_dd2" title="DailyDota2 Matches" href="#dd2_acc_matches" data-toggle="tab">DD2</a></li>
-      <li><a class="menutab hovmenu" id="nav_ranking" title="Rankings" href="#rankings" data-toggle="tab"><i class="icon-signal"></i></a></li>
+      <li class="active"><a class="menutab hovmenu" id="nav_dd2" title="DailyDota2 Matches" href="#dd2_acc_matches" data-toggle="tab">DD2</a></li>
+      <li><a class="menutab hovmenu" id="nav_gg" title="GosuGamers Matches" href="#gg_acc_matches" data-toggle="tab">GG</a></li>
       <li><a class="menutab hovmenu" id="nav_stream" title="Streams and VODs" title="News" href="#streams_vods" data-toggle="tab"><i class="icon-play"></i></a></li>
       <li><a class="menutab hovmenu" id="nav_sett" title="Settings" href="#settings" data-toggle="tab"><i class="icon-wrench"></i></a></li>
       <li><a class="" id="nav_outpost" data-target="#" href="http://www.stay22.com/search?cid=oe&did=1&utm_source=d2mt&utm_medium=rowClick&utm_campaign=Dota2MatchTicker" target="_blank" data-toggle="tooltip" title="The cheapest way to stay for the upcoming DotA2 TI5 Championships" data-placement="bottom"><img src="img/sleeping.png" alt=""></a></li>
@@ -22,24 +21,8 @@
     </ul>
   </div>
   <div class="tab-content">
-    <!-- ========================= News Tab ========================= -->
-    <div class="tab-pane alignborder" id="news">
-      <ul class="nav nav-tabs" id="js-newstab">
-        <li class="active"><a class="submenu sub-tabs-top ph-tabstop ph-tableft" data-toggle="tab" href="#jdNews">joinDota News &nbsp;<span title="Go to: http://www.joindota.com/" data-link="http://www.joindota.com/" href="#" class="permalink"><i class="icon-share"></i></span></a></li>
-      </ul>
-      <div class="tab-content">
-        <div class="tab-pane active" id="jdNews">
-          <table id="jdNewsList" class="table table-hover table-condensed">
-            <tbody class="listload" id="tbody_jdNews">
-              <tr class="gif"></tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-
     <!-- ========================= DailyDota2 Tab ========================= -->
-    <div class="tab-pane alignborder" id="dd2_acc_matches">
+    <div class="tab-pane alignborder active" id="dd2_acc_matches">
       <ul class="nav nav-tabs">
         <li class="active"><a class="submenu sub-tabs-top ph-tabstop ph-tableft" data-toggle="tab" href="#tb-dd2ummatch">Upcoming Matches &nbsp;<span title="Go to: http://dailydota2.com/" data-link="http://dailydota2.com/" href="#" class="permalink"><i class="icon-share"></i></span></a></li>
         <li><a class="submenu sub-tabs-top ph-tabstop" data-toggle="tab" href="#tb-dd2rrmatch">Recent Results</a></li>
@@ -61,21 +44,29 @@
       </div>
     </div>
 
-    <!-- ========================= Rankings Tab ========================= -->
-    <div class="tab-pane alignborder" id="rankings">
-      <ul class="nav nav-tabs">
-        <li class="active"><a class="submenu sub-tabs-top ph-tabstop ph-tableft" data-toggle="tab" href="#jdRankings">jD Standings &nbsp;<span title="Go to: http://www.joindota.com/en/edb/teams" data-link="http://www.joindota.com/en/edb/teams" href="#" class="permalink"><i class="icon-share"></i></span></a></li>
-      </ul>
-      <div class="tab-content">
-        <div class="tab-pane active" id="jdRankings">
-          <table id="jd_rankList" class="table table-hover table-condensed">
-            <tbody class="listload" id="tbody_jdRankings">
-              <tr class="gif"></tr>
-            </tbody>
-          </table>
+    <!-- ========================= GosuGamers Tab ========================= -->
+        <div class="tab-pane alignborder" id="gg_acc_matches">
+          <ul class="nav nav-tabs">
+            <li class="active"><a class="submenu sub-tabs-top ph-tabstop ph-tableft" data-toggle="tab" href="#tb-ggummatch">Upcoming Matches &nbsp;<span title="Go to: http://www.gosugamers.net/dota2/gosubet" data-link="http://www.gosugamers.net/dota2/gosubet" href="#" class="permalink"><i class="icon-share"></i></span></a></li>
+            <li><a class="submenu sub-tabs-top ph-tabstop" data-toggle="tab" href="#tb-ggrrmatch">Recent Results</a></li>
+          </ul>
+          <div class="tab-content">
+            <div class="tab-pane active" id="tb-ggummatch">
+              <table id="gg_matchList" class="table table-hover table-condensed">
+                <tbody class="listload" id="tbody_ggUpMatches">
+                  <tr class="gif"></tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="tab-pane" id="tb-ggrrmatch">
+              <table id="gg_finishedList" class="table table-hover table-condensed">
+                <tbody class="listload" id="tbody_ggReMatches">
+                </tbody>
+              </table>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
+
 
     <!-- ========================= Streams/VODs Tab ========================= -->
     <div class="tab-pane alignborder" id="streams_vods">
@@ -195,11 +186,10 @@
           <div class="accordion-inner">
             <small>
             <ul>
-              <li><b>1.7.4</b> - 09/04/2015
+              <li><b>1.7.5</b> - 17/04/2015
               <ul>
-                <li>Added dailydota2.com match API</li>
-                <li>Removed other match providers</li>
-                <li>Changed servers</li>
+                <li>Removed news and rankings</li>
+                <li>dded GG back and fixed issues, we ready for TI5 bois</li>
               </ul>
               </li>
             </ul>
@@ -217,7 +207,7 @@
               <tbody>
                 <tr>
                   <td><b>Version:</b></td>
-                  <td>1.7.4</td>
+                  <td>1.7.5</td>
                 </tr>
                 <tr>
                   <td><b>Author:</b></td>
