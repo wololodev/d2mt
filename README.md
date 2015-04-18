@@ -1,4 +1,4 @@
-# [DotA 2 Match Ticker](http://dotaprj.me) v1.7.5
+# [DotA 2 Match Ticker](http://dotaprj.me) v1.7.6
 Competitive coverage on the go!
 
 ## Contributing

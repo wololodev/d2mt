@@ -1,8 +1,8 @@
 {
-  "name": "DotA 2 Match Ticker (DailyDota2)",
-  "version": "1.7.5",
+  "name": "DotA 2 Match Ticker",
+  "version": "1.7.6",
   "manifest_version": 2,
-  "description": "DotA 2 competitive coverage on the go! (powered by DailyDota2.com)",
+  "description": "DotA 2 competitive coverage on the go!",
  "update_url": "https://clients2.google.com/service/update2/crx",
  "key": "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC345dUzu5li4AryTs4E24oQgHWOzx/VlED/6VcAjpDc/dKFkNzPbB7T03Vltje5EsLL+gtk7cg0vUjnhr4vGclTep5awHPJCTh3HZ2b9N2JaPSrH6uNMF8yU56ko+RJ8/qKhFPQXi14MGMXiWR3CNNFuHkUHVyT0YJt4tAetR3cwIDAQAB",
   "icons": {
@@ -16,8 +16,5 @@
   },
   "background": {
     "page": "index.html"
-  },
-  "permissions": [
-    "http://api.dotaprj.me/"
-  ]
+  }
 }

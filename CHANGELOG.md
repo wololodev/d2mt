@@ -1,3 +1,8 @@
+## 1.7.6 - 18/04/2015
+    -   Fixed more shit including result sorting and timing
+    -   Fixed annoying first tab getting blue
+    -   Removed permissions to dotaprj.me
+    -   Renamed some tabs
 ## 1.7.5 - 17/04/2015
     -   Removed news and rankings
     -   Added GG back and fixed issues, we ready for TI5 bois

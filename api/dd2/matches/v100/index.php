@@ -32,7 +32,7 @@
 		$timeStamp = $match['starttime_unix'];
 
 		$date = "Live";
-		$gameArray["eventLive"][] = "<tr class='d2mtrow eventLive' href='{$linkID}' title='{$eventName}' rel='tooltip'><td alt='{$timeStamp}' class='push-tt gg_date'><b>{$date}</b></td><td><img src='{$img1}' width='28px' height='18px'> {$team1}</td><td>v</td><td><img src='{$img2}' width='14px' height='9px'> {$team2}</td></tr>";
+		$gameArray["eventLive"][] = "<tr class='d2mtrow eventLive' href='{$linkID}' title='{$eventName}' rel='tooltip'><td alt='{$timeStamp}' class='push-tt gg_date'><b>{$date}</b></td><td><img class='dd2-teamimg' src='{$img1}' width='28px' height='18px'> {$team1}</td><td>v</td><td><img class='dd2-teamimg' src='{$img2}' width='14px' height='9px'> {$team2}</td></tr>";
 
 		if ($i == 13) {
 			break;
@@ -72,7 +72,7 @@
 
 		if ($match['status'] == 0) {
 			$date = nice_time($match['timediff']);
-			$gameArray["eventSoon"][] =  "<tr class='d2mtrow eventSoon' href='{$linkID}' title='{$eventName}' rel='tooltip'><td alt='{$timeStamp}' class='push-tt gg_date'>{$date}</td><td><img src='{$img1}' width='28px' height='18px'> {$team1}</td><td>v</td><td><img src='{$img2}' width='14px' height='9px'> {$team2}</td></tr>";
+			$gameArray["eventSoon"][] =  "<tr class='d2mtrow eventSoon' href='{$linkID}' title='{$eventName}' rel='tooltip'><td alt='{$timeStamp}' class='push-tt gg_date'>{$date}</td><td><img class='dd2-teamimg' src='{$img1}' width='28px' height='18px'> {$team1}</td><td>v</td><td><img class='dd2-teamimg' src='{$img2}' width='14px' height='9px'> {$team2}</td></tr>";
 		}
 
 		if ($i == 13) {
@@ -117,7 +117,7 @@
 
 		if ($match['status'] == 2) {
 			$date = nice_time($match['timediff']);
-			$gameArray["eventDone"][] =  "<tr class='d2mtrow eventDone' href='{$linkID}' title='{$eventName}' rel='tooltip'><td alt='{$timeStamp}' class='push-tt gg_date series'>{$series}</td><td><img src='{$img1}' width='28px' height='18px'> {$team1}</td><td class='winResult' data-winner='{$winner}'>{$winner}</td><td><img src='{$img2}' width='28px' height='18px'> {$team2}</td></tr>";
+			$gameArray["eventDone"][] =  "<tr class='d2mtrow eventDone' href='{$linkID}' title='{$eventName}' rel='tooltip'><td alt='{$timeStamp}' class='push-tt gg_date series'>{$series}</td><td><img class='dd2-teamimg' src='{$img1}' width='28px' height='18px'> {$team1}</td><td class='winResult' data-winner='{$winner}'>{$winner}</td><td><img class='dd2-teamimg' src='{$img2}' width='28px' height='18px'> {$team2}</td></tr>";
 		}
 
 		if ($i == 13) {
@@ -126,6 +126,8 @@
 
 		$i++;
 	}
+
+	$gameArray["eventDone"] = array_reverse($gameArray["eventDone"]);
 
 	$str = trim(json_encode($gameArray));
 	$filestr = "api.json";

@@ -145,7 +145,7 @@
     if (localStorage.lastOpenedTab !== undefined) {
       $('#'+localStorage.lastOpenedTab).tab('show');
     } else {
-      $('#nav_jd').tab('show');
+      $('.menutab:first').tab('show');
     }
 
     // Time Format
@@ -356,4 +356,9 @@
   });
 
   $('#nav_outpost').tooltip();
+
+  setTimeout(function() {
+    // Focus fix
+    $("#nav_dd2").blur();
+  }, 200);
 })(jQuery);

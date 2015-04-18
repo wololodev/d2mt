@@ -12,7 +12,7 @@
 <body>
   <div class="tabbable tabs-top">
     <ul id="menu" class="nav nav-tabs">
-      <li class="active"><a class="menutab hovmenu" id="nav_dd2" title="DailyDota2 Matches" href="#dd2_acc_matches" data-toggle="tab">DD2</a></li>
+      <li><a class="menutab hovmenu" id="nav_dd2" title="DailyDota2 Matches" href="#dd2_acc_matches" data-toggle="tab">DD2</a></li>
       <li><a class="menutab hovmenu" id="nav_gg" title="GosuGamers Matches" href="#gg_acc_matches" data-toggle="tab">GG</a></li>
       <li><a class="menutab hovmenu" id="nav_stream" title="Streams and VODs" title="News" href="#streams_vods" data-toggle="tab"><i class="icon-play"></i></a></li>
       <li><a class="menutab hovmenu" id="nav_sett" title="Settings" href="#settings" data-toggle="tab"><i class="icon-wrench"></i></a></li>
@@ -22,7 +22,7 @@
   </div>
   <div class="tab-content">
     <!-- ========================= DailyDota2 Tab ========================= -->
-    <div class="tab-pane alignborder active" id="dd2_acc_matches">
+    <div class="tab-pane alignborder" id="dd2_acc_matches">
       <ul class="nav nav-tabs">
         <li class="active"><a class="submenu sub-tabs-top ph-tabstop ph-tableft" data-toggle="tab" href="#tb-dd2ummatch">Upcoming Matches &nbsp;<span title="Go to: http://dailydota2.com/" data-link="http://dailydota2.com/" href="#" class="permalink"><i class="icon-share"></i></span></a></li>
         <li><a class="submenu sub-tabs-top ph-tabstop" data-toggle="tab" href="#tb-dd2rrmatch">Recent Results</a></li>
@@ -71,9 +71,9 @@
     <!-- ========================= Streams/VODs Tab ========================= -->
     <div class="tab-pane alignborder" id="streams_vods">
       <ul class="nav nav-tabs">
-        <li class="active"><a class="submenu sub-tabs-top ph-tabstop ph-tableft" data-toggle="tab" href="#streams">Live Streams</a></li>
-        <li><a class="submenu sub-tabs-top ph-tabstop" data-toggle="tab" href="#dota2vods">Match VODs &nbsp;<span title="Go to: http://http://www.dotacinema.com/vods" data-link="http://www.dotacinema.com/vods" href="#" class="permalink"><i class="icon-share"></i></span></a></li>
-        <li><a class="submenu sub-tabs-top ph-tabstop" data-toggle="tab" href="#vods">VODs</a></li>
+        <li class="active"><a class="submenu sub-tabs-top ph-tabstop ph-tableft" data-toggle="tab" href="#streams">Live Streams &nbsp;<span title="Go to: http://www.twitch.tv/directory/game/Dota%202" data-link="http://www.twitch.tv/directory/game/Dota%202" href="#" class="permalink"><i class="icon-share"></i></span></a></li>
+        <li><a class="submenu sub-tabs-top ph-tabstop" data-toggle="tab" href="#dota2vods">VODs &nbsp;<span title="Go to: http://www.dotacinema.com/vods" data-link="http://www.dotacinema.com/vods" href="#" class="permalink"><i class="icon-share"></i></span></a></li>
+        <li><a class="submenu sub-tabs-top ph-tabstop" data-toggle="tab" href="#vods">YT</a></li>
       </ul>
       <div class="tab-content">
         <div class="tab-pane active" id="streams">
@@ -150,55 +150,6 @@
       </div>
       <div class="accordion-group">
         <div class="accordion-heading">
-          <a class="accordion-toggle" data-toggle="collapse" data-parent="#settings" href="#settingsTwo"><i class="icon-question-sign"></i>&nbsp;FAQ</a>
-        </div>
-        <div id="settingsTwo" class="accordion-body collapse">
-          <div class="accordion-inner">
-            <small class="faq">
-              <dl>
-                <dt>How frequently is this updated ?</dt>
-                <dd>Depends. It could update every minute, 5 minutes, or every 15 minutes max.</dd>
-
-                <dt>Is there D2MT for other browsers ?</dt>
-                <dd>Yes, <a href="https://chrome.google.com/webstore/detail/dota-2-match-ticker/nejdjlaibiicicciokonbbkecjleilon" target="_blank">Chrome</a> - <a href="https://addons.mozilla.org/en-US/firefox/addon/dota-2-match-ticker/" target="_blank">Firefox</a> - <a href="https://addons.opera.com/en/extensions/details/dota-2-match-ticker/" target="_blank">Opera</a> - <a href="http://dotaprj.me/" target="_blank">Web</a></dd>
-
-                <dt>Does this run as a background process ?</dt>
-                <dd>No. Unlike many extensions, this one does not. As soon as you close the extension, you are freeing resource. (Except for firefox)</dd>
-
-                <dt>What channels are you taking VODs from ?</dt>
-                <dd>VODs section will show you the 15 most recent uploads from the most popular DotA2 channels (currently 12). Contact me if you want to add yours.</dd>
-
-                <dt>Why are some news bolded ?</dt>
-                <dd>It's to show news that are hot. (Over 50 comments)</dd>
-
-                <dt>Joindota has points not elo, what gives ?</dt>
-                <dd>I divided the points by 22 to give the same elo feeling that GosuGamers gives.</dd>
-              </dl>
-            </small>
-          </div>
-        </div>
-      </div>
-      <div class="accordion-group">
-        <div class="accordion-heading">
-          <a class="accordion-toggle" data-toggle="collapse" data-parent="#settings" href="#settingsThree"><i class="icon-search"></i>&nbsp;Changelog</a>
-        </div>
-        <div id="settingsThree" class="accordion-body collapse">
-          <div class="accordion-inner">
-            <small>
-            <ul>
-              <li><b>1.7.5</b> - 17/04/2015
-              <ul>
-                <li>Removed news and rankings</li>
-                <li>dded GG back and fixed issues, we ready for TI5 bois</li>
-              </ul>
-              </li>
-            </ul>
-            </small>
-          </div>
-        </div>
-      </div>
-      <div class="accordion-group">
-        <div class="accordion-heading">
           <a class="accordion-toggle" data-toggle="collapse" data-parent="#settings" href="#settingsFour"><i class="icon-info-sign"></i>&nbsp;About</a>
         </div>
         <div id="settingsFour" class="accordion-body collapse">
@@ -207,19 +158,19 @@
               <tbody>
                 <tr>
                   <td><b>Version:</b></td>
-                  <td>1.7.5</td>
+                  <td>1.7.6 - <a href="https://github.com/wololodev/d2mt/blob/master/CHANGELOG.md" target="_blank">View changelog</a></td>
                 </tr>
                 <tr>
                   <td><b>Author:</b></td>
-                  <td>Hamed "Wololo" Al-Khabaz, Gregor "grex" Krambs</td>
+                  <td>Hamed "Wololo" Al-Khabaz</td>
                 </tr>
                 <tr>
                   <td><b>Thanks to:</b></td>
-                  <td>Matthew "MasterOdin" Peveler, Blasz</td>
+                  <td>Gregor "grex" Krambs, Matthew "MasterOdin" Peveler, Blasz</td>
                 </tr>
                 <tr>
                   <td><b>Contact:</b></td>
-                  <td><a target="_blank" href="mailto:gregorkrambs@gmail.com">gregorkrambs@gmail.com</a></td>
+                  <td><a target="_blank" href="mailto:gregorkrambs@gmail.com">gregorkrambs@gmail.com</a><br><a target="_blank" href="mailto:hamedalkhabaz@gmail.com">hamedalkhabaz@gmail.com</a></td>
                 </tr>
                 <tr>
                   <td><b>Follow me:</b></td>
