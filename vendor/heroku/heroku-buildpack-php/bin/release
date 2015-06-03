@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+# bin/release <build-dir>
+
+cat <<EOF
+---
+addons: []
+default_process_types:
+  web: php -S 0.0.0.0:\$PORT
+EOF

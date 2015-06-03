@@ -1,0 +1,85 @@
+#!/usr/bin/env bash
+# Build Path: /app/.heroku/php/
+# Build Deps: libraries/zlib, libraries/libmcrypt, libraries/icu, libraries/gettext
+
+OUT_PREFIX=$1
+
+# fail hard
+set -o pipefail
+# fail harder
+set -eux
+
+DEFAULT_VERSION="5.5.11"
+dep_version=${VERSION:-$DEFAULT_VERSION}
+dep_dirname=php-${dep_version}
+dep_archive_name=${dep_dirname}.tar.gz
+if [[ $dep_version == *alpha* ]] || [[ $dep_version == *beta* ]] || [[ $dep_version == *RC* ]]; then
+    if [[ $dep_version == 5.5.* ]]; then
+        dep_url=http://downloads.php.net/~jpauli/${dep_archive_name}
+    elif [[ $dep_version == 5.6.* ]]; then
+        dep_url=http://downloads.php.net/~tyrael/${dep_archive_name}
+    fi
+else
+    dep_url=http://us1.php.net/get/${dep_archive_name}/from/this/mirror
+fi
+
+echo "-----> Building PHP ${dep_version}..."
+
+curl -L ${dep_url} | tar xz
+
+pushd ${dep_dirname}
+
+if echo -n $dep_version | python -c "import sys, pkg_resources; ver=pkg_resources.parse_version(sys.stdin.read()); sys.exit(ver >= pkg_resources.parse_version('5.6.0RC2') || ver >= pkg_resources.parse_version('5.5.17RC1'));"; then
+    echo "-----> Applying https://github.com/php/php-src/pull/694..."
+    curl -L https://github.com/php/php-src/pull/694.diff | patch -p1
+fi
+
+export PATH=${OUT_PREFIX}/bin:$PATH
+# cannot be built shared: date, ereg, opcache (always), pcre, reflection, sockets (?), spl, standard,
+# sqlite3 and pdo_sqlite are on by default but we're building them shared on purpose
+LD_LIBRARY_PATH=${OUT_PREFIX} ./configure \
+    --prefix=${OUT_PREFIX} \
+    --with-config-file-path=/app/.heroku/php/etc/php \
+    --with-config-file-scan-dir=/app/.heroku/php/etc/php/conf.d \
+    --enable-fpm \
+    --with-bz2 \
+    --with-curl \
+    --with-mcrypt=${OUT_PREFIX} \
+    --with-pdo-mysql \
+    --with-mysqli \
+    --with-openssl \
+    --with-pgsql \
+    --with-pdo-pgsql \
+    --with-readline \
+    --enable-sockets \
+    --enable-zip \
+    --with-zlib \
+    --with-zlib-dir=${OUT_PREFIX} \
+    --enable-bcmath=shared \
+    --enable-calendar=shared \
+    --enable-exif=shared \
+    --enable-ftp=shared \
+    --with-gd=shared \
+        --enable-gd-native-ttf \
+        --with-freetype-dir=/usr \
+        --with-jpeg-dir=/usr \
+        --with-png-dir=/usr \
+    --with-gettext=shared,${OUT_PREFIX} \
+    --enable-intl=shared \
+    --enable-mbstring=shared \
+    --with-mysql=shared \
+    --enable-pcntl=shared \
+    --enable-shmop=shared \
+    --enable-soap=shared \
+    --with-sqlite3=shared \
+    --with-pdo-sqlite=shared \
+    --with-xmlrpc=shared \
+    --with-xsl=shared
+make -s -j 9
+make install -s
+popd
+
+echo "-----> Preparing PECL..."
+${OUT_PREFIX}/bin/pecl channel-update pecl.php.net
+
+echo "-----> Done."
