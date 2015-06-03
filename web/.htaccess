@@ -377,12 +377,12 @@ AddDefaultCharset utf-8
 
 # Option 1: rewrite www.example.com → example.com
 
-<IfModule mod_rewrite.c>
-    RewriteEngine On
-    RewriteCond %{HTTPS} !=on
-    RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
-    RewriteRule ^ %{ENV:PROTO}://%1%{REQUEST_URI} [R=301,L]
-</IfModule>
+#<IfModule mod_rewrite.c>
+#    RewriteEngine On
+#    RewriteCond %{HTTPS} !=on
+#    RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
+#    RewriteRule ^ %{ENV:PROTO}://%1%{REQUEST_URI} [R=301,L]
+#</IfModule>
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -391,14 +391,14 @@ AddDefaultCharset utf-8
 # Be aware that the following might not be a good idea if you use "real"
 # subdomains for certain parts of your website.
 
-# <IfModule mod_rewrite.c>
-#     RewriteEngine On
-#     RewriteCond %{HTTPS} !=on
-#     RewriteCond %{HTTP_HOST} !^www\. [NC]
-#     RewriteCond %{SERVER_ADDR} !=127.0.0.1
-#     RewriteCond %{SERVER_ADDR} !=::1
-#     RewriteRule ^ %{ENV:PROTO}://www.%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
-# </IfModule>
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteCond %{HTTPS} !=on
+    RewriteCond %{HTTP_HOST} !^www\. [NC]
+    RewriteCond %{SERVER_ADDR} !=127.0.0.1
+    RewriteCond %{SERVER_ADDR} !=::1
+    RewriteRule ^ %{ENV:PROTO}://www.%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+</IfModule>
 
 
 # ######################################################################
@@ -982,3 +982,8 @@ FileETag None
 #     RewriteCond %{REQUEST_FILENAME} !-f
 #     RewriteRule ^(.+)\.(\d+)\.(bmp|css|cur|gif|ico|jpe?g|js|png|svgz?|webp|webmanifest)$ $1.$3 [L]
 # </IfModule>
+
+
+# RewriteEngine on
+# RewriteCond %{HTTP_HOST} ^api.dotaprj.me
+#RewriteRule ^(.*)$ http://dotaprj.me/api/$1 [L,NC,QSA]
