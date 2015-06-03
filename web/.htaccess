@@ -984,6 +984,6 @@ FileETag None
 # </IfModule>
 
 
-# RewriteEngine on
-# RewriteCond %{HTTP_HOST} ^api.dotaprj.me
-#RewriteRule ^(.*)$ http://dotaprj.me/api/$1 [L,NC,QSA]
+RewriteEngine on
+RewriteCond %{HTTP_HOST} ^api.dotaprj.me
+RewriteRule ^(.*)$ http://dotaprj.me/api/$1 [L,NC,QSA]
