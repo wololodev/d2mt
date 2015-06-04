@@ -36,78 +36,6 @@
 
 	krsort($combinedList);
 
-	$jd_json = json_decode(get_contents("http://gdata.youtube.com/feeds/api/users/joindota/uploads?&v=2&alt=jsonc&max-results=15"));
-	$sltv_json = json_decode(get_contents("http://gdata.youtube.com/feeds/api/users/dotasltv/uploads?&v=2&alt=jsonc&max-results=15"));
-	$sheever_json = json_decode(get_contents("http://gdata.youtube.com/feeds/api/users/sheevergaming/uploads?&v=2&alt=jsonc&max-results=15"));
-	$purge_json = json_decode(get_contents("http://gdata.youtube.com/feeds/api/users/PurgeGamers/uploads?&v=2&alt=jsonc&max-results=15"));
-	$bts_json = json_decode(get_contents("http://gdata.youtube.com/feeds/api/users/beyondthesummittv/uploads?&v=2&alt=jsonc&max-results=15"));
-	$ld_json = json_decode(get_contents("http://gdata.youtube.com/feeds/api/users/ldDOTA/uploads?&v=2&alt=jsonc&max-results=15"));
-	$godz_json = json_decode(get_contents("http://gdata.youtube.com/feeds/api/users/GoDzStudios/uploads?&v=2&alt=jsonc&max-results=15"));
-	$sagan_json = json_decode(get_contents("http://gdata.youtube.com/feeds/api/users/sagan9ne/uploads?&v=2&alt=jsonc&max-results=15"));
-	$tpl_json = json_decode(get_contents("http://gdata.youtube.com/feeds/api/users/thepremierrleague/uploads?&v=2&alt=jsonc&max-results=15"));
-	$eg_json = json_decode(get_contents("http://gdata.youtube.com/feeds/api/users/myEGnet/uploads?&v=2&alt=jsonc&max-results=15"));
-	$lumi_json = json_decode(get_contents("http://gdata.youtube.com/feeds/api/users/luminousinverse/uploads?&v=2&alt=jsonc&max-results=15"));
-	$epi_json = json_decode(get_contents("http://gdata.youtube.com/feeds/api/users/SocialPathology/uploads?&v=2&alt=jsonc&max-results=15"));
-	$neo_json = json_decode(get_contents("http://gdata.youtube.com/feeds/api/users/neodota2/uploads?&v=2&alt=jsonc&max-results=15"));
-	$d2_json = json_decode(get_contents("http://gdata.youtube.com/feeds/api/users/dota2/uploads?&v=2&alt=jsonc&max-results=15"));
-	$dc_json = json_decode(get_contents("http://gdata.youtube.com/feeds/api/users/DotaCinema/uploads?&v=2&alt=jsonc&max-results=15"));
-	$wo_json = json_decode(get_contents("http://gdata.youtube.com/feeds/api/users/WoDotA/uploads?&v=2&alt=jsonc&max-results=15"));
-	$dh_json = json_decode(get_contents("http://gdata.youtube.com/feeds/api/users/DreamhackMedia/uploads?&v=2&alt=jsonc&max-results=15"));
-	$ytList = array();
-
-	foreach($jd_json->data->items as $aVOD) {
-		parseVods("joinDota", 'icons iconJD', $aVOD);
-	}
-	foreach($sltv_json->data->items as $aVOD) {
-		parseVods("StarLadder.TV", 'icon-star', $aVOD);
-	}
-	foreach($sheever_json->data->items as $aVOD) {
-		parseVods("SheeverGaming", 'icons iconSHEEV', $aVOD);
-	}
-	foreach($purge_json->data->items as $aVOD) {
-		parseVods("Purge Gamers", 'icons iconPURGE', $aVOD);
-	}
-	foreach($bts_json->data->items as $aVOD) {
-		parseVods("Beyond The Summit", 'icons iconBTS', $aVOD);
-	}
-	foreach($ld_json->data->items as $aVOD) {
-		parseVods("LDdota", 'icons iconLD', $aVOD);
-	}
-	foreach($godz_json->data->items as $aVOD) {
-		parseVods("GoDz Studios", 'icons iconGODZ', $aVOD);
-	}
-	foreach($sagan_json->data->items as $aVOD) {
-		parseVods("sagan9ne", 'icons iconSAGAN', $aVOD);
-	}
-	foreach($tpl_json->data->items as $aVOD) {
-		parseVods("The Premier League", 'icons iconTPL', $aVOD);
-	}
-	foreach($eg_json->data->items as $aVOD) {
-		parseVods("Evil Geniuses", 'icons iconEG', $aVOD);
-	}
-	foreach($lumi_json->data->items as $aVOD) {
-		parseVods("Luminous", 'icons iconLUMI', $aVOD);
-	}
-	foreach($epi_json->data->items as $aVOD) {
-		parseVods("EpiCommentary", 'icons iconEPI', $aVOD);
-	}
-	foreach($neo_json->data->items as $aVOD) {
-		parseVods("NEO Dota", 'icons iconNEO', $aVOD);
-	}
-	foreach($d2_json->data->items as $aVOD) {
-		parseVods("DotA2 Official", 'icons iconD2', $aVOD);
-	}
-	foreach($dc_json->data->items as $aVOD) {
-		parseVods("DotaCinema", 'icons iconDC', $aVOD);
-	}
-	foreach($wo_json->data->items as $aVOD) {
-		parseVods("WoDotA", 'icons iconWO', $aVOD);
-	}
-	foreach($dh_json->data->items as $aVOD) {
-		parseVods("DreamHack", 'icons iconDH', $aVOD);
-	}
-
-	krsort($ytList);
 	//$ytList = array_slice($ytList, 0, 15);
 
 	$arr = array('/', 'Date', '(', ')', '-0500');
@@ -155,11 +83,7 @@
 		$ultimateList["stream"][] = $aStream;
 	}
 	$i = 0;
-	foreach($ytList as $aStream) {
-		if ($aStream == null) continue;
-		$ultimateList["vod"][] = $aStream;
-		if (++$i == 15) break;
-	}
+
 	foreach($dota2vodslist as $aStream) {
 		$ultimateList["dota2vods"][] = $aStream;
 	}
@@ -217,7 +141,7 @@
 		return "$difference{$periods[$j]} ago";
 	}
 
-	function get_contents($url) 
+	function get_contents($url)
 	{
 		$ch = curl_init();
 		curl_setopt($ch, CURLOPT_URL, $url);

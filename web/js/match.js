@@ -186,8 +186,8 @@
     }
   };
 
-  var endPoint = 'api.dotaprj.me';
-  // var endPoint = 'localhost:8444/api';
+  // var endPoint = 'dotaprj.me/api';
+  var endPoint = 'localhost:8444/api';
   var onLoadAjax = function() {
     // DAILYDOTA2 MATCH TICKER
     var load_dd2matches = $.ajax("http://" + endPoint + "/dd2/matches/v100/api.json")
