@@ -186,8 +186,8 @@
     }
   };
 
-  // var endPoint = 'dotaprj.me/api';
-  var endPoint = 'localhost:8444/api';
+  var endPoint = 'dotaprj.me/api';
+  // var endPoint = 'localhost:8444/api';
   var onLoadAjax = function() {
     // DAILYDOTA2 MATCH TICKER
     var load_dd2matches = $.ajax("http://" + endPoint + "/dd2/matches/v100/api.json")
@@ -279,8 +279,12 @@
   });
 
   $('.menutab').on('shown', function(e) {
-    var lastTab = e.target;
-    localStorage.lastOpenedTab = $(lastTab).attr('id');
+    var lastTab = $(e.target).attr('id');
+    localStorage.lastOpenedTab = lastTab;
+
+    if (lastTab === "nav_stay22") {
+      $("#stay22iframe").attr("src", "https://www.stay22.com/embed/the-international-dota");
+    }
   });
 
   $('.timeformat').click(function(){

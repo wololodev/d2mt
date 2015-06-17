@@ -1,4 +1,6 @@
-## 1.7.6 - 18/04/2015
+## 1.7.8 - 3/6/2015
+    -   Fixed stuff not getitng updated
+## 1.7.6 - 18/4/2015
     -   Fixed more shit including result sorting and timing
     -   Fixed annoying first tab getting blue
     -   Removed permissions to dotaprj.me
@@ -6,7 +8,7 @@
 ## 1.7.5 - 17/04/2015
     -   Removed news and rankings
     -   Added GG back and fixed issues, we ready for TI5 bois
-## 1.7.4 - 09/04/2015
+## 1.7.4 - 9/04/2015
     -   Added dailydota2.com match API
     -   Removed other match providers
     -   Changed servers
