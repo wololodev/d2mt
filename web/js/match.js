@@ -283,7 +283,7 @@
     localStorage.lastOpenedTab = lastTab;
 
     if (lastTab === "nav_stay22") {
-      $("#stay22iframe").attr("src", "https://www.stay22.com/embed/the-international-dota");
+      $("#stay22iframe").attr("src", "https://www.stay22.com/embed/esl-one-nyc-2015");
     }
   });
 
