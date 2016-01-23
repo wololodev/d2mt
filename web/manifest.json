@@ -1,18 +1,18 @@
 {
   "name": "DotA 2 Match Ticker",
-  "version": "1.7.9.3",
+  "version": "1.7.9.4",
   "manifest_version": 2,
   "description": "DotA 2 competitive coverage on the go!",
- "update_url": "https://clients2.google.com/service/update2/crx",
- "key": "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC345dUzu5li4AryTs4E24oQgHWOzx/VlED/6VcAjpDc/dKFkNzPbB7T03Vltje5EsLL+gtk7cg0vUjnhr4vGclTep5awHPJCTh3HZ2b9N2JaPSrH6uNMF8yU56ko+RJ8/qKhFPQXi14MGMXiWR3CNNFuHkUHVyT0YJt4tAetR3cwIDAQAB",
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "key": "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC345dUzu5li4AryTs4E24oQgHWOzx/VlED/6VcAjpDc/dKFkNzPbB7T03Vltje5EsLL+gtk7cg0vUjnhr4vGclTep5awHPJCTh3HZ2b9N2JaPSrH6uNMF8yU56ko+RJ8/qKhFPQXi14MGMXiWR3CNNFuHkUHVyT0YJt4tAetR3cwIDAQAB",
   "icons": {
-		"16": "icon16.png",
-		"48": "icon48.png",
-		"128": "icon128.png"
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
   },
   "browser_action": {
     "default_icon": "icon128.png",
-  	"default_popup": "index.html"
+    "default_popup": "index.html"
   },
   "background": {
     "page": "index.html"

@@ -135,7 +135,8 @@
 	fwrite($fp, $str);
 	fwrite($fp, "");
 	fclose($fp);
-	echo $str;
+	// echo $str;
+	echo "OK";
 
 	function nice_time($t) {
 		$h = floor($t/3600);

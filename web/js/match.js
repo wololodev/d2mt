@@ -1,3 +1,4 @@
+// using https://cron-job.org for free crons to update this shit
 (function($) {
   "use strict";
 
@@ -283,7 +284,7 @@
     localStorage.lastOpenedTab = lastTab;
 
     if (lastTab === "nav_stay22") {
-      $("#stay22iframe").attr("src", "https://www.stay22.com/embed/dota-starseries-season");
+      $("#stay22iframe").attr("src", "https://www.stay22.com/embed/the-shanghai-major");
     }
   });
 

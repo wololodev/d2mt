@@ -94,7 +94,8 @@
 	fwrite($fp, $str);
 	fwrite($fp, "");
 	fclose($fp);
-	echo $str;
+	// echo $str;
+	echo "OK";
 
 	function secToTime($duration) {
 		return $duration <= 3600 ? gmdate("i:s", $duration) : gmdate("H:i:s", $duration);

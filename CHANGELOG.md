@@ -1,3 +1,7 @@
+## 1.7.9 - 23/1/2016
+    -   Fixed GG's pics not loading
+    -   Made feed update faster
+    -   Fixed other minor bugs bunnies 
 ## 1.7.8 - 3/6/2015
     -   Fixed stuff not getitng updated
 ## 1.7.6 - 18/4/2015

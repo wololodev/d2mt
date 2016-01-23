@@ -1,7 +1,7 @@
 <?php
 	// error_reporting(0);
 	require_once('php/simple_html_dom.php');
-	date_default_timezone_set("CET");
+	// date_default_timezone_set("CET");
 	$matchList = file_get_html('http://www.gosugamers.net/dota2/gosubet');
 	$dota_suffixs = array('DotA2','Dota 2','.Dota2','.Dota 2','-Dota2','-Dota 2');
 	$done = $matchList->find('.matches');
@@ -33,11 +33,11 @@
 		$started = $matchList->find('.matches', $d0);
 		foreach($started->find('tr') as $aGame) {
 			$img1 = strtolower(substr($aGame->find('.flag', 0)->class,-2));
-			$img1 = ($img1 == "un") ? "world" : $img1;
+			$img1 = ($img1 == "un" || $img1 == "xa") ? "world" : $img1;
 			$img1 = "http://cdn1.gamesports.net/img/flags/".$img1.".gif";
 
 			$img2 = strtolower(substr($aGame->find('.flag', 1)->class,-2));
-			$img2 = ($img2 == "un") ? "world" : $img2;
+			$img2 = ($img2 == "un" || $img2 == "xa") ? "world" : $img2;
 			$img2 = "http://cdn1.gamesports.net/img/flags/".$img2.".gif";
 
       $linky = $aGame->find('a', 0)->href;
@@ -89,7 +89,8 @@
             }
             $team2 =  parse_name(trim($titleList->find('.opponent2', 0)->children(1)->plaintext));
             $eventName = get_event($titleList);
-            $fullDate = str_replace("CET", "CEST", $titleList->find('.datetime', 0)->plaintext);
+            // $fullDate = str_replace("CET", "CEST", $titleList->find('.datetime', 0)->plaintext); //reenable this on DST
+            $fullDate = trim($titleList->find('.datetime', 0)->plaintext);
             $timeStamp = strtotime($fullDate);
 
             $gameArray["eventSoon"][] =  "<tr class='d2mtrow eventSoon' href='{$linkID}' title='{$eventName}' rel='tooltip'><td alt='{$timeStamp}' class='push-tt gg_date'>{$date}</td><td><img src='{$img1}' width='14px' height='9px'> {$team1}</td><td>v</td><td><img src='{$img2}' width='14px' height='9px'> {$team2}</td></tr>";
@@ -150,7 +151,8 @@
 	fwrite($fp, $str);
 	fwrite($fp, "");
 	fclose($fp);
-	echo $str;
+  // echo $str;
+  echo "OK";
 
 	function parse_name($name) {
 		global $dota_suffixs;
