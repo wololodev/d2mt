@@ -68,14 +68,14 @@
         $upcoming = $matchList->find('.matches', $d1);
         foreach($upcoming->find('tr') as $aGame) {
             $img1 = strtolower(substr($aGame->find('.flag', 0)->class,-2));
-            $img1 = ($img1 == "un") ? "world" : $img1;
+            $img1 = ($img1 == "un" || $img1 == "xa") ? "world" : $img1;
             $img1 = "http://cdn1.gamesports.net/img/flags/".$img1.".gif";
             $team1 =  trim($aGame->find('.opp1', 0)->plaintext);
             if (!$team1) {
                 continue;
             }
             $img2 = strtolower(substr($aGame->find('.flag', 1)->class,-2));
-            $img2 = ($img2 == "un") ? "world" : $img2;
+            $img2 = ($img2 == "un" || $img2 == "xa") ? "world" : $img2;
             $img2 = "http://cdn1.gamesports.net/img/flags/".$img2.".gif";
             $team2 =  trim($aGame->find('.opp2', 0)->plaintext);
             $date = trim($aGame->find('.live-in', 0)->plaintext);
@@ -106,14 +106,14 @@
 		if ($i > 15)
 			break;
 		$img1 = strtolower(substr($aGame->find('.flag', 0)->class,-2));
-		$img1 = ($img1 == "un") ? "world" : $img1;
+		$img1 = ($img1 == "un" || $img1 == "xa") ? "world" : $img1;
 		$img1 = "http://cdn1.gamesports.net/img/flags/".$img1.".gif";
 		$team1 =  trim($aGame->find('.opp1', 0)->plaintext);
 		if (!$team1) {
 			continue;
 		}
 		$img2 = strtolower(substr($aGame->find('.flag', 1)->class,-2));
-		$img2 = ($img2 == "un") ? "world" : $img2;
+		$img2 = ($img2 == "un" || $img2 == "xa") ? "world" : $img2;
 		$img2 = "http://cdn1.gamesports.net/img/flags/".$img2.".gif";
 		$team2 =  trim($aGame->find('.opp2', 0)->plaintext);
 
