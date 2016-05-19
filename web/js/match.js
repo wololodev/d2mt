@@ -284,8 +284,7 @@
     localStorage.lastOpenedTab = lastTab;
 
     if (lastTab === "nav_stay22") {
-      $("#stay22iframe").attr("src", "https://www.stay22.com/embed/epicenter-dota2-2016");
-      // $("#stay22iframe").attr("src", "https://www.stay22.com/embed/the-manila-dota2-major-by-pgl");
+      $("#stay22iframe").attr("src", "https://www.stay22.com/embed/the-international-2016");
     }
   });
 
