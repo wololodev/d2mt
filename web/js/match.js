@@ -191,7 +191,7 @@
   // var endPoint = 'localhost:8444/api';
   var onLoadAjax = function() {
     // DAILYDOTA2 MATCH TICKER
-    var load_dd2matches = $.ajax("//" + endPoint + "/dd2/matches/v100/api.json")
+    var load_dd2matches = $.ajax("https://" + endPoint + "/dd2/matches/v100/api.json")
     .success(function(data) {
       var recent, finished;
       $.each(data, function(key, val) {
@@ -208,7 +208,7 @@
 
 
     // GOSUGAMERS MATCH TICKER
-    var load_ggmatches = $.ajax("//" + endPoint + "/gg/matches/v120/api.json")
+    var load_ggmatches = $.ajax("https://" + endPoint + "/gg/matches/v120/api.json")
     .success(function(data) {
       var recent = "";
       var finished = "";
@@ -225,7 +225,7 @@
     });
 
     // VODS AND STREAMS
-    var load_streamsAndVods = $.ajax("//" + endPoint + "/stream/v160/api.json")
+    var load_streamsAndVods = $.ajax("https://" + endPoint + "/stream/v160/api.json")
     .success(function(data) {
       var streams, vods, dota2vods;
       $.each(data, function(key, val) {
