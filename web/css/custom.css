@@ -82,7 +82,7 @@ tbody {
 }
 /*OVERWRITTING*/
 .nav {
-	margin-bottom:-1px !important;
+	margin-bottom: 0px !important;
 }
 .accordion {
 	margin-bottom: 0px !important;
