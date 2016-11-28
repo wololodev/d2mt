@@ -1,7 +1,7 @@
 <?php
 	error_reporting(0);
 
-	$twitch_json = json_decode(get_contents("https://api.twitch.tv/kraken/streams?game=Dota+2&limit=15"));
+	$twitch_json = json_decode(get_contents("https://api.twitch.tv/kraken/streams?game=Dota+2&limit=15&client_id=kw0nk8crmhxtogj9ctvbxita1lv4jf4"));
 	$dota2vd_json = json_decode(get_contents("http://www.dotacinema.com/feed_shoutcast_match_list_search?casters=&tournaments=&heroes=&teams=&rates=&descriptions=&dates=&actualPage=1&JSON=Y"));
 
 	$combinedList = array();
